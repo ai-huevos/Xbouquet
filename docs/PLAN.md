@@ -6,6 +6,34 @@ This document tracks the progress of our Agentic Development Workflow (ADW) miss
 - **/adw-start [mission_number]**: Initiates a mission (pulls `dev` branch, initializes context, sets up task).
 - **/adw-finish**: Finalizes a mission (runs typechecks, commits, pushes to `dev`, updates this tracker, and preps for deployment).
 
+## Architecture & ADW Routing Flow
+
+Use this Directed Acyclic Graph (DAG) to understand mission dependencies. 
+**Rule of Thumb:** If two missions are on parallel branches of the graph (e.g., M3 and M4), you can use `git worktree` to spin up two parallel ADW agents to build them simultaneously without conflict.
+
+```mermaid
+graph TD
+    classDef complete fill:#238636,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef inprogress fill:#dbab0a,stroke:#fff,stroke-width:2px,color:#000;
+    classDef pending fill:#1f2937,stroke:#6b7280,stroke-width:1px,color:#f3f4f6;
+
+    M1["M1: Auth & Roles"]:::complete --> M2["M2: Supplier Product CRUD"]:::complete
+    
+    %% Parallel execution routing
+    M2 --> M3["M3: Supplier Bulk Import"]:::complete
+    M2 --> M4["M4: Marketplace Browse"]:::pending
+    
+    M4 --> M5["M5: Cart & Order Creation"]:::pending
+    M5 --> M6["M6: Order Dashboards"]:::pending
+    M6 --> M7["M7: RLS Validation"]:::pending
+    M7 --> M8["M8: Stripe Integration"]:::pending
+
+    subgraph "Parallel Worktrees (Safe to parallelize)"
+        M3
+        M4
+    end
+```
+
 ---
 
 ## 🌊 WAVE 1: Core MVP (Production Blocking)
@@ -16,7 +44,7 @@ This document tracks the progress of our Agentic Development Workflow (ADW) miss
   - Supplier dashboard, Product tables, Supabase Storage for images, Server Actions.
 - [x] **Mission 3: Supplier Bulk Import (Data Ingestion)**
   - CSV parsing, column mapping UI, data validation, and batch insertion for instant catalog onboarding.
-- [ ] **Mission 4: Marketplace Browse**
+- [x] **Mission 4: Marketplace Browse**
   - Public product list, detail pages, server-side data fetching for shops.
 - [ ] **Mission 5: Order Creation Flow**
   - Cart state, checkout action, pending orders, basic supplier dashboard order view.
