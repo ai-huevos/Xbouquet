@@ -435,10 +435,10 @@ Keep it under 100 lines.
 
 After each mission:
 
-1. Commit
-2. Export DB schema
-3. Update /docs/ARCHITECTURE.md
-4. Start next mission referencing artifacts
+1. Use `/adw-finish` to Typecheck, commit, and update the global tracker (`/PLAN.md`).
+2. Export DB schema if necessary
+3. Update `/docs/ARCHITECTURE.md` if necessary
+4. For the next mission, run `/adw-start [mission_number]` so the Agent references the updated artifacts.
 
 Never rely on chat memory.
 Artifacts are source of truth.

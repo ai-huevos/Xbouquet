@@ -14,6 +14,7 @@ B2B flower marketplace. Suppliers list flowers, shops order them.
 - MVP source of truth: `/docs/ARCHITECTURE.md` (core only)
 - Growth systems (frozen, future): `/docs/GROWTH_ARCHITECTURE_V2.md`
 - Decision log: `/docs/DECISIONS.md`
+- Agent Tracker: `/PLAN.md` (Tracks the ADW missions)
 - Roles: `supplier` | `shop` (immutable, set at signup)
 - RLS on every table, no exceptions
 - Server Actions for all mutations (no API routes)
@@ -39,6 +40,12 @@ First growth feature to add: Drops only. Not tiers, not badges, not referrals.
 - Validators: `src/lib/validators/{domain}.ts`
 - Pages: `src/app/(dashboard)/{role}/{feature}/page.tsx`
 - Migrations: `supabase/migrations/{NNN}_{description}.sql`
+
+## Agentic Development Workflow (ADW)
+Missions are tracked in `/PLAN.md`.
+Use custom slash commands for workflow triggers:
+- `/adw-start [mission_number]`: Start development
+- `/adw-finish`: Typecheck, format, commit, push to dev, and mark done in PLAN.md.
 
 ## Rules
 - No real-time, no messaging, no notifications (future phases)

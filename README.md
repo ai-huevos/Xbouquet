@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Xpress Buke — B2B Flower Marketplace
 
-## Getting Started
+A two-sided B2B marketplace where suppliers list rare, exclusive flowers, and boutique shops browse and place wholesale orders.
 
-First, run the development server:
+## Tech Stack
+- **Framework**: Next.js 15 (App Router, RSC, Server Actions)
+- **Language**: TypeScript (strict)
+- **Database/Auth**: Supabase (PostgreSQL, Auth, Storage, RLS)
+- **Styling**: Tailwind CSS v4
 
+## Documentation & Architecture
+- **Architecture**: `docs/ARCHITECTURE.md`
+- **Growth Architecture**: `docs/GROWTH_ARCHITECTURE_V2.md`
+- **Agentic Dev Plan**: `PLAN.md` (Contains the missions spanning 6 waves)
+
+## Agentic Development Workflow (ADW)
+This project is built using a deterministic AI handoff strategy ("101 Dev Sessions"). 
+
+To manage missions with the AI agent:
+- `/adw-start [mission_number]` - Sets up the environment, pulls latest from `dev`, reads architecture, and starts implementing the mission slice.
+- `/adw-finish` - Runs typechecking (`tsc --noEmit`), linters, commits the work, pushes to `dev`, and updates the `PLAN.md` tracker.
+
+## Development Setup
+1. Clone the repo and `npm install`
+2. Link Supabase: `npx supabase link --project-ref <your-ref>`
+3. Run the development server:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
