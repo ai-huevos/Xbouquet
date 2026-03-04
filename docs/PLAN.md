@@ -12,7 +12,7 @@ This document tracks the progress of our Agentic Development Workflow (ADW) miss
 
 - [x] **Mission 1: Auth & Roles**
   - Next.js setup, Supabase link, Profiles schema & triggers, RLS, Auth Actions, basic routing.
-- [ ] **Mission 2: Supplier Product CRUD**
+- [x] **Mission 2: Supplier Product CRUD**
   - Supplier dashboard, Product tables, Supabase Storage for images, Server Actions.
 - [ ] **Mission 3: Marketplace Browse**
   - Public product list, detail pages, server-side data fetching for shops.

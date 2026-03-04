@@ -92,7 +92,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
                             id="name"
                             required
                             defaultValue={initialData?.name}
-                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition"
+                            className="w-full px-4 py-2 bg-white/5 border border-gray-300 rounded-lg text-gray-900 focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition"
                             placeholder="E.g., Red Roses Batch"
                         />
                     </div>
@@ -104,7 +104,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
                             id="category_id"
                             required
                             defaultValue={initialData?.category_id}
-                            className="w-full px-4 py-2 bg-[#1a1a2e] border border-white/10 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition"
+                            className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-900 focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition"
                         >
                             <option value="">Select a category</option>
                             {categories.map((c) => (
@@ -123,7 +123,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
                             required
                             min="0.01"
                             defaultValue={initialData?.price_per_unit}
-                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition"
+                            className="w-full px-4 py-2 bg-white/5 border border-gray-300 rounded-lg text-gray-900 focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition"
                         />
                     </div>
 
@@ -136,7 +136,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
                             required
                             min="0"
                             defaultValue={initialData?.stock_qty}
-                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition"
+                            className="w-full px-4 py-2 bg-white/5 border border-gray-300 rounded-lg text-gray-900 focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition"
                         />
                     </div>
 
@@ -147,7 +147,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
                             id="description"
                             rows={3}
                             defaultValue={initialData?.description || ''}
-                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition"
+                            className="w-full px-4 py-2 bg-white/5 border border-gray-300 rounded-lg text-gray-900 focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition placeholder-gray-400"
                             placeholder="Describe the flower, origins, stem length..."
                         />
                     </div>
@@ -158,7 +158,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
                             name="status"
                             id="status"
                             defaultValue={initialData?.status || 'active'}
-                            className="w-full px-4 py-2 bg-[#1a1a2e] border border-white/10 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition"
+                            className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-900 focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition"
                         >
                             <option value="active">Active</option>
                             <option value="draft">Draft</option>
@@ -189,18 +189,18 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
                 </div>
             </div>
 
-            <div className="flex justify-end space-x-4 pt-6 border-t border-white/10">
+            <div className="flex justify-end space-x-4 pt-6 border-t border-gray-200">
                 <button
                     type="button"
                     onClick={() => router.push('/supplier/products')}
-                    className="px-6 py-2 rounded-lg border border-white/10 text-gray-300 hover:bg-white/5 transition"
+                    className="px-6 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition"
                 >
                     Cancel
                 </button>
                 <button
                     type="submit"
                     disabled={isPending || uploading}
-                    className="px-6 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-medium shadow-lg shadow-purple-500/25 transition disabled:opacity-50"
+                    className="px-6 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-medium shadow-sm transition disabled:opacity-50"
                 >
                     {isPending ? 'Saving...' : 'Save Product'}
                 </button>

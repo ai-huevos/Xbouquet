@@ -42,16 +42,31 @@ First growth feature to add: Drops only. Not tiers, not badges, not referrals.
 - Migrations: `supabase/migrations/{NNN}_{description}.sql`
 
 ## Agentic Development Workflow (ADW)
-Missions are tracked in `/PLAN.md`.
+Missions are tracked in `docs/PLAN.md`. 
+Execution details are in `docs/MVP_MISSIONS.md` and `docs/GROWTH_MISSIONS.md`.
 Use custom slash commands for workflow triggers:
 - `/adw-start [mission_number]`: Start development
-- `/adw-finish`: Typecheck, format, commit, push to dev, and mark done in PLAN.md.
+- `/adw-finish`: Typecheck, format, commit, push to dev, and mark done in `docs/PLAN.md`.
 
 ## Rules
+- **Hybrid Model**: Claude plan-first → Antigravity execution
+- **Execution Mode**: Always use Review-Driven Mode. Never auto-accept. Keep missions thin and deterministic.
 - No real-time, no messaging, no notifications (future phases)
 - No scope expansion — build what's specified, nothing more
 - No growth system code until core MVP is shipped and validated with real users
 - Feature branches only, never commit to main directly
+- **Testing**: End-to-end functionality must be verified visually via the `browser_subagent` and documented in a `walkthrough.md` on every `/adw-finish`.
 - Read files before editing them
 - Validate with Zod at system boundaries
 - Prefer server components; client components only for interactivity
+- All business logic server-side
+- Never trust client role state
+- Use Supabase RLS before public launch
+- One feature per branch
+- No schema changes without migration file
+
+## Risk Map
+1. **RLS misconfiguration** → catastrophic data leak. Mitigation: Write policy tests before launch.
+2. **Marketplace cold start**. Mitigation: Manually onboard 10 suppliers first.
+3. **Inventory mismatch**. Mitigation: Manual confirmation workflow initially.
+4. **Scope creep**. Mitigation: If it doesn’t improve supplier → order → reorder, cut it.

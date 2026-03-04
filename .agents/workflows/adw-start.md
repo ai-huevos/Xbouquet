@@ -6,8 +6,8 @@ description: Starts an Agentic Development Workflow (ADW) session for a specific
 When the USER invokes `/adw-start [mission_description_or_number]`, execute the following protocol strictly:
 
 1. **Context Initialization**:
-   - Immediately read `/Users/tatooine/.gemini/antigravity/brain/09050831-7351-42e5-a466-f8fef67c8002/implementation_plan.md` to map the requested mission.
-   - Read `/docs/ARCHITECTURE.md` (and `DECISIONS.md` if necessary) to establish technical anchors.
+   - Immediately read `docs/PLAN.md` and `docs/MVP_MISSIONS.md` (or `docs/GROWTH_MISSIONS.md`) to map the requested mission.
+   - Read `docs/ARCHITECTURE.md` (and `docs/DECISIONS.md` if necessary) to establish technical anchors.
 
 2. **Branch Management** (// turbo):
    - Run `git fetch`
