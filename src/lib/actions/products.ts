@@ -4,7 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { productSchema, ProductFormValues } from '../validators/products'
 import { bulkProductSchema, BulkProductFormValues } from '../validators/import'
-import { FlowerProduct, FlowerProductWithCategory, ProductCategory } from '@/types/products'
+import { FlowerProduct, FlowerProductWithCategory, FlowerProductWithSupplier, ProductCategory } from '@/types/products'
 
 export async function getCategories(): Promise<ProductCategory[]> {
     const supabase = await createClient()
@@ -52,16 +52,51 @@ export async function getSupplierProducts(): Promise<FlowerProductWithCategory[]
     return products as unknown as FlowerProductWithCategory[]
 }
 
-export async function getProduct(id: string): Promise<FlowerProduct | null> {
+export async function getProducts(search?: string, categoryId?: string): Promise<FlowerProductWithSupplier[]> {
+    const supabase = await createClient()
+
+    let query = supabase
+        .from('flower_products')
+        .select(`
+      *,
+      category:product_categories(*),
+      supplier:supplier_profiles(*)
+    `)
+        .gt('stock_qty', 0)
+        .order('created_at', { ascending: false })
+
+    if (search) {
+        query = query.ilike('name', `%${search}%`)
+    }
+
+    if (categoryId) {
+        query = query.eq('category_id', categoryId)
+    }
+
+    const { data: products, error } = await query
+
+    if (error) {
+        console.error('Error fetching marketplace products:', error)
+        return []
+    }
+
+    return products as unknown as FlowerProductWithSupplier[]
+}
+
+export async function getProduct(id: string): Promise<FlowerProductWithSupplier | null> {
     const supabase = await createClient()
     const { data, error } = await supabase
         .from('flower_products')
-        .select('*')
+        .select(`
+      *,
+      category:product_categories(*),
+      supplier:supplier_profiles(*)
+    `)
         .eq('id', id)
         .single()
 
     if (error) return null
-    return data as FlowerProduct
+    return data as unknown as FlowerProductWithSupplier
 }
 
 export async function createProduct(values: ProductFormValues) {

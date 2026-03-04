@@ -22,3 +22,14 @@ export interface FlowerProduct {
 export interface FlowerProductWithCategory extends FlowerProduct {
     category: ProductCategory;
 }
+
+export interface SupplierProfile {
+    id: string;
+    profile_id: string;
+    business_name: string;
+    created_at: string;
+}
+
+export interface FlowerProductWithSupplier extends FlowerProductWithCategory {
+    supplier: SupplierProfile;
+}
