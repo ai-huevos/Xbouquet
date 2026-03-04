@@ -72,6 +72,11 @@ export function CsvUploader({ onFileSelect }: CsvUploaderProps) {
                         Select File
                     </span>
                 </label>
+                <div className="pt-4">
+                    <a href="/product_import_template.csv" download className="text-sm text-primary hover:underline font-medium">
+                        Download CSV Template
+                    </a>
+                </div>
             </div>
         </div>
     )

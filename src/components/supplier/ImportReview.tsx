@@ -6,7 +6,7 @@ import { bulkCreateProducts } from '@/lib/actions/products'
 import { BulkProductFormValues, bulkProductSchema } from '@/lib/validators/import'
 
 interface ImportReviewProps {
-    parsedData: any[];
+    parsedData: Record<string, string>[];
     mapping: Record<string, string>;
     onBack: () => void;
 }
@@ -24,7 +24,7 @@ export function ImportReview({ parsedData, mapping, onBack }: ImportReviewProps)
             description: row[mapping['description']] || undefined,
             price_per_unit: row[mapping['price_per_unit']], // Will be coerced by Zod
             stock_qty: row[mapping['stock_qty']], // Will be coerced by Zod
-        } as any;
+        } as unknown as BulkProductFormValues;
     });
 
     // Validate preview (first 5)
@@ -52,8 +52,8 @@ export function ImportReview({ parsedData, mapping, onBack }: ImportReviewProps)
                         router.push('/supplier/products');
                     }, 2000);
                 }
-            } catch (e: any) {
-                setServerResult({ error: e.message || 'An unexpected error occurred.' });
+            } catch (e: unknown) {
+                setServerResult({ error: e instanceof Error ? e.message : 'An unexpected error occurred.' });
             }
         });
     };

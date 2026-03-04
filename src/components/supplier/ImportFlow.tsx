@@ -16,7 +16,7 @@ type Step = 'upload' | 'map' | 'review';
 export function ImportFlow({ categories }: ImportFlowProps) {
     const [currentStep, setCurrentStep] = useState<Step>('upload');
     const [csvHeaders, setCsvHeaders] = useState<string[]>([]);
-    const [parsedData, setParsedData] = useState<any[]>([]);
+    const [parsedData, setParsedData] = useState<Record<string, string>[]>([]);
     const [mapping, setMapping] = useState<Record<string, string>>({});
 
     const handleFileSelect = (file: File) => {
@@ -26,7 +26,7 @@ export function ImportFlow({ categories }: ImportFlowProps) {
             complete: (results) => {
                 if (results.meta.fields) {
                     setCsvHeaders(results.meta.fields);
-                    setParsedData(results.data);
+                    setParsedData(results.data as Record<string, string>[]);
                     setCurrentStep('map');
                 } else {
                     alert('Failed to read CSV headers. Please ensure your file has a header row.');

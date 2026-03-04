@@ -14,7 +14,7 @@ This document tracks the progress of our Agentic Development Workflow (ADW) miss
   - Next.js setup, Supabase link, Profiles schema & triggers, RLS, Auth Actions, basic routing.
 - [x] **Mission 2: Supplier Product CRUD**
   - Supplier dashboard, Product tables, Supabase Storage for images, Server Actions.
-- [ ] **Mission 3: Supplier Bulk Import (Data Ingestion)**
+- [x] **Mission 3: Supplier Bulk Import (Data Ingestion)**
   - CSV parsing, column mapping UI, data validation, and batch insertion for instant catalog onboarding.
 - [ ] **Mission 4: Marketplace Browse**
   - Public product list, detail pages, server-side data fetching for shops.

@@ -126,7 +126,7 @@ export async function bulkCreateProducts(products: BulkProductFormValues[]) {
                 ...parsed.data
             });
         } else {
-            errors.push(`Row ${i + 1}: ${parsed.error.issues.map((e: any) => e.message).join(', ')}`);
+            errors.push(`Row ${i + 1}: ${parsed.error.issues.map((e: { message: string }) => e.message).join(', ')}`);
         }
     }
 
@@ -134,7 +134,7 @@ export async function bulkCreateProducts(products: BulkProductFormValues[]) {
         return { error: 'No valid products to insert. Errors: ' + errors.join('; ') };
     }
 
-    const { error, count } = await supabase
+    const { error } = await supabase
         .from('flower_products')
         .insert(validProducts)
 
