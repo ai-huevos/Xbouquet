@@ -32,6 +32,7 @@ Nothing else exists until this works in production with real users.
 | Hosting | Vercel |
 | Styling | Tailwind CSS v4 |
 | Validation | Zod |
+| Data Ingestion | Papaparse (CSV parsing & column mapping) |
 
 ---
 
@@ -96,6 +97,7 @@ That's it. No other statuses.
 | `getProfile` | `actions/profiles.ts` | Authed | Get own profile |
 | `updateProfile` | `actions/profiles.ts` | Authed | Edit own profile |
 | `createProduct` | `actions/products.ts` | Supplier | Add flower listing |
+| `bulkCreateProducts` | `actions/products.ts` | Supplier | Batch insert from CSV |
 | `updateProduct` | `actions/products.ts` | Supplier | Edit own product |
 | `deleteProduct` | `actions/products.ts` | Supplier | Remove own product |
 | `getProducts` | `actions/products.ts` | Any | Browse marketplace |
@@ -124,6 +126,7 @@ app/
 │   │   ├── products/
 │   │   │   ├── page.tsx              # List own products
 │   │   │   ├── new/page.tsx          # Add product
+│   │   │   ├── import/page.tsx       # Bulk CSV upload & mapping
 │   │   │   └── [id]/edit/page.tsx    # Edit product
 │   │   └── orders/
 │   │       ├── page.tsx              # Incoming orders
@@ -198,7 +201,7 @@ All of the following work in production:
 
 - [ ] Supplier signs up with role = supplier
 - [ ] Supplier completes business profile
-- [ ] Supplier adds a flower product with image
+- [ ] Supplier adds flower products (single item and bulk CSV import)
 - [ ] Shop signs up with role = shop
 - [ ] Shop browses marketplace, sees product
 - [ ] Shop adds to cart

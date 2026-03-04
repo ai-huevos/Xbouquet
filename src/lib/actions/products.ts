@@ -3,6 +3,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { productSchema, ProductFormValues } from '../validators/products'
+import { bulkProductSchema, BulkProductFormValues } from '../validators/import'
 import { FlowerProduct, FlowerProductWithCategory, ProductCategory } from '@/types/products'
 
 export async function getCategories(): Promise<ProductCategory[]> {
@@ -97,6 +98,59 @@ export async function createProduct(values: ProductFormValues) {
     revalidatePath('/supplier/products')
     return { success: true }
 }
+
+export async function bulkCreateProducts(products: BulkProductFormValues[]) {
+    const supabase = await createClient()
+
+    const { data: userData, error: userError } = await supabase.auth.getUser()
+    if (userError || !userData.user) return { error: 'Not authenticated' }
+
+    const { data: profile } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('user_id', userData.user.id)
+        .single()
+
+    if (!profile) return { error: 'Profile not found' }
+
+    // Validate all products
+    const validProducts = [];
+    const errors = [];
+
+    for (let i = 0; i < products.length; i++) {
+        const parsed = bulkProductSchema.safeParse(products[i]);
+
+        if (parsed.success) {
+            validProducts.push({
+                supplier_id: profile.id,
+                ...parsed.data
+            });
+        } else {
+            errors.push(`Row ${i + 1}: ${parsed.error.issues.map((e: any) => e.message).join(', ')}`);
+        }
+    }
+
+    if (validProducts.length === 0) {
+        return { error: 'No valid products to insert. Errors: ' + errors.join('; ') };
+    }
+
+    const { error, count } = await supabase
+        .from('flower_products')
+        .insert(validProducts)
+
+    if (error) {
+        console.error('Error in bulk insert:', error)
+        return { error: error.message }
+    }
+
+    revalidatePath('/supplier/products')
+    return {
+        success: true,
+        insertedCount: validProducts.length,
+        errors: errors.length > 0 ? errors : undefined
+    }
+}
+
 
 export async function updateProduct(id: string, values: ProductFormValues) {
     const parsed = productSchema.safeParse(values)

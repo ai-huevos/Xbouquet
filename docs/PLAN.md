@@ -14,18 +14,20 @@ This document tracks the progress of our Agentic Development Workflow (ADW) miss
   - Next.js setup, Supabase link, Profiles schema & triggers, RLS, Auth Actions, basic routing.
 - [x] **Mission 2: Supplier Product CRUD**
   - Supplier dashboard, Product tables, Supabase Storage for images, Server Actions.
-- [ ] **Mission 3: Marketplace Browse**
+- [ ] **Mission 3: Supplier Bulk Import (Data Ingestion)**
+  - CSV parsing, column mapping UI, data validation, and batch insertion for instant catalog onboarding.
+- [ ] **Mission 4: Marketplace Browse**
   - Public product list, detail pages, server-side data fetching for shops.
-- [ ] **Mission 4: Order Creation Flow**
+- [ ] **Mission 5: Order Creation Flow**
   - Cart state, checkout action, pending orders, basic supplier dashboard order view.
-- [ ] **Mission 5: RLS Enforcement**
+- [ ] **Mission 6: RLS Enforcement**
   - Define and apply strict Row Level Security for Profiles, Products, and Orders based on role.
 
 ## 🌊 WAVE 2: Payments & Hardening
 
-- [ ] **Mission 6: Stripe Integration**
+- [ ] **Mission 7: Stripe Integration**
   - Checkout sessions, webhooks, updating order status to 'paid', idempotent handlers.
-- [ ] **Mission 7: UI Polish & Optimization**
+- [ ] **Mission 8: UI Polish & Optimization**
   - Human-led via Cursor + Agent. Glassmorphism, tailored palettes, loading states.
 
 ## 🌊 WAVE 3: Growth Overlay — Phase 1 (Status Layer)
