@@ -48,7 +48,7 @@ graph TD
   - Public product list, detail pages, server-side data fetching for shops.
 - [x] **Mission 5: Order Creation Flow**
   - Cart state, checkout action, pending orders, basic supplier dashboard order view.
-- [ ] **Mission 6: RLS Enforcement**
+- [x] **Mission 6: RLS Enforcement**
   - Define and apply strict Row Level Security for Profiles, Products, and Orders based on role.
 
 ## 🌊 WAVE 2: Payments & Hardening
