@@ -2,6 +2,7 @@ import { getProduct } from '@/lib/actions/products'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
+import { AddToCartForm } from '@/components/cart/AddToCartForm'
 
 type Params = Promise<{ id: string }>
 
@@ -98,39 +99,7 @@ export default async function ProductDetailPage({
                                 )}
                             </div>
 
-                            <form className="flex flex-col gap-4 sm:flex-row">
-                                <div className="flex h-14 items-center rounded-xl border border-gray-200 bg-gray-50 px-2 sm:w-32">
-                                    <button type="button" className="flex h-10 w-10 items-center justify-center rounded-lg text-gray-500 hover:bg-gray-200 hover:text-gray-900 transition-colors disabled:opacity-50">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                            <path d="M5 12h14" />
-                                        </svg>
-                                    </button>
-                                    <input
-                                        type="number"
-                                        name="quantity"
-                                        defaultValue={1}
-                                        min={1}
-                                        max={product.stock_qty}
-                                        className="w-full bg-transparent text-center font-semibold text-gray-900 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                                    />
-                                    <button type="button" className="flex h-10 w-10 items-center justify-center rounded-lg text-gray-500 hover:bg-gray-200 hover:text-gray-900 transition-colors disabled:opacity-50">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                            <path d="M5 12h14" /><path d="M12 5v14" />
-                                        </svg>
-                                    </button>
-                                </div>
-
-                                <button
-                                    type="submit"
-                                    disabled={product.stock_qty === 0}
-                                    className="flex h-14 flex-1 items-center justify-center gap-2 rounded-xl bg-gray-900 px-8 font-semibold text-white transition-all hover:bg-gray-800 active:scale-95 disabled:pointer-events-none disabled:opacity-50"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <circle cx="8" cy="21" r="1" /><circle cx="19" cy="21" r="1" /><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
-                                    </svg>
-                                    Add to Cart
-                                </button>
-                            </form>
+                            <AddToCartForm productId={product.id} stockQty={product.stock_qty} />
                         </div>
                     </div>
                 </div>

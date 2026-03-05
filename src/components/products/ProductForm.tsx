@@ -4,6 +4,7 @@ import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { createProduct, updateProduct, uploadProductImage } from '@/lib/actions/products'
 import { ProductCategory, FlowerProduct } from '@/types/products'
+import Image from 'next/image'
 
 interface ProductFormProps {
     categories: ProductCategory[]
@@ -171,7 +172,13 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
                         <div className="flex items-center space-x-6">
                             {imageUrl && (
                                 <div className="relative w-32 h-32 rounded-lg overflow-hidden border border-white/10">
-                                    <img src={imageUrl} alt="Product preview" className="object-cover w-full h-full" />
+                                    <Image
+                                        src={imageUrl}
+                                        alt="Product preview"
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                        className="object-cover"
+                                    />
                                 </div>
                             )}
                             <div className="flex-1">

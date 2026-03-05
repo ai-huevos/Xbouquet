@@ -2,6 +2,7 @@
 
 import { useTransition } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { FlowerProductWithCategory } from '@/types/products'
 import { deleteProduct } from '@/lib/actions/products'
 
@@ -41,13 +42,19 @@ export function ProductList({ products }: ProductListProps) {
                 <div key={product.id} className="group bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden hover:border-purple-500/50 transition duration-300 shadow-xl">
                     <div className="relative h-48 bg-gray-900">
                         {product.image_url ? (
-                            <img src={product.image_url} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                            <Image
+                                src={product.image_url}
+                                alt={product.name}
+                                fill
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                className="object-cover group-hover:scale-105 transition duration-500"
+                            />
                         ) : (
                             <div className="w-full h-full flex items-center justify-center text-gray-600">No Image</div>
                         )}
                         <div className="absolute top-2 right-2">
                             <span className={`px-2 py-1 text-xs font-semibold rounded-full backdrop-blur-md bg-black/50 ${product.status === 'active' ? 'text-green-400' :
-                                    product.status === 'draft' ? 'text-yellow-400' : 'text-gray-400'
+                                product.status === 'draft' ? 'text-yellow-400' : 'text-gray-400'
                                 }`}>
                                 {product.status.toUpperCase()}
                             </span>

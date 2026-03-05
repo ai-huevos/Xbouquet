@@ -46,7 +46,7 @@ graph TD
   - CSV parsing, column mapping UI, data validation, and batch insertion for instant catalog onboarding.
 - [x] **Mission 4: Marketplace Browse**
   - Public product list, detail pages, server-side data fetching for shops.
-- [ ] **Mission 5: Order Creation Flow**
+- [x] **Mission 5: Order Creation Flow**
   - Cart state, checkout action, pending orders, basic supplier dashboard order view.
 - [ ] **Mission 6: RLS Enforcement**
   - Define and apply strict Row Level Security for Profiles, Products, and Orders based on role.
