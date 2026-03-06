@@ -54,44 +54,45 @@ graph TD
 ## 🌊 WAVE 2: Payments & Hardening
 
 - [x] **Mission 7: UI Polish & Optimization**
-  - Human-led via Cursor + Agent. Glassmorphism, tailored palettes, loading states, premium aesthetics.
-- [ ] **Mission 8: Stripe Integration**
-  - Checkout sessions, webhooks, updating order status to 'paid', idempotent handlers.
+  - Human-led via Cursor + Agent. Glassmorphism, tailored palettes, loading states, premium aesthetics, Mobile UI flows.
+- [ ] **Mission 8: Guest Checkout Backend & E2E Testing (Stripe)**
+  - Implement Guest Checkout backend flow and Stripe Checkout sessions.
+  - Set up Playwright for comprehensive End-to-End (E2E) UI testing.
 
 ## 🌊 WAVE 3: Growth Overlay — Phase 1 (Status Layer)
 
-- [ ] **Mission 8: Tiers & Badges Schema**
+- [ ] **Mission 9: Tiers & Badges Schema**
   - Create Tier tables, RLS, and Badge definitions.
-- [ ] **Mission 9: Tier Engine**
+- [ ] **Mission 10: Tier Engine**
   - Implement daily Tier Calculation cron job/function.
-- [ ] **Mission 10: Status Dashboards**
+- [ ] **Mission 11: Status Dashboards**
   - Build Tier & Badge UI dashboards for Suppliers and Shops.
 
 ## 🌊 WAVE 4: Growth Overlay — Phase 2 (Viral Layer)
 
-- [ ] **Mission 11: Network Graph**
+- [ ] **Mission 12: Network Graph**
   - Implement specific follows (Shop -> Supplier).
-- [ ] **Mission 12: Invite Engine**
+- [ ] **Mission 13: Invite Engine**
   - Build Referral logic (Codes, 3-stage completion, anti-gaming checks).
-- [ ] **Mission 13: Showcases**
+- [ ] **Mission 14: Showcases**
   - Arrangement photos, product tagging, likes.
 
 ## 🌊 WAVE 5: Growth Overlay — Phase 3 (Scarcity Engine)
 
-- [ ] **Mission 14: Drops Schema**
+- [ ] **Mission 15: Drops Schema**
   - Drops, Drop Items, and Drop Claims DB + RLS.
-- [ ] **Mission 15: Drop Lifecycle**
+- [ ] **Mission 16: Drop Lifecycle**
   - Drop Lifecycle Functions (Cron jobs for scheduled->live, expiry).
-- [ ] **Mission 16: Drop Administration**
+- [ ] **Mission 17: Drop Administration**
   - Supplier Drop Management UI & Shop Drops Browse UI.
-- [ ] **Mission 17: Drop Cart Engine**
+- [ ] **Mission 18: Drop Cart Engine**
   - Cart injection (Reserving drop items, TTL countdowns).
 
 ## 🌊 WAVE 6: Growth Overlay — Phase 4 (Trending)
 
-- [ ] **Mission 18: Trending Schema**
+- [ ] **Mission 19: Trending Schema**
   - Trending Snapshot + Entries tables & RLS.
-- [ ] **Mission 19: Trending Engine**
+- [ ] **Mission 20: Trending Engine**
   - Weekly cron job for trending calculation (products, suppliers, showcases).
-- [ ] **Mission 20: Trending Interface**
+- [ ] **Mission 21: Trending Interface**
   - Trending UI page.

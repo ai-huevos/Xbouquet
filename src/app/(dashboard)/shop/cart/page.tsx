@@ -134,14 +134,52 @@ export default async function CartPage() {
                             ))}
                         </div>
 
-                        <div className="lg:col-span-1">
-                            <div className="sticky top-6 glass-panel p-6 shadow-sm transition-glass">
+                        <div className="lg:col-span-1 space-y-6">
+                            {/* Shipping Calculator UI */}
+                            <div className="glass-panel p-6 shadow-sm transition-glass bg-white dark:bg-zinc-950/80">
+                                <h3 className="text-base font-bold text-foreground mb-4 flex items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary-600">
+                                        <rect x="3" y="11" width="18" height="10" rx="2" />
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                    </svg>
+                                    Calculate Shipping
+                                </h3>
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">COUNTRY/REGION</label>
+                                        <select className="mt-1 w-full rounded-lg border border-input bg-transparent px-3 py-2 text-sm text-foreground focus:ring-1 focus:ring-primary-500 focus:outline-none">
+                                            <option className="bg-background text-foreground">United States</option>
+                                            <option className="bg-background text-foreground">Canada</option>
+                                            <option className="bg-background text-foreground">Mexico</option>
+                                        </select>
+                                    </div>
+                                    <div className="flex gap-3">
+                                        <div className="flex-1">
+                                            <label className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">STATE</label>
+                                            <input type="text" placeholder="State" className="mt-1 w-full rounded-lg border border-input bg-transparent px-3 py-2 text-sm text-foreground focus:ring-1 focus:ring-primary-500 focus:outline-none" />
+                                        </div>
+                                        <div className="flex-1">
+                                            <label className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">ZIP CODE</label>
+                                            <input type="text" placeholder="Zip" className="mt-1 w-full rounded-lg border border-input bg-transparent px-3 py-2 text-sm text-foreground focus:ring-1 focus:ring-primary-500 focus:outline-none" />
+                                        </div>
+                                    </div>
+                                    <button className="w-full rounded-lg bg-zinc-100 dark:bg-zinc-800 px-4 py-2.5 text-sm font-semibold text-foreground hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors">
+                                        Update Total
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="sticky top-6 glass-heavy border-2 border-primary-500/20 p-6 shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgba(255,255,255,0.05)] transition-glass rounded-2xl">
                                 <h2 className="text-lg font-bold text-foreground">Order Summary</h2>
 
                                 <dl className="mt-6 space-y-4 text-sm text-zinc-600 dark:text-zinc-400">
                                     <div className="flex items-center justify-between">
                                         <dt>Subtotal</dt>
                                         <dd className="font-medium text-foreground">${(cart.totalPrice / 100).toFixed(2)}</dd>
+                                    </div>
+                                    <div className="flex items-center justify-between">
+                                        <dt>Taxes & Shipping</dt>
+                                        <dd className="font-medium text-zinc-400">Calculated at checkout</dd>
                                     </div>
                                     <div className="flex items-center justify-between">
                                         <dt>Supplier count</dt>
@@ -154,18 +192,12 @@ export default async function CartPage() {
                                     </div>
                                 </dl>
 
-                                <form className="mt-8" action={async () => {
-                                    'use server'
-                                    const { checkout } = await import('@/lib/actions/orders')
-                                    await checkout()
-                                }}>
-                                    <button
-                                        type="submit"
-                                        className="w-full rounded-xl bg-primary-600 px-4 py-4 font-semibold text-white transition-all hover:bg-primary-700 active:scale-95 shadow-sm hover:-translate-y-0.5"
-                                    >
-                                        Proceed to Checkout
-                                    </button>
-                                </form>
+                                <Link
+                                    href="/checkout/gateway"
+                                    className="mt-8 flex w-full justify-center rounded-xl bg-primary-600 px-4 py-4 font-bold text-white text-lg transition-all hover:bg-primary-700 active:scale-95 shadow-[0_4px_14px_0_rgba(16,185,129,0.39)] hover:shadow-[0_6px_20px_rgba(16,185,129,0.23)] hover:-translate-y-0.5"
+                                >
+                                    Proceed to Checkout
+                                </Link>
                                 <p className="mt-4 text-center text-xs text-zinc-500 dark:text-zinc-400">
                                     Orders will be grouped by supplier and pending confirmation.
                                 </p>

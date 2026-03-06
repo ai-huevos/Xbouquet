@@ -81,11 +81,30 @@ export default async function ProductDetailPage({
                             <div className="mb-1 text-lg font-medium text-zinc-500">per unit</div>
                         </div>
 
-                        <div className="prose prose-zinc dark:prose-invert mb-10 max-w-none text-zinc-600 dark:text-zinc-400">
+                        <div className="prose prose-zinc dark:prose-invert mb-8 max-w-none text-zinc-600 dark:text-zinc-400">
                             <p>{product.description || 'No detailed description available for this product.'}</p>
                         </div>
 
-                        <div className="mt-auto border-t border-border pt-8 relative">
+                        {/* GEO/SEO Conversational Attributes */}
+                        <div className="mb-10 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 p-6">
+                            <h3 className="text-sm font-bold text-foreground mb-4 uppercase tracking-wider">Product Attributes</h3>
+                            <ul className="space-y-3">
+                                <li className="flex items-center text-sm text-zinc-600 dark:text-zinc-400">
+                                    <span className="w-32 font-medium text-zinc-900 dark:text-zinc-200">Vase Life</span>
+                                    <span>10-14 days</span>
+                                </li>
+                                <li className="flex items-center text-sm text-zinc-600 dark:text-zinc-400">
+                                    <span className="w-32 font-medium text-zinc-900 dark:text-zinc-200">Bloom Stage</span>
+                                    <span>2 (Closed)</span>
+                                </li>
+                                <li className="flex items-center text-sm text-zinc-600 dark:text-zinc-400">
+                                    <span className="w-32 font-medium text-zinc-900 dark:text-zinc-200">Stem Length</span>
+                                    <span>50cm - 60cm</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div className="mt-auto md:border-t md:border-border md:pt-8 relative mb-24 md:mb-0">
                             <div className="mb-6 flex items-center justify-between">
                                 <span className="font-medium text-foreground">Availability</span>
                                 {product.stock_qty > 0 ? (
@@ -101,7 +120,10 @@ export default async function ProductDetailPage({
                                 )}
                             </div>
 
-                            <AddToCartForm productId={product.id} stockQty={product.stock_qty} />
+                            {/* Mobile Sticky / Desktop Inline Cart Add */}
+                            <div className="fixed bottom-0 left-0 right-0 z-50 glass-panel md:relative md:glass-none border-t border-zinc-200/50 dark:border-zinc-800/50 md:border-none p-4 md:p-0 rounded-t-3xl md:rounded-none shadow-[0_-10px_40px_rgba(0,0,0,0.05)] md:shadow-none">
+                                <AddToCartForm productId={product.id} stockQty={product.stock_qty} />
+                            </div>
                         </div>
                     </div>
                 </div>

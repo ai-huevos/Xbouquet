@@ -152,5 +152,5 @@ export async function checkout() {
     }
 
     // Redirect on success
-    redirect(`/shop/orders`)
+    redirect(`/checkout/success`)
 }
