@@ -3,6 +3,8 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 
+import { stripe } from '@/lib/stripe'
+
 export async function checkout() {
     const supabase = await createClient()
 
@@ -32,6 +34,7 @@ export async function checkout() {
             product_id,
             product:flower_products (
                 id,
+                name,
                 price_per_unit,
                 stock_qty,
                 supplier_id
@@ -43,114 +46,53 @@ export async function checkout() {
         return { error: 'Cart is empty or could not be fetched' }
     }
 
-    // 2. Group items by supplier to prepare payload
-    const supplierGroups: Record<string, typeof cartItems> = {}
+    // 2. Validate stock and build Stripe line_items
+    const lineItems: import('stripe').Stripe.Checkout.SessionCreateParams.LineItem[] = []
 
-    // Validate stock simultaneously
     for (const item of cartItems) {
-        const prod = item.product as unknown as { stock_qty: number; supplier_id: string; id: string; price_per_unit: number; }
+        const prod = item.product as unknown as { name: string; stock_qty: number; supplier_id: string; id: string; price_per_unit: number; }
         if (item.quantity > prod.stock_qty) {
             return { error: `Insufficient stock for product ID: ${prod.id}` }
         }
 
-        const supplierId = prod.supplier_id
-        if (!supplierGroups[supplierId]) {
-            supplierGroups[supplierId] = []
-        }
-        supplierGroups[supplierId].push(item)
+        lineItems.push({
+            price_data: {
+                currency: 'usd',
+                product_data: {
+                    name: prod.name,
+                },
+                unit_amount: prod.price_per_unit, // amount in cents
+            },
+            quantity: item.quantity,
+        })
     }
 
-    let orderGroupId: string;
-
-    // Use a Supabase RPC wrapper if complex atomic transactions are strictly required.
-    // However, since we define RPCs as optional in MVP, we will run the sequence sequentially 
-    // but rollback-capable in the frontend logic. Given MVP constraints, sequential chained inserts are standard.
+    let sessionUrl: string | null = null;
 
     try {
-        // Step A: Create order_group
-        const { data: groupData, error: groupError } = await supabase
-            .from('order_groups')
-            .insert({ shop_id: profile.id })
-            .select('id')
-            .single()
+        // 3. Create Stripe Checkout Session
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: lineItems,
+            mode: 'payment',
+            success_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/checkout/success`,
+            cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/checkout/payment`,
+            metadata: {
+                shop_id: profile.id, // Store shop_id to fulfill the order via webhook
+            },
+        })
 
-        if (groupError) {
-            console.error("checkout: Error creating order_group", groupError)
-            throw groupError
-        }
-        orderGroupId = groupData.id
-
-        // Step B: Loop over supplier groups
-        for (const [supplierId, items] of Object.entries(supplierGroups)) {
-            // 1. Create order
-            const { data: orderData, error: orderError } = await supabase
-                .from('orders')
-                .insert({
-                    order_group_id: orderGroupId,
-                    shop_id: profile.id,
-                    supplier_id: supplierId,
-                    status: 'pending'
-                })
-                .select('id')
-                .single()
-
-            if (orderError) {
-                console.error(`checkout: Error creating order for supplier ${supplierId}`, orderError)
-                throw orderError
-            }
-
-            const orderId = orderData.id
-
-            // 2. Create order_items and decrement stock
-            const orderItemsPayload = items.map(item => {
-                const prod = item.product as unknown as { price_per_unit: number; stock_qty: number; id: string; }
-                return {
-                    order_id: orderId,
-                    product_id: item.product_id,
-                    quantity: item.quantity,
-                    unit_price: prod.price_per_unit
-                }
-            })
-
-            const { error: itemsError } = await supabase
-                .from('order_items')
-                .insert(orderItemsPayload)
-
-            if (itemsError) {
-                console.error(`checkout: Error creating order_items for order ${orderId}`, itemsError)
-                throw itemsError
-            }
-
-            // Decrement stock (Warning: Sequential updates are race-condition prone without RPC. 
-            // In a production app, an RPC like decrement_stock(id, qty) is necessary.
-            // For this phase, we read above and update here)
-            for (const item of items) {
-                const prod = item.product as unknown as { stock_qty: number; id: string; price_per_unit: number; }
-                const { error: stockError } = await supabase
-                    .from('flower_products')
-                    .update({ stock_qty: prod.stock_qty - item.quantity })
-                    .eq('id', item.product_id)
-
-                if (stockError) {
-                    console.error(`checkout: Error decrementing stock for product ${item.product_id}`, stockError)
-                    throw stockError
-                }
-            }
-        }
-
-        // Step C: Clear the cart
-        const { error: clearError } = await supabase
-            .from('cart_items')
-            .delete()
-            .eq('shop_id', profile.id)
-
-        if (clearError) throw clearError
+        sessionUrl = session.url;
 
     } catch (err) {
         console.error('Checkout error:', err)
-        return { error: err instanceof Error ? err.message : 'An error occurred during checkout' }
+        return { error: err instanceof Error ? err.message : 'An error occurred initiating checkout' }
     }
 
-    // Redirect on success
-    redirect(`/checkout/success`)
+    // Redirect to Stripe Checkout page
+    if (sessionUrl) {
+        redirect(sessionUrl)
+    } else {
+        return { error: 'Failed to create Stripe session' }
+    }
 }
