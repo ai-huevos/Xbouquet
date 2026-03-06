@@ -53,10 +53,10 @@ graph TD
 
 ## 🌊 WAVE 2: Payments & Hardening
 
-- [ ] **Mission 7: Stripe Integration**
+- [ ] **Mission 7: UI Polish & Optimization**
+  - Human-led via Cursor + Agent. Glassmorphism, tailored palettes, loading states, premium aesthetics.
+- [ ] **Mission 8: Stripe Integration**
   - Checkout sessions, webhooks, updating order status to 'paid', idempotent handlers.
-- [ ] **Mission 8: UI Polish & Optimization**
-  - Human-led via Cursor + Agent. Glassmorphism, tailored palettes, loading states.
 
 ## 🌊 WAVE 3: Growth Overlay — Phase 1 (Status Layer)
 
