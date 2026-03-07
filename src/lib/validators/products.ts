@@ -8,6 +8,9 @@ export const productSchema = z.object({
     stock_qty: z.coerce.number().int().min(0, 'Stock cannot be negative'),
     image_url: z.string().url('Invalid image URL').optional().or(z.literal('')),
     status: z.enum(['active', 'draft', 'archived']).default('active'),
+    box_type: z.enum(['QB', 'HB', 'FB']).optional().nullable(),
+    stems_per_bunch: z.coerce.number().int().min(1, 'Must be at least 1').optional().nullable(),
+    stem_length_cm: z.coerce.number().int().min(1, 'Must be at least 1 cm').optional().nullable(),
 });
 
 export type ProductFormValues = z.infer<typeof productSchema>;

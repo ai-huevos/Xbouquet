@@ -51,6 +51,9 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
             stock_qty: Number(formData.get('stock_qty')),
             image_url: imageUrl,
             status: formData.get('status') as 'active' | 'draft' | 'archived',
+            box_type: (formData.get('box_type') as 'QB' | 'HB' | 'FB') || null,
+            stems_per_bunch: formData.get('stems_per_bunch') ? Number(formData.get('stems_per_bunch')) : null,
+            stem_length_cm: formData.get('stem_length_cm') ? Number(formData.get('stem_length_cm')) : null,
         }
 
         startTransition(async () => {
@@ -175,6 +178,62 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
                                     </select>
                                     <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-zinc-500">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5"><path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" /></svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Packaging Logistics */}
+                            <div className="pt-4 border-t border-zinc-200/50 dark:border-zinc-700/50">
+                                <h3 className="text-sm font-bold text-zinc-800 dark:text-zinc-200 mb-4 flex items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-4 h-4 text-primary-500"><path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0v9l-9 5.25m9-14.25v9l9 5.25m-9-14.25l-9 5.25M3 7.5v9l9 5.25L3 7.5m0-14.25l9 5.25l9-5.25M12 12.75l9-5.25v9l-9-5.25" /></svg>
+                                    B2B Packaging Details
+                                </h3>
+
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div className="group">
+                                        <label htmlFor="box_type" className="block text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5">Box Type</label>
+                                        <div className="relative">
+                                            <select
+                                                name="box_type"
+                                                id="box_type"
+                                                defaultValue={initialData?.box_type || ''}
+                                                className="w-full bg-white/50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 text-foreground rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all appearance-none text-sm"
+                                            >
+                                                <option value="">Select Box</option>
+                                                <option value="QB">Quarter Box (QB)</option>
+                                                <option value="HB">Half Box (HB)</option>
+                                                <option value="FB">Full Box (FB)</option>
+                                            </select>
+                                            <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none text-zinc-500">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4"><path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" /></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="group">
+                                        <label htmlFor="stems_per_bunch" className="block text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5">Stems / Bunch</label>
+                                        <input
+                                            type="number"
+                                            name="stems_per_bunch"
+                                            id="stems_per_bunch"
+                                            min="1"
+                                            defaultValue={initialData?.stems_per_bunch || ''}
+                                            className="w-full bg-white/50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 text-foreground rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all placeholder:text-zinc-400 text-sm"
+                                            placeholder="e.g. 10"
+                                        />
+                                    </div>
+
+                                    <div className="group">
+                                        <label htmlFor="stem_length_cm" className="block text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5">Length (cm)</label>
+                                        <input
+                                            type="number"
+                                            name="stem_length_cm"
+                                            id="stem_length_cm"
+                                            min="1"
+                                            defaultValue={initialData?.stem_length_cm || ''}
+                                            className="w-full bg-white/50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 text-foreground rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all placeholder:text-zinc-400 text-sm"
+                                            placeholder="e.g. 50"
+                                        />
                                     </div>
                                 </div>
                             </div>

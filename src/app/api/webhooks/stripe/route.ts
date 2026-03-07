@@ -24,6 +24,8 @@ export async function POST(req: Request) {
     if (event.type === 'checkout.session.completed') {
         const session = event.data.object
         const shopId = session.metadata?.shop_id
+        const orderType = session.metadata?.order_type || 'immediate'
+        const requestedDeliveryDate = session.metadata?.requested_delivery_date || null
 
         if (!shopId) {
             console.error('Webhook Error: Missing shop_id in metadata')
@@ -89,14 +91,20 @@ export async function POST(req: Request) {
             // Step B: Loop over supplier groups
             for (const [supplierId, items] of Object.entries(supplierGroups)) {
                 // 1. Create order
+                const orderInsertData: any = {
+                    order_group_id: orderGroupId,
+                    shop_id: shopId,
+                    supplier_id: supplierId,
+                    status: 'pending',
+                    order_type: orderType
+                }
+                if (requestedDeliveryDate) {
+                    orderInsertData.requested_delivery_date = requestedDeliveryDate
+                }
+
                 const { data: orderData, error: orderError } = await supabase
                     .from('orders')
-                    .insert({
-                        order_group_id: orderGroupId,
-                        shop_id: shopId,
-                        supplier_id: supplierId,
-                        status: 'pending'
-                    })
+                    .insert(orderInsertData)
                     .select('id')
                     .single()
 

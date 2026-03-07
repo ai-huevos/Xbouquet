@@ -15,6 +15,9 @@ export interface FlowerProduct {
     stock_qty: number;
     image_url: string | null;
     status: 'active' | 'draft' | 'archived';
+    box_type?: 'QB' | 'HB' | 'FB' | null;
+    stems_per_bunch?: number | null;
+    stem_length_cm?: number | null;
     created_at: string;
     updated_at: string;
 }

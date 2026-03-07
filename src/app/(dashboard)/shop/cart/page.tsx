@@ -68,6 +68,13 @@ export default async function CartPage() {
                                             <div className="flex-1 min-w-0 flex flex-col justify-between h-20">
                                                 <h3 className="text-sm font-semibold text-slate-100 truncate">{item.product.name}</h3>
                                                 <p className="text-xs text-slate-400 -mt-1">Unit Price: ${(item.product.price_per_unit / 100).toFixed(2)} / stem</p>
+                                                {(item.product.box_type || item.product.stems_per_bunch) && (
+                                                    <p className="text-[10px] text-primary-400 font-medium">
+                                                        {item.product.box_type ? `Box: ${item.product.box_type}` : ''}
+                                                        {item.product.box_type && item.product.stems_per_bunch ? ' | ' : ''}
+                                                        {item.product.stems_per_bunch ? `${item.product.stems_per_bunch} stems/bunch` : ''}
+                                                    </p>
+                                                )}
                                                 <div className="flex items-end justify-between mt-auto">
                                                     <div className="scale-90 origin-left">
                                                         <CartItemControls itemId={item.id} quantity={item.quantity} maxStock={item.product.stock_qty} />
