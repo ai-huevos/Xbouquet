@@ -19,8 +19,8 @@ When the USER invokes `/feature [feature_description]`, execute the following pr
      - Required route changes or new pages in Next.js.
 
 3. **Artifact Generation**:
-   - Generate or update the `implementation_plan.md` artifact with the detailed design and step-by-step execution strategy.
-   - If appropriate, update `task.md` with the new tasks for the feature.
+   - Generate the explicit implementation plan and save it directly to the project repository at `docs/missions/mission-[number]-[feature-name-slug]-plan.md`.
+   - Update your internal `task.md` artifact with the new tasks for the feature.
    - **CRITICAL**: To ensure the handoff to `/adw-start` is smooth, you MUST append the newly planned feature as a numbered mission under the appropriate Wave in `docs/PLAN.md` (e.g., `Mission X: Feature Name`).
 
 4. **Review Phase**:

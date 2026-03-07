@@ -7,6 +7,7 @@ When the USER invokes `/adw-start [mission_description_or_number]`, execute the 
 
 1. **Context Initialization**:
    - Immediately read `docs/PLAN.md` and `docs/MVP_MISSIONS.md` (or `docs/GROWTH_MISSIONS.md`) to map the requested mission.
+   - Read the explicit implementation plan from `docs/missions/mission-[number]-*-plan.md` if it exists.
    - Read `docs/ARCHITECTURE.md` (and `docs/DECISIONS.md` if necessary) to establish technical anchors.
 
 2. **Branch Management** (// turbo):
