@@ -2,11 +2,14 @@
 
 import { signUp } from '@/lib/actions/auth'
 import Link from 'next/link'
-import { useState, useTransition } from 'react'
+import { useState, useTransition, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 
-export default function SignUpPage() {
+function SignUpContent() {
     const [error, setError] = useState<string | null>(null)
     const [isPending, startTransition] = useTransition()
+    const searchParams = useSearchParams()
+    const defaultRole = searchParams.get('role') || 'shop'
 
     function onSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
@@ -39,13 +42,13 @@ export default function SignUpPage() {
                 {/* Toggle Switch for Role */}
                 <div className="flex bg-zinc-200/50 dark:bg-zinc-900/50 p-1 rounded-xl mb-6">
                     <label className="flex-1 cursor-pointer group">
-                        <input className="peer hidden" name="role" type="radio" value="shop" defaultChecked />
+                        <input className="peer hidden" name="role" type="radio" value="shop" defaultChecked={defaultRole === 'shop'} />
                         <div className="py-2.5 text-center rounded-lg text-sm font-bold transition-all peer-checked:bg-white dark:peer-checked:bg-zinc-800 peer-checked:shadow-sm text-zinc-500 peer-checked:text-zinc-900 dark:peer-checked:text-white hover:text-zinc-700 dark:hover:text-zinc-300">
                             Buyer (Shop)
                         </div>
                     </label>
                     <label className="flex-1 cursor-pointer group">
-                        <input className="peer hidden" name="role" type="radio" value="supplier" />
+                        <input className="peer hidden" name="role" type="radio" value="supplier" defaultChecked={defaultRole === 'supplier'} />
                         <div className="py-2.5 text-center rounded-lg text-sm font-bold transition-all peer-checked:bg-white dark:peer-checked:bg-zinc-800 peer-checked:shadow-sm text-zinc-500 peer-checked:text-zinc-900 dark:peer-checked:text-white hover:text-zinc-700 dark:hover:text-zinc-300">
                             Supplier
                         </div>
@@ -112,5 +115,13 @@ export default function SignUpPage() {
                 </p>
             </div>
         </>
+    )
+}
+
+export default function SignUpPage() {
+    return (
+        <Suspense fallback={<div className="p-8 text-center text-zinc-500">Loading form...</div>}>
+            <SignUpContent />
+        </Suspense>
     )
 }
