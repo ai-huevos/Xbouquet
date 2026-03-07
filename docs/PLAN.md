@@ -104,3 +104,7 @@ graph TD
   - Implement Box Types (QB, HB, FB), Delivery Logistics (Pre-books/Standing), Quality Claims, and B2B Terms.
 - [x] **Mission 23: Mobile Responsiveness Overhaul**
   - Overhaul landing, login, and signup pages with responsive Tailwind padding, auto heights, and typography to fit mobile screens perfectly.
+- [ ] **Mission 24: UX Experience Review and Tandem Testing**
+  - Subagent visual UX sweep across landing, shop, and supplier views.
+  - Implement permanent local DB seed.sql.
+  - Synchronize documentation.
