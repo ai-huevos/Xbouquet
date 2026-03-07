@@ -27,6 +27,7 @@ graph TD
     M5 --> M6["M6: Order Dashboards"]:::pending
     M6 --> M7["M7: RLS Validation"]:::pending
     M7 --> M8["M8: Stripe Integration"]:::pending
+    M8 --> M22["M22: Marketplace B2B Boost"]:::complete
 
     subgraph "Parallel Worktrees (Safe to parallelize)"
         M3

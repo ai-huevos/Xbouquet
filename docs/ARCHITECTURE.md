@@ -53,14 +53,15 @@ Stored in `profiles.role`. No admin role in MVP.
 profiles (id, user_id, role, full_name, avatar_url, created_at, updated_at)
   ├── supplier_profiles (id, profile_id, business_name, ...)
   │     └── flower_products (id, supplier_id, name, price_per_unit, stock_qty, ...)
-  └── shop_profiles (id, profile_id, business_name, ...)
+  └── shop_profiles (id, profile_id, business_name, credit_limit, current_balance, payment_terms, ...)
         └── cart_items (id, shop_id, product_id, quantity, ...)
 
 product_categories (id, name, slug)
 
 order_groups (id, shop_id, created_at)
-  └── orders (id, order_group_id, supplier_id, shop_id, status, ...)
+  └── orders (id, order_group_id, supplier_id, shop_id, status, order_type, requested_delivery_date, ...)
         └── order_items (id, order_id, product_id, quantity, unit_price, ...)
+              └── claims (id, order_item_id, shop_id, supplier_id, reason, requested_credit_amount, evidence_url_array, status, ...)
 ```
 
 ### Order statuses
@@ -85,6 +86,7 @@ That's it. No other statuses.
 | order_groups | Own shop | Own shop | — | — |
 | orders | Own shop + own supplier | System (checkout) | Own supplier (status only) | — |
 | order_items | Via order access | System (checkout) | — | — |
+| claims | Own shop + own supplier | Own shop | Own supplier (status only) | — |
 
 ---
 
@@ -111,6 +113,8 @@ That's it. No other statuses.
 | `getOrder` | `actions/orders.ts` | Authed | Order detail |
 | `updateOrderStatus` | `actions/orders.ts` | Supplier | Confirm or mark delivered |
 | `cancelOrder` | `actions/orders.ts` | Authed | Cancel (with rules) |
+| `submitClaim` | `actions/claims.ts` | Shop | Submit item quality claim |
+| `resolveClaim` | `actions/claims.ts` | Supplier | Approve/Reject a claim |
 
 ---
 
@@ -138,7 +142,9 @@ app/
 │       ├── cart/page.tsx             # Shopping cart
 │       └── orders/
 │           ├── page.tsx              # Order history
-│           └── [id]/page.tsx         # Order detail
+│           └── [id]/
+│               ├── page.tsx          # Order detail
+│               └── claim/page.tsx    # Quality claims form
 ```
 
 ---
@@ -158,9 +164,10 @@ app/
 010_seed_product_categories.sql
 011_create_rls_core.sql
 012_create_auth_trigger.sql
+013_marketplace_boost_schema.sql
 ```
 
-12 migrations. That's it.
+13 migrations. That's it.
 
 ---
 

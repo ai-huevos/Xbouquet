@@ -124,3 +124,30 @@
 **Trigger for growth work:** 5 real suppliers, 10 real shops, 20+ real orders completed.
 **First growth feature:** Drops only (directly increases order frequency). Not tiers, not badges, not referrals.
 **Rationale:** Architecture without running code is speculation. The core order loop must prove itself in production before investing in engagement overlays. Cognitive separation prevents scope creep during execution.
+
+---
+
+## ADR-014: Credit Limit Enforcement — Hard Block
+**Date:** 2026-03-07
+**Status:** Accepted
+**Context:** Shops can purchase using B2B terms (e.g., Net 30). We need a mechanism to enforce the credit limits assigned by suppliers/platform.
+**Decision:** Hard Block. When a shop selects "Put on Account" at checkout, `orders.ts` validates the order total against `shop_profiles.credit_limit - shop_profiles.current_balance`. If it exceeds the limit, the order creation is rejected at the server action level.
+**Rationale:** A soft request would require a manual approval interface for suppliers, adding complexity to the MVP order flow. A hard block forces shops to clear their balance or contact administration.
+
+---
+
+## ADR-015: Standing Orders — Cron Job Generation
+**Date:** 2026-03-07
+**Status:** Accepted
+**Context:** Shops can request recurring deliveries ("standing orders").
+**Decision:** The platform will use a weekly Cron Job (Edge Function or pg_cron) to generate the next instance of a standing order exactly 7 days before its scheduled delivery date, inserting it as a `pending` order. It will *not* pre-generate all future orders immediately.
+**Rationale:** Pre-generating hundreds of future orders pollutes the database, creates a nightmare if the standing order is cancelled or modified (e.g., price changes), and artificially locks up supplier inventory months in advance.
+
+---
+
+## ADR-016: Quality Claims System — Tied to Order Items
+**Date:** 2026-03-07
+**Status:** Accepted
+**Context:** Flower perishability demands a streamlined claims process (e.g., Botrytis, temperature damage).
+**Decision:** Claims are their own table (`claims`), but they must reference a specific `order_item_id` rather than the parent `order`. They require an explicit enum reason, a requested credit amount, and an array of evidence URLs (photos).
+**Rationale:** Shops rarely claim an entire order (which may span multiple suppliers); they claim specific bunches of bad product. Tying it to the item level allows exact refund calculations based on the item's `unit_price`.
