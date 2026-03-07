@@ -26,7 +26,7 @@ function SignUpContent() {
     return (
         <>
             <div className="mb-6">
-                <h3 className="text-3xl font-extrabold text-zinc-900 dark:text-zinc-100 mb-2">Create Account</h3>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-zinc-100 mb-2">Create Account</h3>
                 <p className="text-zinc-500 dark:text-zinc-400">Join the FloraMarket B2B network today.</p>
             </div>
 
@@ -61,7 +61,7 @@ function SignUpContent() {
                         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
                         </div>
-                        <input id="full_name" name="full_name" type="text" required className="w-full pl-11 pr-4 py-3 bg-white/80 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 outline-none transition-all text-zinc-900 dark:text-zinc-100 placeholder-zinc-400" placeholder="John Doe" />
+                        <input id="full_name" name="full_name" type="text" required className="w-full pl-11 pr-4 py-3 sm:py-3.5 bg-white/80 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 outline-none transition-all text-zinc-900 dark:text-zinc-100 placeholder-zinc-400" placeholder="John Doe" />
                     </div>
                 </div>
 
@@ -71,7 +71,7 @@ function SignUpContent() {
                         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400"><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
                         </div>
-                        <input id="email" name="email" type="email" required className="w-full pl-11 pr-4 py-3 bg-white/80 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 outline-none transition-all text-zinc-900 dark:text-zinc-100 placeholder-zinc-400" placeholder="name@company.com" />
+                        <input id="email" name="email" type="email" required className="w-full pl-11 pr-4 py-3 sm:py-3.5 bg-white/80 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 outline-none transition-all text-zinc-900 dark:text-zinc-100 placeholder-zinc-400" placeholder="name@company.com" />
                     </div>
                 </div>
 
@@ -81,7 +81,7 @@ function SignUpContent() {
                         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-400"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
                         </div>
-                        <input id="password" name="password" type="password" required className="w-full pl-11 pr-4 py-3 bg-white/80 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 outline-none transition-all text-zinc-900 dark:text-zinc-100 placeholder-zinc-400" placeholder="••••••••" />
+                        <input id="password" name="password" type="password" required className="w-full pl-11 pr-4 py-3 sm:py-3.5 bg-white/80 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 rounded-xl focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 outline-none transition-all text-zinc-900 dark:text-zinc-100 placeholder-zinc-400" placeholder="••••••••" />
                     </div>
                 </div>
 
@@ -89,7 +89,7 @@ function SignUpContent() {
                     <button
                         type="submit"
                         disabled={isPending}
-                        className="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-primary-600/20 transition-all flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
+                        className="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 sm:py-3.5 rounded-xl shadow-lg shadow-primary-600/20 transition-all flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
                     >
                         {isPending ? (
                             <>

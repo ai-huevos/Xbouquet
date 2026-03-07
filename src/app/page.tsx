@@ -7,15 +7,15 @@ export const metadata = {
 
 export default function LandingPage() {
   return (
-    <div className="bg-zinc-50 dark:bg-zinc-950 font-sans min-h-screen flex items-center justify-center p-6 lg:p-12 relative overflow-hidden">
+    <div className="bg-zinc-50 dark:bg-zinc-950 font-sans min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-12 relative overflow-hidden">
       {/* Abstract background elements for depth */}
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary-600/10 rounded-full blur-[120px]"></div>
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-emerald-400/20 rounded-full blur-[120px]"></div>
 
-      <div className="relative w-full max-w-5xl h-[80vh] min-h-[650px] flex shadow-2xl rounded-2xl overflow-hidden glass-panel-auth flex-col lg:flex-row">
+      <div className="relative w-full max-w-5xl h-auto lg:h-[80vh] min-h-[100dvh] lg:min-h-[650px] flex shadow-2xl rounded-2xl overflow-hidden glass-panel-auth flex-col lg:flex-row">
 
         {/* Left Side: Visual Content */}
-        <div className="w-full lg:w-1/2 relative floral-bg flex flex-col justify-between p-12 text-white">
+        <div className="w-full lg:w-1/2 relative floral-bg flex flex-col justify-center lg:justify-between p-6 sm:p-8 lg:p-12 gap-8 lg:gap-0 text-white">
           <div className="flex items-center gap-3">
             <div className="bg-primary-600 p-2 rounded-lg">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
@@ -30,10 +30,10 @@ export default function LandingPage() {
           </div>
 
           <div className="space-y-4">
-            <h2 className="text-4xl lg:text-5xl font-bold leading-tight">Empowering the <br /><span className="text-emerald-400">Global Floral</span> Trade.</h2>
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight">Empowering the <br /><span className="text-emerald-400">Global Floral</span> Trade.</h2>
             <p className="text-white/80 text-lg max-w-sm">Access exclusive high-volume inventory from the world&apos;s finest farms, directly to your shop.</p>
 
-            <div className="flex items-center gap-4 pt-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-6">
               <div className="flex -space-x-3">
                 <img alt="Member" className="w-10 h-10 rounded-full border-2 border-white/20 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDC0m3WXkal0ebrzqXb7qH9mN_OfWq2c497krVvYF73QdBw4AwsFKtslsfRrY6H97MB5xFIX3NlX-stGlIblkI_IQdM9LAmm51AahOnoCi_DXUXYG_sHtQxDmTAELaTI7Z_4DsriYTNRQZi9rZ01Qfw4iBRpStYdlH0X-sLmkmreS0l5mbsHmZ9kATZbm8CV8XLbs7dcQOhfQspmNk1sScQNpQhuSY6_RC3QhifXZfdiS2dOu9EASZbu12FDJj1Osmhl-HIJ-c609A" />
                 <img alt="Member" className="w-10 h-10 rounded-full border-2 border-white/20 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6uwJ9AQkUMT9LQKJsoDLaxlmhJKosYRFCxePjv1KJctGcU77wKyHjP16Mq3iKC0uKNIwOSm_IbxbJkp-RcLopMFHL0INBWuy5_x2OIZb89eA7kWrvQsIxrEuzsCF1a7GexePkxayQn1aI8e7k163utI3cxJyRCZ712EWRLJD_0NOom-83odbUKNmtr1aPu6Tzu0utz701apAvkOMj4Lhtn8G7lU5gHjf0X3rW2zE08TK1TKxQXT9P3rqOm80SXpk-P97Ls08tYTc" />
@@ -45,7 +45,7 @@ export default function LandingPage() {
         </div>
 
         {/* Right Side: Action Area */}
-        <div className="w-full lg:w-1/2 flex flex-col justify-center p-8 md:p-16 bg-white/60 dark:bg-zinc-950/60 backdrop-blur-md">
+        <div className="w-full lg:w-1/2 flex flex-col justify-center p-6 sm:p-8 md:p-16 bg-white/60 dark:bg-zinc-950/60 backdrop-blur-md">
           <div className="max-w-md mx-auto w-full space-y-8">
             <div className="space-y-2">
               <h3 className="text-3xl font-extrabold text-zinc-900 dark:text-zinc-100">Get Started</h3>

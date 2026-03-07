@@ -2,12 +2,12 @@ import { ReactNode } from 'react'
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
     return (
-        <div className="bg-zinc-50 dark:bg-zinc-950 font-sans min-h-screen flex items-center justify-center p-6 lg:p-12 relative overflow-hidden">
+        <div className="bg-zinc-50 dark:bg-zinc-950 font-sans min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-12 relative overflow-hidden">
             {/* Abstract background elements for depth */}
             <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary-600/10 rounded-full blur-[120px]"></div>
             <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-emerald-400/20 rounded-full blur-[120px]"></div>
 
-            <div className="relative w-full max-w-5xl h-[80vh] min-h-[650px] flex shadow-2xl rounded-2xl overflow-hidden glass-panel-auth flex-col lg:flex-row">
+            <div className="relative w-full max-w-5xl h-auto lg:h-[80vh] min-h-[100dvh] lg:min-h-[650px] flex shadow-2xl rounded-none sm:rounded-2xl overflow-hidden glass-panel-auth flex-col lg:flex-row">
 
                 {/* Left Side: Visual Content (Shared) */}
                 <div className="hidden lg:flex lg:w-1/2 relative floral-bg flex-col justify-between p-12 text-white shadow-[inset_-10px_0_30px_rgba(0,0,0,0.1)]">
@@ -40,7 +40,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
                 </div>
 
                 {/* Right Side: Dynamic Form Area */}
-                <div className="w-full lg:w-1/2 flex flex-col justify-center p-8 md:p-12 lg:p-16 bg-white/60 dark:bg-zinc-950/60 backdrop-blur-md overflow-y-auto relative no-scrollbar">
+                <div className="w-full lg:w-1/2 flex flex-col justify-center p-6 sm:p-8 md:p-12 lg:p-16 bg-white/60 dark:bg-zinc-950/60 backdrop-blur-md overflow-y-auto relative no-scrollbar">
 
                     {/* Mobile Branding Header */}
                     <div className="mb-10 lg:hidden flex items-center justify-center gap-3 pb-8 border-b border-zinc-200 dark:border-zinc-800">
