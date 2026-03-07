@@ -29,12 +29,12 @@ export default async function ShopHeader() {
                     </form>
                 </div>
 
-                <div className="flex items-center gap-6 shrink-0">
-                    <nav className="hidden lg:flex items-center gap-6 text-sm font-semibold text-zinc-600 dark:text-zinc-300">
-                        <Link className="hover:text-primary-500 transition-colors" href="/shop/browse">Marketplace</Link>
-                        <Link className="hover:text-primary-500 transition-colors" href="/shop/orders">Orders</Link>
+                <div className="flex items-center gap-4 shrink-0 overflow-x-auto no-scrollbar">
+                    <nav className="flex items-center gap-4 text-sm font-semibold text-zinc-600 dark:text-zinc-300">
+                        <Link className="hover:text-primary-500 transition-colors whitespace-nowrap" href="/shop/browse">Marketplace</Link>
+                        <Link className="hover:text-primary-500 transition-colors whitespace-nowrap" href="/shop/orders">Orders</Link>
                     </nav>
-                    <div className="h-6 w-px bg-zinc-200 dark:bg-zinc-800 hidden lg:block"></div>
+                    <div className="h-6 w-px bg-zinc-200 dark:bg-zinc-800 hidden sm:block"></div>
 
                     <div className="flex items-center gap-4">
                         <Link href="/shop/cart" className="relative p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors text-zinc-600 dark:text-zinc-300 group">

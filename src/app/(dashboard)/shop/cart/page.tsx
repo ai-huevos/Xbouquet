@@ -13,17 +13,6 @@ export default async function CartPage() {
 
     return (
         <div className="relative flex min-h-[calc(100vh-4rem)] w-full flex-col overflow-x-hidden bg-background-light dark:bg-zinc-950 font-display text-slate-900 dark:text-slate-100 pb-40">
-            {/* Header */}
-            <header className="sticky top-0 z-50 glass px-4 sm:px-6 py-4 flex items-center justify-between">
-                <Link href="/shop/browse" className="flex items-center justify-center p-2 rounded-full hover:bg-primary-600/10 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-100"><path d="m15 18-6-6 6-6" /></svg>
-                </Link>
-                <h1 className="text-lg font-bold tracking-tight text-slate-100">B2B Wholesale Cart</h1>
-                <button className="flex items-center justify-center p-2 rounded-full hover:bg-red-500/10 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-100"><path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /><line x1="10" x2="10" y1="11" y2="17" /><line x1="14" x2="14" y1="11" y2="17" /></svg>
-                </button>
-            </header>
-
             {/* Main Content */}
             <main className="flex-1 px-4 sm:px-6 py-6 space-y-6 max-w-3xl mx-auto w-full">
                 {!cart.totalCount || cart.totalCount === 0 ? (

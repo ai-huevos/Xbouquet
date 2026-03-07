@@ -1,10 +1,20 @@
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
+import { createClient } from '@/lib/supabase/server'
 
 export const metadata = {
     title: 'Checkout | Xpress Buke'
 }
 
-export default function CheckoutGatewayPage() {
+export default async function CheckoutGatewayPage() {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+
+    // Bypass gateway if user is already authenticated
+    if (user) {
+        redirect('/checkout/payment')
+    }
+
     return (
         <div className="flex-1 px-4 sm:px-6 py-8 md:py-12 space-y-8 h-full bg-gradient-to-b from-primary-500/5 to-transparent max-w-md mx-auto">
             <header className="text-center space-y-2">

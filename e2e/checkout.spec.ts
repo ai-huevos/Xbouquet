@@ -71,8 +71,8 @@ test.describe('Checkout Flow Tests', () => {
         // 4. Shop is now in checkout cart
         await page.click('text="Proceed to Checkout"');
 
-        // Click continue as guest on gateway
-        await page.click('text="Continue as Guest"');
+        // Verify gateway bypass
+        await expect(page).toHaveURL(/\/checkout\/payment/);
 
         // Click pay securely on payment page
         await page.click('button:has-text("Pay Securely with Card")');

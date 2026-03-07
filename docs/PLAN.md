@@ -108,3 +108,10 @@ graph TD
   - Subagent visual UX sweep across landing, shop, and supplier views.
   - Implement permanent local DB seed.sql.
   - Synchronize documentation.
+
+## 🌊 WAVE 8: Premium L3 UX Overhaul
+
+- [ ] **Mission 25: Foundational UX Restructure**
+  - Fix Checkout Auth Loop (make gateway intelligent & auto-redirect authenticated users).
+  - Implement Global Navigation Shells (Sticky Sidebars/TopNavs) for Shop and Supplier dashboards.
+  - Replace dummy image APIs with real, high-quality local floral seed photos to restore aesthetic immersion.

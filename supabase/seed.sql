@@ -67,8 +67,8 @@ BEGIN
   -- 5. Seed Flower Products for the Supplier
   INSERT INTO public.flower_products (supplier_id, category_id, name, description, price_per_unit, stock_qty, image_url)
   VALUES 
-    (supplier_profile_id, roses_id, 'Explorer Red Roses', 'Premium 60cm red roses from Ecuadorian highlands', 1.25, 500, 'https://picsum.photos/seed/flower1/800/600'),
-    (supplier_profile_id, roses_id, 'Mondial White Roses', 'Classic pristine white roses, large head size', 1.45, 300, 'https://picsum.photos/seed/flower2/800/600'),
-    (supplier_profile_id, carnations_id, 'Pink Fancy Carnations', 'Long-lasting bright pink carnations', 0.85, 1000, 'https://picsum.photos/seed/flower3/800/600');
+    (supplier_profile_id, roses_id, 'Explorer Red Roses', 'Premium 60cm red roses from Ecuadorian highlands', 1.25, 500, '/seeds/red-roses.jpg'),
+    (supplier_profile_id, roses_id, 'Mondial White Roses', 'Classic pristine white roses, large head size', 1.45, 300, '/seeds/carnations.jpg'),
+    (supplier_profile_id, carnations_id, 'Pink Fancy Carnations', 'Long-lasting bright pink carnations', 0.85, 1000, '/seeds/sunflowers.jpg');
 
 END $$;
