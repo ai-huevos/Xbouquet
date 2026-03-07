@@ -100,8 +100,10 @@ export async function getProduct(id: string): Promise<FlowerProductWithSupplier 
 }
 
 export async function createProduct(values: ProductFormValues) {
+    console.log('[DEBUG] createProduct called with:', values)
     const parsed = productSchema.safeParse(values)
     if (!parsed.success) {
+        console.error('[DEBUG] createProduct validation failed:', parsed.error)
         return { error: 'Invalid product data' }
     }
 
@@ -131,6 +133,7 @@ export async function createProduct(values: ProductFormValues) {
     }
 
     revalidatePath('/supplier/products')
+    revalidatePath('/shop/browse')
     return { success: true }
 }
 
@@ -207,6 +210,7 @@ export async function updateProduct(id: string, values: ProductFormValues) {
     }
 
     revalidatePath('/supplier/products')
+    revalidatePath('/shop/browse')
     return { success: true }
 }
 
@@ -224,6 +228,7 @@ export async function deleteProduct(id: string) {
     }
 
     revalidatePath('/supplier/products')
+    revalidatePath('/shop/browse')
     return { success: true }
 }
 
