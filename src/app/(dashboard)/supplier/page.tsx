@@ -9,7 +9,7 @@ export default async function SupplierDashboard() {
 
     return (
         <div className="animate-enter">
-            <header className="flex items-center justify-between px-8 py-6 sticky top-0 z-10 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800">
+            <header className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4 lg:py-6 sticky top-0 z-10 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800">
                 <div className="flex items-center gap-4">
                     <h2 className="text-2xl font-bold tracking-tight text-foreground">Marketplace Overview</h2>
                 </div>
@@ -25,7 +25,7 @@ export default async function SupplierDashboard() {
                 </div>
             </header>
 
-            <div className="px-8 py-8 space-y-8 max-w-7xl mx-auto">
+            <div className="px-4 sm:px-6 lg:px-8 py-6 lg:py-8 space-y-8 max-w-7xl mx-auto">
                 {/* Metrics Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <div className="glass border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 p-6 rounded-2xl flex flex-col gap-4 relative overflow-hidden group">

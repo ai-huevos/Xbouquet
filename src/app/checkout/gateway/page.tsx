@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function CheckoutGatewayPage() {
     return (
-        <div className="flex-1 px-4 py-8 md:py-12 space-y-8 h-full bg-gradient-to-b from-primary-500/5 to-transparent max-w-md mx-auto">
+        <div className="flex-1 px-4 sm:px-6 py-8 md:py-12 space-y-8 h-full bg-gradient-to-b from-primary-500/5 to-transparent max-w-md mx-auto">
             <header className="text-center space-y-2">
                 <div className="inline-flex items-center justify-center p-3 bg-primary-500/10 rounded-full mb-2 text-primary-600">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22c4.97-1.5 8-5.5 8-10.5V5l-8-3-8 3v6.5C4 16.5 7.03 20.5 12 22Z" /></svg>

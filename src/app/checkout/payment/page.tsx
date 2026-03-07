@@ -32,7 +32,7 @@ export default async function PaymentProcessorPage() {
     }, 0) || 0;
 
     return (
-        <main className="max-w-7xl mx-auto px-6 py-12 min-h-[calc(100vh-4rem)] w-full animate-enter">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 min-h-[calc(100vh-4rem)] w-full animate-enter">
             <nav className="flex items-center gap-2 text-sm text-zinc-400 dark:text-zinc-500 mb-8">
                 <Link href="/shop/cart" className="hover:text-primary-600 dark:hover:text-primary-500 transition-colors">Cart</Link>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4"><path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" /></svg>

@@ -23,7 +23,7 @@ export default async function BrowsePage({
     ])
 
     return (
-        <div className="max-w-[1440px] mx-auto flex gap-8 p-6 w-full animate-enter">
+        <div className="max-w-[1440px] mx-auto flex gap-8 p-4 sm:p-6 lg:p-8 w-full animate-enter">
             {/* STITCH FACETED NAVIGATION SIDEBAR */}
             <aside className="w-64 shrink-0 space-y-8 hidden md:block">
                 <section>

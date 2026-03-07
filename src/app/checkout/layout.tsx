@@ -11,7 +11,7 @@ export default async function CheckoutLayout({ children }: { children: React.Rea
     return (
         <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex flex-col pt-safe pb-safe selection:bg-primary-500/30">
             {/* Minimal Header */}
-            <header className="sticky top-0 z-50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200/50 dark:border-zinc-800/50 px-6 h-16 flex items-center justify-between shadow-sm">
+            <header className="sticky top-0 z-50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200/50 dark:border-zinc-800/50 px-4 sm:px-6 h-16 flex items-center justify-between shadow-sm">
                 <Link href="/shop/cart" className="text-sm font-medium text-zinc-500 hover:text-foreground transition-colors flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="m15 18-6-6 6-6" />

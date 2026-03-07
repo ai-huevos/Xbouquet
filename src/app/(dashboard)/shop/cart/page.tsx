@@ -14,7 +14,7 @@ export default async function CartPage() {
     return (
         <div className="relative flex min-h-[calc(100vh-4rem)] w-full flex-col overflow-x-hidden bg-background-light dark:bg-zinc-950 font-display text-slate-900 dark:text-slate-100 pb-40">
             {/* Header */}
-            <header className="sticky top-0 z-50 glass px-4 py-4 flex items-center justify-between">
+            <header className="sticky top-0 z-50 glass px-4 sm:px-6 py-4 flex items-center justify-between">
                 <Link href="/shop/browse" className="flex items-center justify-center p-2 rounded-full hover:bg-primary-600/10 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-100"><path d="m15 18-6-6 6-6" /></svg>
                 </Link>
@@ -25,7 +25,7 @@ export default async function CartPage() {
             </header>
 
             {/* Main Content */}
-            <main className="flex-1 px-4 py-6 space-y-6 max-w-3xl mx-auto w-full">
+            <main className="flex-1 px-4 sm:px-6 py-6 space-y-6 max-w-3xl mx-auto w-full">
                 {!cart.totalCount || cart.totalCount === 0 ? (
                     <div className="flex flex-col items-center justify-center rounded-3xl glass-light py-32 text-center animate-enter">
                         <div className="mb-4 rounded-full bg-primary-600/10 p-6 text-primary-500">
@@ -118,7 +118,7 @@ export default async function CartPage() {
             {/* Bottom Fixed Summary (Only when cart is not empty) */}
             {(cart.totalCount ?? 0) > 0 && (
                 <div className="fixed bottom-0 left-0 right-0 z-[100] md:relative md:max-w-3xl md:mx-auto md:w-full md:pb-6">
-                    <div className="glass px-6 py-6 rounded-t-[2rem] md:rounded-2xl shadow-2xl space-y-4">
+                    <div className="glass px-4 sm:px-6 py-4 sm:py-6 rounded-t-[2rem] md:rounded-2xl shadow-2xl space-y-4">
                         <div className="space-y-2">
                             <div className="flex justify-between items-center text-sm">
                                 <span className="text-slate-400">Subtotal</span>
