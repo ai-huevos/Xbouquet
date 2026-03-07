@@ -93,3 +93,14 @@ body {
 .transition-glass {
   @apply transition-all duration-300 ease-in-out hover:shadow-md hover:-translate-y-0.5;
 }
+
+/* Custom Auth Page Utilities */
+.glass-panel-auth {
+  @apply bg-white/70 dark:bg-zinc-900/60 backdrop-blur-[20px] border border-white/40 dark:border-white/10;
+}
+
+.floral-bg {
+  background-image: linear-gradient(rgba(16, 34, 27, 0.4), rgba(16, 34, 27, 0.4)), url(https://lh3.googleusercontent.com/aida-public/AB6AXuCrARTfKhM7wGTOpm65SybK3OfpRav9bxIOdV871267scgcPMsUK4Lq0BrVy9nfxRs50N6eIjBwgHEdq2hjnUbvKXrM6kuxEcl0D09dzhVkoBnlPHrMiNN47-h5uEcrm6w1J_fCn-AcJ3h5RbktY4xZwTIknMaOBTCgUhuGR4ELlPIsQpR1t-0bB5pApgIZAKwzRahF5-q5MdBvL1gONwv5fsxLLOuKz1-vz6dH4cLlvtm_6MVQKs2YE2cvJ7i0g3YTxzAfjPtkOFc);
+  background-size: cover;
+  background-position: center;
+}

@@ -63,7 +63,7 @@ export async function checkout(formData?: FormData) {
                 product_data: {
                     name: prod.name,
                 },
-                unit_amount: prod.price_per_unit, // amount in cents
+                unit_amount: Math.round(prod.price_per_unit * 100), // convert dollars to cents
             },
             quantity: item.quantity,
         })

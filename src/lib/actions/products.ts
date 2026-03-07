@@ -100,8 +100,13 @@ export async function getProduct(id: string): Promise<FlowerProductWithSupplier 
 }
 
 export async function createProduct(values: ProductFormValues) {
+    const fs = require('fs')
+    fs.appendFileSync('/tmp/debug.txt', `[DEBUG] createProduct starting...\n`)
+    fs.appendFileSync('/tmp/debug.txt', `[DEBUG] values: ${JSON.stringify(values)}\n`)
+
     const parsed = productSchema.safeParse(values)
     if (!parsed.success) {
+        fs.appendFileSync('/tmp/debug.txt', `[DEBUG] validation failed: ${JSON.stringify(parsed.error)}\n`)
         return { error: 'Invalid product data' }
     }
 
@@ -131,6 +136,7 @@ export async function createProduct(values: ProductFormValues) {
     }
 
     revalidatePath('/supplier/products')
+    revalidatePath('/shop/browse')
     return { success: true }
 }
 
@@ -207,6 +213,7 @@ export async function updateProduct(id: string, values: ProductFormValues) {
     }
 
     revalidatePath('/supplier/products')
+    revalidatePath('/shop/browse')
     return { success: true }
 }
 
@@ -224,6 +231,7 @@ export async function deleteProduct(id: string) {
     }
 
     revalidatePath('/supplier/products')
+    revalidatePath('/shop/browse')
     return { success: true }
 }
 
