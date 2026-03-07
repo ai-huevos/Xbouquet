@@ -100,10 +100,13 @@ export async function getProduct(id: string): Promise<FlowerProductWithSupplier 
 }
 
 export async function createProduct(values: ProductFormValues) {
-    console.log('[DEBUG] createProduct called with:', values)
+    const fs = require('fs')
+    fs.appendFileSync('/tmp/debug.txt', `[DEBUG] createProduct starting...\n`)
+    fs.appendFileSync('/tmp/debug.txt', `[DEBUG] values: ${JSON.stringify(values)}\n`)
+
     const parsed = productSchema.safeParse(values)
     if (!parsed.success) {
-        console.error('[DEBUG] createProduct validation failed:', parsed.error)
+        fs.appendFileSync('/tmp/debug.txt', `[DEBUG] validation failed: ${JSON.stringify(parsed.error)}\n`)
         return { error: 'Invalid product data' }
     }
 
