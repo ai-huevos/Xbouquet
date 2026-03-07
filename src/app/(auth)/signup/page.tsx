@@ -39,7 +39,7 @@ export default function SignUpPage() {
                         {error}
                     </div>
                 )}
-                <form className="mt-8 space-y-6" onSubmit={onSubmit}>
+                <form className="mt-8 space-y-6" onSubmit={onSubmit} suppressHydrationWarning>
                     <div className="space-y-4">
                         <div>
                             <label htmlFor="full_name" className="block text-sm font-medium text-foreground">Full Name</label>

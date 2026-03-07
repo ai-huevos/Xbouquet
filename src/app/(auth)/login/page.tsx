@@ -39,7 +39,7 @@ export default function LoginPage() {
                         {error}
                     </div>
                 )}
-                <form className="mt-8 space-y-6" onSubmit={onSubmit}>
+                <form className="mt-8 space-y-6" onSubmit={onSubmit} suppressHydrationWarning>
                     <div className="rounded-md shadow-sm -space-y-px">
                         <div>
                             <label htmlFor="email-address" className="sr-only">Email address</label>
