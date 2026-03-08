@@ -51,13 +51,13 @@ alter table public.notifications enable row level security;
 create policy "Users can view their own conversations" on public.conversations for
 select using (
         shop_id in (
-            select profile_id
+            select id
             from public.profiles
             where
                 user_id = auth.uid ()
         )
         or supplier_id in (
-            select profile_id
+            select id
             from public.profiles
             where
                 user_id = auth.uid ()
@@ -68,13 +68,13 @@ create policy "Users can insert conversations they are part of" on public.conver
 with
     check (
         shop_id in (
-            select profile_id
+            select id
             from public.profiles
             where
                 user_id = auth.uid ()
         )
         or supplier_id in (
-            select profile_id
+            select id
             from public.profiles
             where
                 user_id = auth.uid ()
@@ -89,13 +89,13 @@ select using (
             from public.conversations
             where
                 shop_id in (
-                    select profile_id
+                    select id
                     from public.profiles
                     where
                         user_id = auth.uid ()
                 )
                 or supplier_id in (
-                    select profile_id
+                    select id
                     from public.profiles
                     where
                         user_id = auth.uid ()
@@ -117,13 +117,13 @@ with
             from public.conversations
             where
                 shop_id in (
-                    select profile_id
+                    select id
                     from public.profiles
                     where
                         user_id = auth.uid ()
                 )
                 or supplier_id in (
-                    select profile_id
+                    select id
                     from public.profiles
                     where
                         user_id = auth.uid ()
@@ -138,13 +138,13 @@ update using (
         from public.conversations
         where
             shop_id in (
-                select profile_id
+                select id
                 from public.profiles
                 where
                     user_id = auth.uid ()
             )
             or supplier_id in (
-                select profile_id
+                select id
                 from public.profiles
                 where
                     user_id = auth.uid ()
