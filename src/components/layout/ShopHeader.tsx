@@ -1,8 +1,10 @@
 import Link from 'next/link'
 import { getProfile } from '@/lib/actions/profiles'
+import { getUnreadNotificationCount } from '@/lib/actions/communications'
 
 export default async function ShopHeader() {
     const profile = await getProfile()
+    const { count: unreadCount } = await getUnreadNotificationCount()
 
     return (
         <header className="sticky top-0 z-50 glass-panel border-b border-slate-200/50 dark:border-slate-800/50 px-6 py-3">
@@ -33,6 +35,15 @@ export default async function ShopHeader() {
                     <nav className="flex items-center gap-4 text-sm font-semibold text-zinc-600 dark:text-zinc-300">
                         <Link className="hover:text-primary-500 transition-colors whitespace-nowrap" href="/shop/browse">Marketplace</Link>
                         <Link className="hover:text-primary-500 transition-colors whitespace-nowrap" href="/shop/orders">Orders</Link>
+                        <Link className="hover:text-primary-500 transition-colors whitespace-nowrap flex items-center gap-1" href="/shop/messages">
+                            Messages
+                            {unreadCount > 0 && (
+                                <span className="flex h-2.5 w-2.5 relative">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                                </span>
+                            )}
+                        </Link>
                     </nav>
                     <div className="h-6 w-px bg-zinc-200 dark:bg-zinc-800 hidden sm:block"></div>
 

@@ -12,128 +12,146 @@ export default async function CartPage() {
     const cart = await getCart()
 
     return (
-        <div className="relative flex min-h-[calc(100vh-4rem)] w-full flex-col overflow-x-hidden bg-background-light dark:bg-zinc-950 font-display text-slate-900 dark:text-slate-100 pb-40">
-            {/* Main Content */}
-            <main className="flex-1 px-4 sm:px-6 py-6 space-y-6 max-w-3xl mx-auto w-full">
+        <div className="bg-background-light dark:bg-zinc-950 font-display min-h-screen">
+            <main className="max-w-7xl mx-auto px-6 py-12 pb-32">
+                {/* Breadcrumbs */}
+                <nav className="flex items-center gap-2 text-sm text-slate-400 dark:text-slate-500 mb-8 pt-4">
+                    <Link href="/shop/browse" className="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Marketplace</Link>
+                    <span className="material-symbols-outlined text-xs">chevron_right</span>
+                    <span className="text-slate-900 dark:text-slate-100 font-medium">Checkout Selection</span>
+                </nav>
+
                 {!cart.totalCount || cart.totalCount === 0 ? (
-                    <div className="flex flex-col items-center justify-center rounded-3xl glass-light py-32 text-center animate-enter">
+                    <div className="flex flex-col items-center justify-center rounded-3xl bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-white/40 dark:border-zinc-800/50 py-32 text-center animate-enter shadow-xl">
                         <div className="mb-4 rounded-full bg-primary-600/10 p-6 text-primary-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="8" cy="21" r="1" /><circle cx="19" cy="21" r="1" /><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" /></svg>
+                            <span className="material-symbols-outlined text-4xl">shopping_cart</span>
                         </div>
-                        <h3 className="text-xl font-bold text-foreground">Your cart is empty</h3>
-                        <p className="mt-2 text-zinc-500 dark:text-zinc-400 max-w-sm">Looks like you haven&apos;t added any flowers to your cart yet.</p>
-                        <Link href="/shop/browse" className="mt-8 rounded-xl bg-primary-600 px-8 py-3.5 font-bold text-white transition-all hover:bg-primary-700 active:scale-95 shadow-sm hover:shadow-md hover:-translate-y-0.5">
-                            Browse Marketplace
+                        <h3 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">Your Selection is Empty</h3>
+                        <p className="mt-2 text-slate-500 dark:text-slate-400 max-w-sm">Looks like you haven&apos;t added any premium floral cultivars to your cart yet.</p>
+                        <Link href="/shop/browse" className="mt-8 rounded-xl bg-primary-600 px-8 py-3.5 font-bold text-white transition-all hover:bg-primary-700 active:scale-95 shadow-lg shadow-primary-500/20 hover:-translate-y-0.5">
+                            Browse Inventory
                         </Link>
                     </div>
                 ) : (
-                    <>
-                        <section className="space-y-4">
-                            <div className="flex items-center justify-between mb-2">
-                                <h2 className="text-sm font-semibold uppercase tracking-wider text-primary-500">Items in Order ({cart.totalCount ?? 0})</h2>
-                                <span className="text-xs text-slate-400">Inventory Reserved</span>
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                        {/* Left Column: Cart Items */}
+                        <div className="lg:col-span-8 space-y-8">
+                            <div className="flex items-baseline justify-between mb-2">
+                                <h2 className="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">Your Selection</h2>
+                                <span className="text-slate-500 dark:text-slate-400 text-sm font-medium">{cart.totalCount} Stems/Bunches Reserved</span>
                             </div>
 
                             {cart.grouped?.map((group: any) => (
-                                <div key={group.supplier.profile_id} className="space-y-4">
-                                    <div className="flex items-center gap-2 px-2 pb-2 border-b border-primary-500/10">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary-500"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" /><path d="M3 6h18" /><path d="M16 10a4 4 0 0 1-8 0" /></svg>
-                                        <span className="text-sm font-bold text-slate-300">{group.supplier.business_name}</span>
+                                <section key={group.supplier.profile_id} className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-white/40 dark:border-zinc-800/50 rounded-3xl p-6 lg:p-8 space-y-6 shadow-xl shadow-slate-200/50 dark:shadow-black/50">
+                                    <div className="flex items-center gap-3 pb-4 border-b border-slate-200 dark:border-zinc-800/50">
+                                        <span className="material-symbols-outlined text-primary-600 dark:text-primary-400">potted_plant</span>
+                                        <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 tracking-tight">{group.supplier.business_name}</h3>
+                                        <span className="ml-auto text-xs font-bold uppercase tracking-wider text-primary-700 dark:text-primary-300 bg-primary-50 dark:bg-primary-900/30 border border-primary-200 dark:border-primary-800/50 px-3 py-1 rounded">Preferred Partner</span>
                                     </div>
 
-                                    {group.items?.map((item: any) => (
-                                        <div key={item.id} className="glass-light rounded-xl p-4 flex gap-4 items-center">
-                                            <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-zinc-800/50">
-                                                {item.product.image_url ? (
-                                                    <Image src={item.product.image_url} alt={item.product.name} fill className="object-cover" />
-                                                ) : (
-                                                    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-zinc-900 border border-zinc-200 dark:border-zinc-700/50">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-zinc-400 dark:text-zinc-600">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                                                        </svg>
+                                    <div className="space-y-6">
+                                        {group.items?.map((item: any) => (
+                                            <div key={item.id} className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 pb-6 border-b border-slate-100 dark:border-zinc-800/30 last:border-0 last:pb-0">
+                                                <div className="w-24 h-24 rounded-2xl overflow-hidden bg-white/50 dark:bg-zinc-800/50 border border-white dark:border-zinc-700 shrink-0 relative">
+                                                    {item.product.image_url ? (
+                                                        <Image src={item.product.image_url} alt={item.product.name} fill className="object-cover" />
+                                                    ) : (
+                                                        <div className="flex h-full w-full items-center justify-center bg-slate-100 dark:bg-zinc-800">
+                                                            <span className="material-symbols-outlined text-slate-300 dark:text-slate-600 text-3xl">image</span>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                                <div className="flex-1 w-full">
+                                                    <div className="flex flex-col sm:flex-row justify-between items-start gap-2 sm:gap-0">
+                                                        <div>
+                                                            <Link href={`/shop/browse/${item.product.id}`} className="hover:underline hover:text-primary-600">
+                                                                <h4 className="text-lg font-bold text-slate-900 dark:text-slate-100">{item.product.name}</h4>
+                                                            </Link>
+                                                            <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                                                                {(item.product.box_type || item.product.stems_per_bunch) && (
+                                                                    <>
+                                                                        {item.product.box_type ? `Box: ${item.product.box_type}` : ''}
+                                                                        {item.product.box_type && item.product.stems_per_bunch ? ' • ' : ''}
+                                                                        {item.product.stems_per_bunch ? `${item.product.stems_per_bunch} stems/bunch` : ''}
+                                                                    </>
+                                                                )}
+                                                            </p>
+                                                        </div>
+                                                        <div className="sm:text-right flex flex-row sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto mt-2 sm:mt-0">
+                                                            <p className="text-lg font-extrabold text-primary-600 dark:text-primary-400">${(item.lineTotal / 100).toFixed(2)}</p>
+                                                            <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase mt-1 px-1.5 py-0.5 rounded bg-slate-100 dark:bg-zinc-800 inline-block">${(item.product.price_per_unit / 100).toFixed(2)} / unit</p>
+                                                        </div>
                                                     </div>
-                                                )}
-                                            </div>
-                                            <div className="flex-1 min-w-0 flex flex-col justify-between h-20">
-                                                <h3 className="text-sm font-semibold text-slate-100 truncate">{item.product.name}</h3>
-                                                <p className="text-xs text-slate-400 -mt-1">Unit Price: ${(item.product.price_per_unit / 100).toFixed(2)} / stem</p>
-                                                {(item.product.box_type || item.product.stems_per_bunch) && (
-                                                    <p className="text-[10px] text-primary-400 font-medium">
-                                                        {item.product.box_type ? `Box: ${item.product.box_type}` : ''}
-                                                        {item.product.box_type && item.product.stems_per_bunch ? ' | ' : ''}
-                                                        {item.product.stems_per_bunch ? `${item.product.stems_per_bunch} stems/bunch` : ''}
-                                                    </p>
-                                                )}
-                                                <div className="flex items-end justify-between mt-auto">
-                                                    <div className="scale-90 origin-left">
-                                                        <CartItemControls itemId={item.id} quantity={item.quantity} maxStock={item.product.stock_qty} />
+                                                    <div className="flex items-center justify-between mt-4">
+                                                        <div className="scale-[0.85] sm:scale-95 origin-left">
+                                                            <CartItemControls itemId={item.id} quantity={item.quantity} maxStock={item.product.stock_qty} />
+                                                        </div>
                                                     </div>
-                                                    <span className="text-sm font-bold text-slate-100">${(item.lineTotal / 100).toFixed(2)}</span>
                                                 </div>
                                             </div>
-                                        </div>
-                                    ))}
-                                </div>
+                                        ))}
+                                    </div>
+                                </section>
                             ))}
-                        </section>
+                        </div>
 
-                        {/* Shipping Calculator */}
-                        <section className="glass-light rounded-xl p-4 border-l-4 border-primary-600 mt-8 hidden sm:block">
-                            <div className="flex items-center gap-3 mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary-600"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
-                                <h3 className="text-sm font-semibold text-slate-100">Shipping Calculator</h3>
-                            </div>
-                            <div className="space-y-3">
-                                <div className="relative flex gap-2">
-                                    <div className="w-1/2">
-                                        <label className="block text-[10px] uppercase font-bold text-slate-500 mb-1 ml-1">State</label>
-                                        <input className="w-full bg-zinc-900/50 border border-slate-700/50 rounded-lg text-sm py-2 px-3 text-slate-100 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none" type="text" placeholder="NY" />
+                        {/* Right Column: Order Summary (Sticky) */}
+                        <div className="lg:col-span-4">
+                            <div className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-2xl border border-white/60 dark:border-zinc-700/50 rounded-3xl p-6 lg:p-8 sticky top-28 space-y-8 shadow-2xl shadow-primary-900/5 dark:shadow-black/70">
+                                <h3 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight border-b border-slate-200 dark:border-zinc-700/50 pb-4">Order Summary</h3>
+
+                                <div className="space-y-4">
+                                    <div className="flex justify-between text-slate-600 dark:text-slate-400 text-sm">
+                                        <span className="font-medium">Subtotal</span>
+                                        <span className="font-bold text-slate-900 dark:text-slate-100">${((cart.totalPrice ?? 0) / 100).toFixed(2)}</span>
                                     </div>
-                                    <div className="w-1/2">
-                                        <label className="block text-[10px] uppercase font-bold text-slate-500 mb-1 ml-1">Destination Zip</label>
-                                        <input className="w-full bg-zinc-900/50 border border-slate-700/50 rounded-lg text-sm py-2 px-3 text-slate-100 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none" type="text" placeholder="10001" />
+                                    <div className="flex justify-between text-slate-600 dark:text-slate-400 text-sm">
+                                        <span className="font-medium group relative cursor-help border-b border-slate-300 dark:border-zinc-600 border-dashed">
+                                            B2B Tax Exemption
+                                            <span className="opacity-0 group-hover:opacity-100 transition-opacity absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 bg-slate-800 text-white text-xs rounded p-2 pointer-events-none">Requires valid reseller certificate on file.</span>
+                                        </span>
+                                        <span className="font-bold text-emerald-600 dark:text-emerald-500">-$0.00</span>
+                                    </div>
+                                    <div className="flex justify-between text-slate-600 dark:text-slate-400 text-sm">
+                                        <span className="font-medium">Cold-Chain Shipping</span>
+                                        <span className="font-bold text-primary-600 dark:text-primary-400">Calculated Later</span>
+                                    </div>
+                                    <div className="pt-4 border-t border-slate-200 dark:border-zinc-700/50 flex justify-between items-baseline">
+                                        <span className="text-xl font-bold text-slate-900 dark:text-slate-100">Total Due</span>
+                                        <span className="text-3xl font-extrabold text-primary-600 dark:text-primary-400">${((cart.totalPrice ?? 0) / 100).toFixed(2)}</span>
                                     </div>
                                 </div>
-                                <div className="flex items-center justify-between text-xs text-slate-400 mt-2">
-                                    <span>Standard Cold-Chain Delivery</span>
-                                    <span className="text-primary-500 font-semibold">Free Over $500</span>
-                                </div>
-                            </div>
-                        </section>
-                    </>
-                )}
-            </main>
 
-            {/* Bottom Fixed Summary (Only when cart is not empty) */}
-            {(cart.totalCount ?? 0) > 0 && (
-                <div className="fixed bottom-0 left-0 right-0 z-[100] md:relative md:max-w-3xl md:mx-auto md:w-full md:pb-6">
-                    <div className="glass px-4 sm:px-6 py-4 sm:py-6 rounded-t-[2rem] md:rounded-2xl shadow-2xl space-y-4">
-                        <div className="space-y-2">
-                            <div className="flex justify-between items-center text-sm">
-                                <span className="text-slate-400">Subtotal</span>
-                                <span className="text-slate-100 font-medium">${((cart.totalPrice ?? 0) / 100).toFixed(2)}</span>
-                            </div>
-                            <div className="flex justify-between items-center text-sm">
-                                <span className="text-slate-400">Estimated Tax (B2B)</span>
-                                <span className="text-slate-100 font-medium">$0.00</span>
-                            </div>
-                            <div className="flex justify-between items-center text-sm">
-                                <span className="text-slate-400">Shipping Fee</span>
-                                <span className="text-primary-500 font-bold uppercase text-[10px]">Calculated at next step</span>
-                            </div>
-                            <div className="h-[1px] bg-slate-700/50 my-2"></div>
-                            <div className="flex justify-between items-center">
-                                <span className="text-base font-bold text-slate-100">Total Amount</span>
-                                <span className="text-xl font-bold text-slate-100">${((cart.totalPrice ?? 0) / 100).toFixed(2)}</span>
+                                <div className="space-y-4 pt-2">
+                                    <div className="bg-primary-50/50 dark:bg-primary-900/10 rounded-2xl p-4 border border-primary-100 dark:border-primary-800/30">
+                                        <div className="flex items-center gap-3 mb-2">
+                                            <span className="material-symbols-outlined text-primary-600 dark:text-primary-400 text-sm">local_shipping</span>
+                                            <span className="text-sm font-bold text-slate-800 dark:text-slate-200">Delivery Logistics</span>
+                                        </div>
+                                        <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Guaranteed temperature-controlled delivery. All flowers are shipped in hydration reservoir boxes to preserve Stage 2 bloom cycle.</p>
+                                    </div>
+
+                                    <Link href="/checkout/gateway" className="w-full bg-primary-600 hover:bg-primary-500 text-white font-bold py-4 rounded-2xl shadow-lg shadow-primary-500/20 flex items-center justify-center gap-2 transition-transform active:scale-[0.98] group">
+                                        <span>Secure Checkout</span>
+                                        <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                                    </Link>
+
+                                    <div className="flex items-center justify-center gap-6 pt-4">
+                                        <div className="flex items-center gap-1.5 grayscale opacity-50 dark:opacity-30">
+                                            <span className="material-symbols-outlined text-sm">verified_user</span>
+                                            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-700 dark:text-slate-300">256-bit SSL</span>
+                                        </div>
+                                        <div className="flex items-center gap-1.5 grayscale opacity-50 dark:opacity-30">
+                                            <span className="material-symbols-outlined text-sm">payments</span>
+                                            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-700 dark:text-slate-300">Credit Terms</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <Link href="/checkout/gateway" className="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-primary-500/20 flex items-center justify-center gap-2 transition-transform active:scale-[0.98]">
-                            <span>Proceed to Checkout</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
-                        </Link>
                     </div>
-                </div>
-            )}
+                )}
+            </main>
         </div>
     )
 }

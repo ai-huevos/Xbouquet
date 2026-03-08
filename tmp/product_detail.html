@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>B2B Floral Product Detail Page</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;family=Playfair+Display:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#08f7ab",
+                        "emerald-600": "#059669",
+                        "background-light": "#f5f8f7",
+                        "background-dark": "#0f231c",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at top left, #f5f8f7 0%, #e2e8f0 100%);
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex min-h-screen flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 glass-panel border-b border-white/20 px-6 lg:px-20 py-4">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-12">
+<div class="flex items-center gap-3">
+<div class="size-9 bg-primary flex items-center justify-center rounded-lg text-background-dark">
+<span class="material-symbols-outlined font-bold">local_florist</span>
+</div>
+<h1 class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">FloralMarket<span class="text-emerald-600">.</span></h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-colors" href="#">Browse</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-colors" href="#">Suppliers</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-colors" href="#">Orders</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-colors" href="#">Analytics</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="bg-white/50 border-none rounded-full pl-10 pr-4 py-2 text-sm w-64 focus:ring-2 focus:ring-primary/50 transition-all" placeholder="Search cultivars..." type="text"/>
+</div>
+<button class="p-2 hover:bg-primary/10 rounded-full transition-colors relative">
+<span class="material-symbols-outlined text-slate-700">shopping_cart</span>
+<span class="absolute top-1 right-1 size-4 bg-emerald-600 text-white text-[10px] flex items-center justify-center rounded-full">3</span>
+</button>
+<div class="size-10 rounded-full border-2 border-primary/30 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile avatar of a florist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-IJlQn6sku23WMrWFNHOS1PXc4ozEz6uYrujuea-OqFpiTyNx71BTD6-meKiWExwezKA8d1NisP0-99Y3BH1jg6KdrJY5z9xLSi9D6rBX66OkbLIYfCCI0KQJwrTFWLfY-uCHsx2AR9DeS81-4w7pmCSJb6VCkh0PljNfElhrfO95qgnPgmVyuH0Jkws72b9DMJfUbBa8ejHD_572FM4mmDEB9Q4G4mKAh1-BCoNd41VhGkq2yCvyIGoo2vz6Qllrr1NHb2Ma2zQ"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-7xl mx-auto w-full px-6 lg:px-20 py-10">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-sm font-medium text-slate-400 mb-8">
+<a class="hover:text-emerald-600" href="#">Inventory</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<a class="hover:text-emerald-600" href="#">Fresh Cut Flowers</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<a class="hover:text-emerald-600" href="#">Peonies</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-slate-900">Sarah Bernhardt</span>
+</nav>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+<!-- Left Section: Image Gallery -->
+<div class="space-y-4">
+<div class="glass-panel p-3 rounded-2xl shadow-xl shadow-slate-200/50">
+<div class="aspect-[4/5] w-full rounded-xl overflow-hidden bg-white">
+<img class="w-full h-full object-cover" data-alt="Close up high resolution shot of pink Sarah Bernhardt peonies" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxhomp6CRmaHNX6TYWxyTldSGMZahEeA6YrmwS_jwThDT0depWQwS7eb7vPdjctAiQadYJtrgiF0AwR8nYIt3UxvxTcrtw9BCFVUfjQKZ-4Yg0chTBKG8FLJhzPquyULh3wuF3aeEh8lU8gPbCGRTNsNk4OuWVMZDZMu2EVLFj21tZndJxoS7v7c0hUW4wodvuGNzBKcdPHIz4ZytHE25yvB2RLZ-O-jdZ1KpUfWJikWX6pTu0z0lUNxnmvoi7Yy_CSfjJm-NK9RQ"/>
+</div>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-2">
+<div class="size-24 rounded-lg border-2 border-emerald-600 overflow-hidden flex-shrink-0 cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="Thumbnail image 1 of peony" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_S9tNm3gyALRE0MoOGg3DnVdhtceYtIcl4L-Y_otWSiTNN9rV_AOkWEgKAmaveNXA6fuZB2NrWvLATz93ZAPT7s5z57ULPWsG_xaO3Sw2xEMSPVuY8_2O5S6ecMB3N42iYyZAWzChrZeAxE1lngXP1YtaDUXBXVmQLuRzHqj303R7yjaVgFHQpRpnjFJK1SYc1wfzFLL_RX75f--jW4733gq2LNvXOU5yVoXcTtfwNFKGTm4M6Cxn7uXlQ7dig-T79OapwBTB0Hc"/>
+</div>
+<div class="size-24 rounded-lg border-2 border-transparent hover:border-emerald-600/50 overflow-hidden flex-shrink-0 cursor-pointer transition-colors">
+<img class="w-full h-full object-cover" data-alt="Thumbnail image 2 of peony bunch" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJKgS9GaMn89hiG3FyPsj2YOzcZ8EeGI517DcCiOoGXzxwDrHZX-h69oymRyWF04rPmwaHKHkgZnxUmq2NpZtYX2PaVfm1IwefQ4Sdv6CYfHGI5Ex2AKVcCeGzMbeNauUSqQpxvVtyhe6v2XC-l5qhNLQ5-Ye0w0INpRvyVNJ7Ivzq9ckKtmEgZEk7ErOh28QfDAh3F3m19m8rAjWK0U0ihwXjjRRXBRMhgC9j-jQq9yXUaMSWwz09GEJaflBK8R5vWezOQ5wYDrU"/>
+</div>
+<div class="size-24 rounded-lg border-2 border-transparent hover:border-emerald-600/50 overflow-hidden flex-shrink-0 cursor-pointer transition-colors">
+<img class="w-full h-full object-cover" data-alt="Thumbnail image 3 of peony petal detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmE3yhDu7i3Alq3qvGT6FxRc9xXeqmGQlQRZPP1ePQ0su3K-okEwrP8D5pKtGlMZM2jBXyemIHYOpJ2UCe7iPwZZPAf2LagZ2ehC-zf3CGBfM8PoH1yffLJihq8uTCWwCpYHSmR51agmL16pSzX3H3AcJ-gvy-1rn4PGo-Cuk4tmZcUm3ekYWGOhXIQMBxtnksOf5naXXiq-_L0hIOaOkynK40g4jDP_VGpDuWW9FRm9mJPd0vcOZOsFB_o_VU7kCVrjsDtTx3MGY"/>
+</div>
+</div>
+</div>
+<!-- Right Section: Product Details -->
+<div class="glass-panel p-10 lg:p-14 rounded-3xl shadow-2xl shadow-slate-200/40">
+<div class="space-y-8">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold tracking-widest text-emerald-600 uppercase">Premium Select</span>
+<div class="flex items-center gap-1 bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full text-xs font-bold">
+<span class="material-symbols-outlined text-sm">inventory_2</span>
+                                    50 In Stock
+                                </div>
+</div>
+<h2 class="font-serif text-5xl text-slate-900 leading-tight mb-2">Peony Sarah Bernhardt</h2>
+<p class="text-slate-500 font-medium">Supplier: <span class="text-emerald-600 cursor-pointer hover:underline">Dutch Bloomers</span></p>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-extrabold text-emerald-600">$2.45</span>
+<span class="text-slate-400 font-medium">/ stem</span>
+<span class="ml-4 text-xs font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded">Min. 20 stems</span>
+</div>
+<div class="space-y-4">
+<h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider">Description</h3>
+<p class="text-slate-600 leading-relaxed font-light text-lg">
+                                The Sarah Bernhardt is the quintessential double peony. Featuring large, apple-blossom pink blooms that can reach up to 20cm in diameter. Known for its delicate fragrance and exceptional vase life, it remains the gold standard for high-end wedding installations and luxury floral arrangements.
+                            </p>
+</div>
+<div class="grid grid-cols-2 gap-4 py-6 border-y border-slate-100">
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 mb-1">Grade</p>
+<p class="text-sm font-semibold text-slate-800">A1 Premium</p>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 mb-1">Stem Length</p>
+<p class="text-sm font-semibold text-slate-800">60cm - 75cm</p>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 mb-1">Season</p>
+<p class="text-sm font-semibold text-slate-800">May - July</p>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-slate-400 mb-1">Origin</p>
+<p class="text-sm font-semibold text-slate-800">Aalsmeer, NL</p>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-4 pt-4">
+<div class="flex items-center h-14 bg-slate-100 rounded-xl px-2 w-full sm:w-auto">
+<button class="size-10 flex items-center justify-center hover:bg-white rounded-lg transition-colors text-slate-600">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<input class="w-16 bg-transparent border-none text-center font-bold text-lg focus:ring-0 text-slate-800" type="number" value="20"/>
+<button class="size-10 flex items-center justify-center hover:bg-white rounded-lg transition-colors text-slate-600">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<button class="flex-1 h-14 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl flex items-center justify-center gap-3 shadow-lg shadow-emerald-200 transition-all hover:scale-[1.02] active:scale-[0.98] w-full">
+<span class="material-symbols-outlined">shopping_bag</span>
+                                Add to Cart — $49.00
+                            </button>
+</div>
+<div class="flex items-center justify-center gap-8 pt-4">
+<button class="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-emerald-600 transition-colors">
+<span class="material-symbols-outlined text-lg">favorite</span>
+                                SAVE TO WISHLIST
+                            </button>
+<button class="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-emerald-600 transition-colors">
+<span class="material-symbols-outlined text-lg">share</span>
+                                SHARE PRODUCT
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Related Products -->
+<section class="mt-24">
+<div class="flex items-end justify-between mb-8">
+<div>
+<h3 class="font-serif text-3xl text-slate-900">Recommended for you</h3>
+<p class="text-slate-500">Similar premium cultivars from Dutch Bloomers</p>
+</div>
+<a class="text-emerald-600 font-bold flex items-center gap-2 hover:gap-3 transition-all" href="#">
+                        View all <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Product Card 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] rounded-2xl overflow-hidden mb-4 bg-white shadow-md group-hover:shadow-xl transition-all">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Pink roses in a bunch" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAStgH1c6_0fB3ZMcunjFMv4ERncQzZGrAa7bZDHfuspLx6_mHDyDL9fwx4N__DvJzuxPmZIXvjGMcU3CIxsQgl-ZFHN8d1_lBmBQskzPtDET5J7NiQcEnLqQ-Ajw1x5pL-oKb2mK_4pKI60DEYae-eMvLFRdrjuhesYhzTiogwFxxQKQI4QXg1KjCVaowSj3aM0G-OD1qm5PdntZ-Jv8VDphyUomedzaLtFcwg5OR0mVwKvv4JEhpj2Qk7kUJihMUpDchRnDii90A"/>
+</div>
+<h4 class="font-bold text-slate-800">Sweet Avalanche Rose</h4>
+<p class="text-slate-500 text-sm">$1.85 / stem</p>
+</div>
+<!-- Product Card 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] rounded-2xl overflow-hidden mb-4 bg-white shadow-md group-hover:shadow-xl transition-all">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="White ranunculus flower" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACxFEMUpmjfk1YlqlXe7AlBBxpdvU4ZjOzQ88zdEqF_LXFIpSdHeyOmpFZWJkw3H1rrDMAG5BZS5iD6qf-moMcKgn-BIkygDc23mOUku_hxla0IJDcAYA6bXm9lqk3SKXIJP5ofKvTmK0g5ow_64IBsCx4EurKou_op4zQOp4hpEshI3BUqFuX_saPI3VR6_cf1PuRExBCuS4X3ugi5_Hqo709luSGCYBFX0tW_hV7hQFTa07nForUDFYOjsUJDodj5OGR_jVdWvU"/>
+</div>
+<h4 class="font-bold text-slate-800">White Ranunculus</h4>
+<p class="text-slate-500 text-sm">$2.10 / stem</p>
+</div>
+<!-- Product Card 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] rounded-2xl overflow-hidden mb-4 bg-white shadow-md group-hover:shadow-xl transition-all">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Pink tulip garden" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2B_XUNjFNY7dVL8g-oMOKFKuYhG2sNAaYgCg37hJlHcF7wi0YWjEjtXJT43B-eUzOmrj-odogdQF664-0Q-A7CvxqlEKtEAyWjsFtUeUjCdrAyRoyc2ibwZ0UPp3lSsAXqMM1w1LVJvEqsLPFXaZY_X-NuA6PAeDb1H02qEIrl0-cRfY2A_MgaQ3e38NtV_Yiozs4IPpL_fxW2YgeYG7Vv_eomZ7hD1SuMXKy7Lx7N7dDQeZ8SPohioNOh4ahh49oKsDuWi--KRE"/>
+</div>
+<h4 class="font-bold text-slate-800">Double Late Tulip</h4>
+<p class="text-slate-500 text-sm">$0.95 / stem</p>
+</div>
+<!-- Product Card 4 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] rounded-2xl overflow-hidden mb-4 bg-white shadow-md group-hover:shadow-xl transition-all">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Coral charm peony" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLnPlHU9AqoiAprf7VQbtHzy3TtnoKPs_hTTczdwDWaH3iX1fBkSdV0-OVSAd8nDCbjxKkBNiD_UbFwXP42Gidw_JgCbpB_UW2jQy_tnBYixQKcO2yU402KeIEJrjjF3oVjNHhVmkmuaNFSB41I0VbwxFNA8ZgruOSJhl12FoDJFBmDuTPska_EIm8ia9cu7NXvU0QZvRpGbCraSyHNe6Oiqb84f2HnyNDxGc0fE9TL99NkEGx1w59NFurq92yIWaQxxQk5cJbTqY"/>
+</div>
+<h4 class="font-bold text-slate-800">Peony Coral Charm</h4>
+<p class="text-slate-500 text-sm">$2.80 / stem</p>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-slate-900 text-slate-400 py-16 px-6 lg:px-20 mt-20">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-3 mb-6 text-white">
+<div class="size-8 bg-primary flex items-center justify-center rounded-lg text-background-dark">
+<span class="material-symbols-outlined font-bold text-base">local_florist</span>
+</div>
+<h1 class="text-lg font-extrabold tracking-tight">FloralMarket</h1>
+</div>
+<p class="text-sm leading-relaxed">
+                        The global B2B standard for premium floral commerce. Connecting the world's finest growers with elite florists and event designers.
+                    </p>
+</div>
+<div>
+<h5 class="text-white font-bold mb-6">Marketplace</h5>
+<ul class="space-y-4 text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">Seasonal Trends</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Direct Auction</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Sustainability Reports</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Logistics Partners</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-white font-bold mb-6">Support</h5>
+<ul class="space-y-4 text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">Quality Guarantee</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Shipping Information</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Help Center</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contact Expert</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-white font-bold mb-6">Subscribe to Alerts</h5>
+<p class="text-xs mb-4">Get notifications for limited inventory and seasonal drops.</p>
+<div class="flex gap-2">
+<input class="bg-slate-800 border-none rounded-lg px-4 py-2 text-sm flex-1 focus:ring-1 focus:ring-primary" placeholder="Email address" type="email"/>
+<button class="bg-primary text-slate-900 px-4 py-2 rounded-lg font-bold text-sm">Join</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto border-t border-slate-800 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
+<p>© 2024 FloralMarket Global B.V. All rights reserved.</p>
+<div class="flex gap-8">
+<a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-white transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-white transition-colors" href="#">Cookie Settings</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>
