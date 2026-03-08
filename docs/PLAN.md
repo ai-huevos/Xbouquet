@@ -123,3 +123,8 @@ graph TD
 - [x] **Mission 28: Logistics & Platform Governance**
   - Expand order statuses in the database for perishables (`processing`, `shipped`, `partially_fulfilled`).
   - Implement the Admin Dispute Resolution Dashboard.
+
+## 🌊 WAVE 9: Engagement & Messaging
+
+- [x] **Mission 27: Communications & Notifications**
+  - Implement on-platform messaging schema/UI and webhooks/triggers for order statuses.
