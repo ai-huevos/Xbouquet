@@ -115,3 +115,8 @@ graph TD
   - Fix Checkout Auth Loop (make gateway intelligent & auto-redirect authenticated users).
   - Implement Global Navigation Shells (Sticky Sidebars/TopNavs) for Shop and Supplier dashboards.
   - Replace dummy image APIs with real, high-quality local floral seed photos to restore aesthetic immersion.
+- [ ] **Mission 26: Stitch UI Alignment & Aesthetic Overhaul**
+  - Extract aesthetic design rules from the Stitch "Xpress Buke UI Flows" project.
+  - Reconstruct the Cart (`/shop/cart/page.tsx`) layout to match premium L3 B2B standards.
+  - Reconstruct the Product Detail (`/shop/browse/[id]/page.tsx`) layout to match premium L3 B2B standards.
+  - Ensure Supplier views reflect the same premium design system.
