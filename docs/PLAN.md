@@ -104,6 +104,11 @@ graph TD
   - Shop Billing & Reconciliation (`/shop/billing`) — Balance cards, credit utilization, transaction history table.
   - Net-30 Invoice Generation (`/api/invoice/[orderId]`) — Styled HTML invoice download per order.
   - Navigation updates: Analytics in SupplierNav, Billing in ShopHeader.
+- [x] **Mission 30: Backend Re-Engagement & Data Seeding** (Post-Parallel Stabilization)
+  - Applied 3 unapplied migrations (`add_order_statuses`, `add_admin_role`, `communications_schema`).
+  - Fixed `profile_id` → `id` column reference bug in communications RLS policies.
+  - Seeded 8 flower products across 6 categories, shop@test.com and supplier@test.com with full profiles.
+  - Switched `.env.local` from local Supabase to cloud instance. Full browser verification passed.
 
 ## 🌊 WAVE 10: Growth & Viral Overlays (Future)
 
@@ -120,9 +125,9 @@ graph TD
 
 | Metric | Count |
 |--------|-------|
-| Completed missions | 17 (M1–M8, M22–M29) |
-| Pending missions | Growth (M30+) |
-| Migrations | 16+ SQL files |
+| Completed missions | 18 (M1–M8, M22–M30) |
+| Pending missions | Growth (M31+) |
+| Migrations | 16 SQL files (all applied) |
 | Server Action files | 8+ (`auth`, `cart`, `claims`, `communications`, `orders`, `products`, `profiles`, `analytics`) |
 | Route pages | 22+ (dashboard + checkout + admin + analytics + billing) |
 | ADRs | 16 architectural decisions |
