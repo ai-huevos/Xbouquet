@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { getProfile } from '@/lib/actions/profiles'
 import { getUnreadNotificationCount } from '@/lib/actions/communications'
+import UserMenuDropdown from './UserMenuDropdown'
 
 export default async function ShopHeader() {
     const profile = await getProfile()
@@ -55,11 +56,11 @@ export default async function ShopHeader() {
                             </svg>
                         </Link>
 
-                        <div className="flex items-center gap-2 pl-2 border-l border-zinc-200 dark:border-zinc-800">
-                            <div className="w-9 h-9 flex items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 font-bold uppercase overflow-hidden">
-                                {profile?.full_name?.charAt(0) || 'U'}
-                            </div>
-                        </div>
+                        <UserMenuDropdown
+                            initials={profile?.full_name?.charAt(0) || 'U'}
+                            fullName={profile?.full_name || 'User'}
+                            email={profile?.email || ''}
+                        />
                     </div>
                 </div>
             </div>
