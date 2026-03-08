@@ -37,6 +37,16 @@ export function SupplierNav() {
                 </svg>
             ),
         },
+        {
+            name: 'Messages',
+            href: '/supplier/messages',
+            exact: false,
+            icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                    <path fillRule="evenodd" d="M2.99 4.316A2.25 2.25 0 015.25 2h9.5A2.25 2.25 0 0117 4.25v9.5A2.25 2.25 0 0114.75 16H6.126l-3.35 2.393A.75.75 0 012 17.78V4.316zM5.25 3.5a.75.75 0 00-.75.75v11.085l2.094-1.496A.75.75 0 017 13.5h7.75a.75.75 0 00.75-.75v-8.5a.75.75 0 00-.75-.75h-9.5z" clipRule="evenodd" />
+                </svg>
+            ),
+        },
     ]
 
     return (
@@ -51,13 +61,13 @@ export function SupplierNav() {
                         key={item.href}
                         href={item.href}
                         className={`flex items-center gap-3 px-4 py-3 rounded-xl font-semibold transition-all group ${isActive
-                                ? 'bg-primary-500/20 text-foreground'
-                                : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800/50'
+                            ? 'bg-primary-500/20 text-foreground'
+                            : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800/50'
                             }`}
                     >
                         <span className={`transition-colors ${isActive
-                                ? 'text-primary-600 dark:text-primary-500 group-hover:scale-110 transition-transform'
-                                : 'text-zinc-400 dark:text-zinc-500 group-hover:text-primary-600 dark:group-hover:text-primary-500'
+                            ? 'text-primary-600 dark:text-primary-500 group-hover:scale-110 transition-transform'
+                            : 'text-zinc-400 dark:text-zinc-500 group-hover:text-primary-600 dark:group-hover:text-primary-500'
                             }`}>
                             {item.icon}
                         </span>

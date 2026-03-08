@@ -120,3 +120,8 @@ graph TD
   - Reconstruct the Cart (`/shop/cart/page.tsx`) layout to match premium L3 B2B standards.
   - Reconstruct the Product Detail (`/shop/browse/[id]/page.tsx`) layout to match premium L3 B2B standards.
   - Ensure Supplier views reflect the same premium design system.
+
+## 🌊 WAVE 9: Engagement & Messaging
+
+- [x] **Mission 27: Communications & Notifications**
+  - Implement on-platform messaging schema/UI and webhooks/triggers for order statuses.
