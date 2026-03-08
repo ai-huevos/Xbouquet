@@ -128,3 +128,11 @@ graph TD
 
 - [x] **Mission 27: Communications & Notifications**
   - Implement on-platform messaging schema/UI and webhooks/triggers for order statuses.
+
+## 🌊 WAVE 10: Analytics & Financial Transparency
+
+- [x] **Mission 29: Analytics & Financial Reconciliation**
+  - Supplier ROI Dashboard (`/supplier/analytics`) — KPI cards, revenue trend chart, top products table, order type breakdown.
+  - Shop Billing & Reconciliation (`/shop/billing`) — Balance cards, credit utilization, transaction history table.
+  - Net-30 Invoice Generation (`/api/invoice/[orderId]`) — Styled HTML invoice download per order.
+  - Navigation updates: Analytics in SupplierNav, Billing in ShopHeader.

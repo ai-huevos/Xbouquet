@@ -35,6 +35,7 @@ export default async function ShopHeader() {
                     <nav className="flex items-center gap-4 text-sm font-semibold text-zinc-600 dark:text-zinc-300">
                         <Link className="hover:text-primary-500 transition-colors whitespace-nowrap" href="/shop/browse">Marketplace</Link>
                         <Link className="hover:text-primary-500 transition-colors whitespace-nowrap" href="/shop/orders">Orders</Link>
+                        <Link className="hover:text-primary-500 transition-colors whitespace-nowrap" href="/shop/billing">Billing</Link>
                         <Link className="hover:text-primary-500 transition-colors whitespace-nowrap flex items-center gap-1" href="/shop/messages">
                             Messages
                             {unreadCount > 0 && (
