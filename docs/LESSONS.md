@@ -71,3 +71,12 @@ CSS `height: X%` only works when the parent has an explicit height. In flex layo
 
 **Lesson:** The safety override system validates itself. Changes to the workflow system itself should always trigger human review — the meta-change detection is critical for preventing the agent from modifying its own rules autonomously.
 
+## API Separation: Deno Edge Functions + Node.js TSC Coexistence
+**What happened:** After creating Supabase Edge Functions in `supabase/functions/api/`, `npx tsc --noEmit` failed with ~30 errors — Deno URL imports (`https://deno.land/x/hono@...`) and `.ts` extension imports are invalid in Node.js TypeScript.
+
+**Root cause:** The root `tsconfig.json` had `"include": ["**/*.ts"]` which also matched `supabase/functions/**/*.ts`. Edge Functions run in Deno with their own type system.
+
+**Fix:** Add `"supabase/functions"` to `tsconfig.json` → `"exclude"`. Edge Functions have their own runtime and don't pass through Next.js compilation.
+
+**Pattern:** When mixing runtimes (Node.js + Deno) in one repo, always partition via `tsconfig.json` excludes. Consider a separate `deno.json` or `tsconfig.json` in `supabase/functions/` for Deno-specific settings.
+
