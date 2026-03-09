@@ -1,0 +1,17 @@
+{
+    "name": "adw-cli",
+    "version": "1.0.0",
+    "description": "Deterministic ADW orchestrator — Blueprint First, Model Second",
+    "type": "module",
+    "scripts": {
+        "adw": "npx tsx adw.ts"
+    },
+    "dependencies": {
+        "commander": "^13.0.0"
+    },
+    "devDependencies": {
+        "tsx": "^4.19.0",
+        "@types/node": "^22.0.0",
+        "typescript": "^5.7.0"
+    }
+}
