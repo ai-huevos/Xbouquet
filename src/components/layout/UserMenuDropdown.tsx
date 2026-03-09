@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
@@ -14,15 +14,23 @@ interface UserMenuDropdownProps {
 
 export default function UserMenuDropdown({ initials, fullName, email }: UserMenuDropdownProps) {
     const [isOpen, setIsOpen] = useState(false)
-    const [mounted, setMounted] = useState(false)
+    const [menuPos, setMenuPos] = useState({ top: 0, right: 0 })
     const buttonRef = useRef<HTMLButtonElement>(null)
     const menuRef = useRef<HTMLDivElement>(null)
     const router = useRouter()
     const supabase = createClient()
 
+
+    // Compute position when menu opens
     useEffect(() => {
-        setMounted(true)
-    }, [])
+        if (isOpen && buttonRef.current) {
+            const rect = buttonRef.current.getBoundingClientRect()
+            setMenuPos({
+                top: rect.bottom + 8,
+                right: window.innerWidth - rect.right,
+            })
+        }
+    }, [isOpen])
 
     // Close when clicking outside
     useEffect(() => {
@@ -57,22 +65,13 @@ export default function UserMenuDropdown({ initials, fullName, email }: UserMenu
         router.push('/login')
     }
 
-    const getMenuPosition = useCallback(() => {
-        if (!buttonRef.current) return { top: 0, right: 0 }
-        const rect = buttonRef.current.getBoundingClientRect()
-        return {
-            top: rect.bottom + 8,
-            right: window.innerWidth - rect.right,
-        }
-    }, [])
-
-    const menuContent = isOpen && mounted ? createPortal(
+    const menuContent = isOpen && typeof document !== 'undefined' ? createPortal(
         <div
             ref={menuRef}
             style={{
                 position: 'fixed',
-                top: getMenuPosition().top,
-                right: getMenuPosition().right,
+                top: menuPos.top,
+                right: menuPos.right,
                 zIndex: 9999,
             }}
             className="w-56 bg-white dark:bg-zinc-900 rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-black/50 border border-slate-200 dark:border-zinc-800 overflow-hidden"

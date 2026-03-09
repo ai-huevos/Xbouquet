@@ -117,11 +117,14 @@ graph TD
 
 ## 🌊 WAVE 10: Dashboard Intelligence & Data Integrity
 
-- [ ] **Mission 32: Live Dashboard KPIs** (Planned)
-  - Replace hardcoded `$42,850.00` Total Sales, `24` Pending Orders, fake orders table with real DB queries.
-  - New `src/lib/actions/dashboard.ts` — `getSupplierDashboardStats()` and `getSupplierOrders()`.
-  - Rebuild Supplier Orders page (`/supplier/orders`) from placeholder to functional management table.
-  - Wire Fulfill button to `updateOrderStatus()` action.
+- [x] **Mission 32: Live Dashboard KPIs**
+  - New `src/lib/actions/dashboard.ts` — `getSupplierDashboardStats()`, `getSupplierOrders()`, `updateOrderStatus()` with real DB queries.
+  - Rewrote supplier dashboard page with live KPI cards (Total Sales, Pending Orders, Active Products) and real orders table.
+  - Rebuilt `/supplier/orders` from placeholder to functional order management with status transitions.
+  - Fixed analytics chart rendering (CSS % height → pixel heights) and Supabase join array type handling.
+  - Seeded 10 demo orders across 2 months for rich MVP demo data.
+  - Fixed profile dropdown clipping via React portal.
+  - Docs essentialism cleanup: consolidated 11 lesson files into `LESSONS.md`, deleted 3 subdirs.
 
 ## 🌊 WAVE 11: Growth & Viral Overlays (Future)
 
@@ -138,11 +141,11 @@ graph TD
 
 | Metric | Count |
 |--------|-------|
-| Completed missions | 19 (M1–M8, M22–M31) |
-| Planned missions | 1 (M32: Live Dashboard KPIs) |
+| Completed missions | 20 (M1–M8, M22–M32) |
+| Planned missions | Growth (M33+) |
 | Future missions | Growth (M33+) |
 | Migrations | 16 SQL files (all applied) |
-| Server Action files | 8+ (`auth`, `cart`, `claims`, `communications`, `orders`, `products`, `profiles`, `analytics`) |
+| Server Action files | 9+ (`auth`, `cart`, `claims`, `communications`, `dashboard`, `orders`, `products`, `profiles`, `analytics`) |
 | Route pages | 22+ (dashboard + checkout + admin + analytics + billing) |
 | ADRs | 16 architectural decisions |
 

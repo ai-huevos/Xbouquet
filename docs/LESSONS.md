@@ -47,3 +47,12 @@ Push interactive forms to Client Components (`useState`, `useTransition`) at the
 
 ## General: React Hydration & Browser Extensions
 Browser extensions (dark-mode togglers, tab managers) inject `data-*` attributes into `<html>` before React hydrates, causing false-positive hydration errors. Always add `suppressHydrationWarning` to `<html>` and `<body>` in the root layout.
+
+## M32: Sticky Header + Dropdown Clipping
+`backdrop-blur-lg` on a sticky header creates a new CSS stacking context. Absolutely-positioned dropdowns inside it get clipped even with high `z-index`. **Fix**: Use React `createPortal` to render dropdowns to `document.body`, computing position from `getBoundingClientRect()` in a `useEffect` (not during render — ESLint will flag ref access during render).
+
+## M32: Supabase Join Returns Array
+When using `.select('product:flower_products(id, name)')`, Supabase may return the joined relation as an **array** `[{id, name}]`, not a single object `{id, name}`. Always guard with `Array.isArray(item.product) ? item.product[0] : item.product`.
+
+## M32: CSS Bar Charts — Percentage Heights
+CSS `height: X%` only works when the parent has an explicit height. In flex layouts, the parent often collapses. Use pixel-based heights computed from a known max height instead: `Math.round((pct / 100) * maxHeightPx)`.
