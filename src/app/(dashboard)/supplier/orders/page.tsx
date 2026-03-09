@@ -1,5 +1,4 @@
 import { getSupplierOrders, updateOrderStatus } from '@/lib/actions/dashboard'
-import { revalidatePath } from 'next/cache'
 import Link from 'next/link'
 
 export const metadata = {

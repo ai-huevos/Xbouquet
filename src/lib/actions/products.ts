@@ -4,7 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { productSchema, ProductFormValues } from '../validators/products'
 import { bulkProductSchema, BulkProductFormValues } from '../validators/import'
-import { FlowerProduct, FlowerProductWithCategory, FlowerProductWithSupplier, ProductCategory } from '@/types/products'
+import { FlowerProductWithCategory, FlowerProductWithSupplier, ProductCategory } from '@/types/products'
 
 export async function getCategories(): Promise<ProductCategory[]> {
     const supabase = await createClient()
@@ -100,13 +100,8 @@ export async function getProduct(id: string): Promise<FlowerProductWithSupplier 
 }
 
 export async function createProduct(values: ProductFormValues) {
-    const fs = require('fs')
-    fs.appendFileSync('/tmp/debug.txt', `[DEBUG] createProduct starting...\n`)
-    fs.appendFileSync('/tmp/debug.txt', `[DEBUG] values: ${JSON.stringify(values)}\n`)
-
     const parsed = productSchema.safeParse(values)
     if (!parsed.success) {
-        fs.appendFileSync('/tmp/debug.txt', `[DEBUG] validation failed: ${JSON.stringify(parsed.error)}\n`)
         return { error: 'Invalid product data' }
     }
 
@@ -247,7 +242,7 @@ export async function uploadProductImage(formData: FormData) {
     const fileExt = file.name.split('.').pop()
     const fileName = `${userData.user.id}-${Math.random().toString(36).substring(2)}.${fileExt}`
 
-    const { data, error } = await supabase.storage
+    const { error } = await supabase.storage
         .from('product_images')
         .upload(fileName, file)
 

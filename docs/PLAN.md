@@ -126,26 +126,36 @@ graph TD
   - Fixed profile dropdown clipping via React portal.
   - Docs essentialism cleanup: consolidated 11 lesson files into `LESSONS.md`, deleted 3 subdirs.
 
+- [x] **Mission 33: ADW v2 — Phase Decomposition + Megaman Suits**
+  - 8 atomic phases (`context`, `plan`, `suit`, `build`, `test`, `review`, `learn`, `ship`) in `.agents/phases/`.
+  - 6 Megaman Suits (growth-loops, psychology, octalysis, network-effects, analytics, experiment) in `.agents/suits/`.
+  - Rewrote `adw-start`, `adw-finish`, `feature` as phase orchestrators.
+  - New workflows: `/adw-resume` (session recovery), `/adw-bugfix` (surgical hotfix), `/adw-parallel` (worktree parallelism), `/adw-metrics` (velocity dashboard), `/adw-triggers` (file watch, cron, webhook).
+  - `adw_state.json` state machine with per-phase checkpointing and session archiving.
+
 ## 🌊 WAVE 11: Growth & Viral Overlays (Future)
 
 *(Frozen until core MVP is validated by real users — see ADR-013)*
 
-- [ ] **Missions 33+: Growth Pipeline**
+- [ ] **Missions 34+: Growth Pipeline**
   - **Drops & Scarcity**: High-ROI scarcity events for fresh floral inventory.
   - **Status & Badges**: Supplier/Shop tier calculations and badging.
   - **Referrals & Trending**: Network invites, Showcases, and trending calculations.
 
 ---
 
-## Current Codebase Snapshot (as of 2026-03-08)
+## Current Codebase Snapshot (as of 2026-03-09)
 
 | Metric | Count |
 |--------|-------|
-| Completed missions | 20 (M1–M8, M22–M32) |
-| Planned missions | Growth (M33+) |
-| Future missions | Growth (M33+) |
+| Completed missions | 21 (M1–M8, M22–M33) |
+| Planned missions | Growth (M34+) |
 | Migrations | 16 SQL files (all applied) |
-| Server Action files | 9+ (`auth`, `cart`, `claims`, `communications`, `dashboard`, `orders`, `products`, `profiles`, `analytics`) |
-| Route pages | 22+ (dashboard + checkout + admin + analytics + billing) |
+| Server Action files | 9+ |
+| Route pages | 22+ |
 | ADRs | 16 architectural decisions |
+| ADW Phase files | 8 |
+| ADW Workflow files | 9 |
+| Megaman Suits | 6 |
+
 

@@ -1,31 +1,28 @@
 ---
-description: Finishes an ADW session, runs verifications, commits changes, and updates the global PLAN.md tracker.
+description: Finishes an ADW session — runs verification gates, generates evidence, captures lessons, and ships.
 ---
 # /adw-finish
 
-When the USER invokes `/adw-finish`, execute the following protocol strictly:
+When the USER invokes `/adw-finish`, execute the following protocol:
 
-1. **Verification Phase** (// turbo):
-   - Run `npx tsc --noEmit` to ensure strict typing compliance.
-   - Run `npx eslint .` to check for linting issues.
+> **This is a phase orchestrator.** Each step below corresponds to an atomic phase in `.agents/phases/`. Read the phase file for detailed instructions.
 
-2. **Visual Evidence Phase**:
-   - Use the `browser_subagent` tool to test the newly built feature flow as a human would.
-   - The browser subagent will automatically generate a WebP video recording.
-   - Generate a `walkthrough.md` artifact documenting changes, what was tested, and visual evidence.
+## State Check
 
-3. **Knowledge Capture**:
-   - If significant bugs or architectural learnings were encountered, append a new section to `docs/LESSONS.md`.
+1. Read `adw_state.json`. Verify that BUILD phase is completed. If not, inform the user to run `/adw-start` first.
 
-4. **Commit & Sync** (// turbo):
-   - Run `git add .`
-   - Run `git commit -m "chore: finalize current ADW mission"`
-   - Run `git push origin dev`
+## Phase Execution
 
-5. **Status Update**:
-   - Open `docs/PLAN.md` and mark the current mission as completed (`[ ]` → `[x]`).
-   - Run `git add docs/PLAN.md` and `git commit -m "docs: update PLAN.md tracker"` then `git push origin dev`.
+2. **Execute phase:** `.agents/phases/test.md` → Update `adw_state.json`
+   - If TEST fails, the test phase has **auto-retry logic** (max 2 retries):
+     - Return to `.agents/phases/build.md` to fix errors
+     - Re-run `.agents/phases/test.md`
+     - If still failing after 2 retries, notify user
 
-6. **Deployment Handoff**:
-   - Inform the user that code has been verified, committed, and pushed to `dev`.
-   - If this mission concludes a Wave, remind the user to open a PR from `dev` to `main`.
+3. **Execute phase:** `.agents/phases/review.md` → Update `adw_state.json`
+   - This phase has a **human gate** — waits for user approval
+   - If user rejects, return to BUILD phase with feedback
+
+4. **Execute phase:** `.agents/phases/learn.md` → Update `adw_state.json`
+
+5. **Execute phase:** `.agents/phases/ship.md` → Update `adw_state.json`

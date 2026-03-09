@@ -34,7 +34,7 @@ function getInitial(name: string): string {
 }
 
 export default async function SupplierDashboard() {
-    const profile = await getProfile()
+    const _profile = await getProfile()
     const products = await getSupplierProducts()
     const stats = await getSupplierDashboardStats()
     const recentOrders = await getSupplierOrders(5)

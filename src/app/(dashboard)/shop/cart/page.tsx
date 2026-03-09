@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getCart } from '@/lib/actions/cart'
 import CartItemControls from '@/components/cart/CartItemControls'
 import Image from 'next/image'

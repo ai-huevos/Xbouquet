@@ -3,7 +3,7 @@
 import { createClaim } from '@/lib/actions/claims'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useFormStatus } from 'react-dom'
-import { FormEvent, useRef, Suspense } from 'react'
+import { useRef, Suspense } from 'react'
 
 function SubmitButton() {
     const { pending } = useFormStatus()

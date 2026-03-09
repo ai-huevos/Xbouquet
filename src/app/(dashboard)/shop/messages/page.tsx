@@ -1,4 +1,4 @@
-import { getConversations, getMessages, sendMessage } from '@/lib/actions/communications'
+import { getConversations, getMessages } from '@/lib/actions/communications'
 import { getProfile } from '@/lib/actions/profiles'
 import { MessagesClient } from '@/components/communications/MessagesClient'
 import { redirect } from 'next/navigation'
