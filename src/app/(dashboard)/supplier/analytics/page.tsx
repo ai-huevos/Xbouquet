@@ -75,19 +75,18 @@ export default async function SupplierAnalyticsPage() {
                     <div className="lg:col-span-2 glass border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 p-6 rounded-2xl">
                         <h3 className="text-lg font-bold text-foreground mb-6">Revenue Trend</h3>
                         {hasData && analytics.monthlyRevenue.length > 0 ? (
-                            <div className="flex items-end gap-3 h-48">
+                            <div className="flex items-end gap-3" style={{ height: '192px' }}>
                                 {analytics.monthlyRevenue.map((month, i) => {
                                     const pct = maxMonthlyRevenue > 0 ? (month.revenue / maxMonthlyRevenue) * 100 : 0
+                                    const barHeight = Math.max(Math.round((pct / 100) * 160), 8)
                                     const isLast = i === analytics.monthlyRevenue.length - 1
                                     return (
-                                        <div key={month.month} className="flex-1 flex flex-col items-center gap-2">
+                                        <div key={month.month} className="flex-1 flex flex-col items-center justify-end gap-2">
                                             <span className="text-xs font-bold text-foreground">{formatCurrency(month.revenue)}</span>
-                                            <div className="w-full flex justify-center">
-                                                <div
-                                                    className={`w-10 rounded-t-lg transition-all ${isLast ? 'bg-gradient-to-t from-primary-600 to-primary-400 shadow-lg shadow-primary-500/20' : 'bg-primary-500/25 dark:bg-primary-500/15'}`}
-                                                    style={{ height: `${Math.max(pct, 4)}%` }}
-                                                />
-                                            </div>
+                                            <div
+                                                className={`w-10 rounded-t-lg transition-all ${isLast ? 'bg-gradient-to-t from-primary-600 to-primary-400 shadow-lg shadow-primary-500/20' : 'bg-primary-500/25 dark:bg-primary-500/15'}`}
+                                                style={{ height: `${barHeight}px` }}
+                                            />
                                             <span className="text-xs text-zinc-500 font-medium">{month.month}</span>
                                         </div>
                                     )

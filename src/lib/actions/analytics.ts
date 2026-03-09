@@ -62,15 +62,17 @@ export async function getSupplierAnalytics(): Promise<SupplierAnalytics | null> 
     const orderTypeMap = new Map<string, { revenue: number; count: number }>()
 
     for (const order of orders) {
-        const items = (order.order_items as unknown as { quantity: number; unit_price: number; product: { id: string; name: string } | null }[]) || []
+        const items = (order.order_items as unknown as { quantity: number; unit_price: number; product: { id: string; name: string } | { id: string; name: string }[] | null }[]) || []
         let orderTotal = 0
 
         for (const item of items) {
             const lineTotal = item.quantity * item.unit_price
             orderTotal += lineTotal
 
-            const prodName = item.product?.name || 'Unknown'
-            const prodId = item.product?.id || 'unknown'
+            // Supabase join may return product as array or object
+            const prod = Array.isArray(item.product) ? item.product[0] : item.product
+            const prodName = prod?.name || 'Unknown'
+            const prodId = prod?.id || 'unknown'
             const existing = productMap.get(prodId) || { name: prodName, unitsSold: 0, revenue: 0 }
             existing.unitsSold += item.quantity
             existing.revenue += lineTotal
