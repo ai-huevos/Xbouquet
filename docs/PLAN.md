@@ -109,6 +109,11 @@ graph TD
   - Fixed `profile_id` → `id` column reference bug in communications RLS policies.
   - Seeded 8 flower products across 6 categories, shop@test.com and supplier@test.com with full profiles.
   - Switched `.env.local` from local Supabase to cloud instance. Full browser verification passed.
+- [x] **Mission 31: User Profile Pages** (Post-Parallel Polish)
+  - Created `/shop/profile` page — avatar, editable name, business details, billing/credit cards.
+  - Created `/supplier/profile` page — avatar, editable name, business details.
+  - Added Profile link to SupplierNav sidebar + made user card clickable.
+  - Enhanced `getFullProfile()` action to join profiles with role-specific sub-profiles.
 
 ## 🌊 WAVE 10: Growth & Viral Overlays (Future)
 
@@ -125,8 +130,8 @@ graph TD
 
 | Metric | Count |
 |--------|-------|
-| Completed missions | 18 (M1–M8, M22–M30) |
-| Pending missions | Growth (M31+) |
+| Completed missions | 19 (M1–M8, M22–M31) |
+| Pending missions | Growth (M32+) |
 | Migrations | 16 SQL files (all applied) |
 | Server Action files | 8+ (`auth`, `cart`, `claims`, `communications`, `orders`, `products`, `profiles`, `analytics`) |
 | Route pages | 22+ (dashboard + checkout + admin + analytics + billing) |
