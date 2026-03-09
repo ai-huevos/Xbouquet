@@ -115,11 +115,19 @@ graph TD
   - Added Profile link to SupplierNav sidebar + made user card clickable.
   - Enhanced `getFullProfile()` action to join profiles with role-specific sub-profiles.
 
-## 🌊 WAVE 10: Growth & Viral Overlays (Future)
+## 🌊 WAVE 10: Dashboard Intelligence & Data Integrity
+
+- [ ] **Mission 32: Live Dashboard KPIs** (Planned)
+  - Replace hardcoded `$42,850.00` Total Sales, `24` Pending Orders, fake orders table with real DB queries.
+  - New `src/lib/actions/dashboard.ts` — `getSupplierDashboardStats()` and `getSupplierOrders()`.
+  - Rebuild Supplier Orders page (`/supplier/orders`) from placeholder to functional management table.
+  - Wire Fulfill button to `updateOrderStatus()` action.
+
+## 🌊 WAVE 11: Growth & Viral Overlays (Future)
 
 *(Frozen until core MVP is validated by real users — see ADR-013)*
 
-- [ ] **Missions 30+: Growth Pipeline**
+- [ ] **Missions 33+: Growth Pipeline**
   - **Drops & Scarcity**: High-ROI scarcity events for fresh floral inventory.
   - **Status & Badges**: Supplier/Shop tier calculations and badging.
   - **Referrals & Trending**: Network invites, Showcases, and trending calculations.
@@ -131,7 +139,8 @@ graph TD
 | Metric | Count |
 |--------|-------|
 | Completed missions | 19 (M1–M8, M22–M31) |
-| Pending missions | Growth (M32+) |
+| Planned missions | 1 (M32: Live Dashboard KPIs) |
+| Future missions | Growth (M33+) |
 | Migrations | 16 SQL files (all applied) |
 | Server Action files | 8+ (`auth`, `cart`, `claims`, `communications`, `orders`, `products`, `profiles`, `analytics`) |
 | Route pages | 22+ (dashboard + checkout + admin + analytics + billing) |

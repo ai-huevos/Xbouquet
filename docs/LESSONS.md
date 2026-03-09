@@ -1,0 +1,49 @@
+# Xpress Buke — Lessons Learned
+
+> Accumulated knowledge from ADW missions. Append new entries at the bottom.
+
+---
+
+## M2: Tailwind Dark Mode in Forms
+When building MVP forms, avoid mixing dark-mode text classes (`text-white`) inside light-themed form inputs (`bg-white`). Stick to base Tailwind classes (`text-gray-900`, `border-gray-300`) until a global design system is established.
+
+## M3: Client-Side CSV Parsing
+Using `papaparse` directly in the browser avoids serverless payload limits and enables instant header exposure for column mapping. Use `z.coerce.number()` for safe CSV string-to-number conversion. Iterate `parsed.error.issues` not `parsed.error.errors`.
+
+## M4: Supabase Join Types
+When returning compound Supabase queries (product + supplier + category), define precise TypeScript interfaces (`FlowerProductWithSupplier`). The `as unknown as [Type]` assertion is necessary due to complex generated types. Abstract complex card UI into dedicated components to keep pages focused on data fetching.
+
+## M5: RLS Silent Failures & Server Actions
+**Critical**: RLS INSERT policies fail silently (HTTP 200, no rows inserted) when the required foreign key profile doesn't exist. The `handle_new_user()` trigger must create entries in *all* role-specific profile tables. Always check DB Triggers when RLS policies fail for new user roles.
+
+Push interactive forms to Client Components (`useState`, `useTransition`) at the leaves of the render tree. Server Components cannot handle loading states without full page reloads.
+
+## M7: Tailwind CSS v4 Animations
+`animate-in fade-in zoom-in-95` from `tailwindcss-animate` don't work in v4 by default. Replace with standard `animation` + `@keyframes` CSS in `globals.css` for build stability.
+
+## M8: Stripe & Playwright
+- **Stripe**: `unit_amount` must be an integer (cents). Always use `Math.round(price * 100)`.
+- **Next.js 15.2**: Middleware renamed to `proxy.ts` (export `proxy` function). Use `npx @next/codemod@canary middleware-to-proxy .`
+- **Playwright**: Use `page.waitForLoadState('networkidle')` before asserting on JS-dependent pages. Use precise selectors (`text="Exact"`, `.locator('button', { hasText: '...' })`).
+
+## M24: Seeding & Image Crashes
+- **Supabase GoTrue**: Newer versions require all `auth.users` columns to be explicitly populated in `seed.sql` (confirmation_token, recovery_token, phone, etc.).
+- **Next.js `<Image>`**: A 404 from a remote image source causes a hard server crash (not graceful fallback). Never use Unsplash for seed data — use `public/seeds/` local files.
+
+## M25: Auth Redirects & Global Nav
+- **Checkout Loop**: Never rely on static checkouts. Server Components must dynamically check session state before rendering CTAs. If session is valid, `redirect()` past the gateway.
+- **Layout Shells**: Use `layout.tsx` as the single source of truth for navigation. Strip individual `page.tsx` of headers.
+- **Seed Images**: Download local JPGs into `/public/seeds/` for 100% offline stability.
+
+## M28: Git Worktrees & Schema
+- `node_modules` and `.env.local` are NOT shared between worktrees. Must be installed/copied independently.
+- Cannot checkout a branch already active in another worktree. Use `git checkout -b feature/branch origin/dev`.
+- Order statuses use `text` + `CHECK` constraint (not enum) — easier to extend with `DROP CONSTRAINT` + `ADD CONSTRAINT`.
+
+## M30: Post-Parallel Stabilization
+- **Column naming**: `profiles` table has `id`, not `profile_id`. Sub-tables (`shop_profiles`, `supplier_profiles`) have `profile_id` referencing `profiles.id`. RLS policies must use the correct column.
+- **Env mismatch**: After parallel ADW sessions, always verify `.env.local` points to the correct Supabase instance.
+- **Seed SQL**: When seeding via direct SQL (not auth endpoints), auth triggers may not fire. Always include explicit profile INSERT fallbacks.
+
+## General: React Hydration & Browser Extensions
+Browser extensions (dark-mode togglers, tab managers) inject `data-*` attributes into `<html>` before React hydrates, causing false-positive hydration errors. Always add `suppressHydrationWarning` to `<html>` and `<body>` in the root layout.

@@ -18,11 +18,12 @@ A two-sided B2B marketplace where suppliers list rare, exclusive flowers, and bo
 - **Quality Claims**: Tied to order items with evidence photo uploads and credit resolution
 - **Premium UI**: Glassmorphism aesthetics, mobile-responsive layouts, sticky nav shells, local floral seed imagery
 
-## Documentation & Architecture
-- **Architecture**: `docs/ARCHITECTURE.md` — Core MVP schema, RLS policies, page map, component map
-- **Growth Architecture**: `docs/GROWTH_ARCHITECTURE_V2.md` — Future growth systems (frozen)
-- **Decision Log**: `docs/DECISIONS.md` — 16 architectural decision records
-- **Development Plan**: `docs/PLAN.md` — ADW mission tracker (14 completed, 3 pending)
+## Documentation (`/docs` — 5 files, flat)
+- `ARCHITECTURE.md` — Core MVP schema, RLS policies, page map, component map
+- `DECISIONS.md` — 16 architectural decision records
+- `PLAN.md` — Mission tracker (19 completed)
+- `GROWTH.md` — Future growth systems (frozen)
+- `LESSONS.md` — Accumulated learnings from past missions
 
 ## Agentic Development Workflow (ADW)
 This project is built using a deterministic AI handoff strategy ("101 Dev Sessions"). 

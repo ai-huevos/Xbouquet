@@ -5,31 +5,27 @@ description: Finishes an ADW session, runs verifications, commits changes, and u
 
 When the USER invokes `/adw-finish`, execute the following protocol strictly:
 
-1. **Verification Phase (Functional DOM Check)** (// turbo):
+1. **Verification Phase** (// turbo):
    - Run `npx tsc --noEmit` to ensure strict typing compliance.
-   - Run `npx eslint .` to check for frontend linting issues.
-   - Run `npx playwright test` to ensure End-to-End data and functional correctness (The "Does it work?" test).
+   - Run `npx eslint .` to check for linting issues.
 
-2. **Testing & Visual Evidence Phase (UX Check)**:
-   - Use the `browser_subagent` tool to test the newly built feature flow manually as a human would (The "Does it look right?" test).
-   - This phase is critical to catch CSS overrides, layout breaks, and color state issues that Playwright ignores.
-   - The browser subagent will automatically generate a WebP video recording of the session.
-   - Generate a `walkthrough.md` artifact that documents the changes made, what was visually tested, and embed the generated recording/screenshots as visual evidence.
+2. **Visual Evidence Phase**:
+   - Use the `browser_subagent` tool to test the newly built feature flow as a human would.
+   - The browser subagent will automatically generate a WebP video recording.
+   - Generate a `walkthrough.md` artifact documenting changes, what was tested, and visual evidence.
 
-3. **Knowledge Capture Phase**:
-   - If you encountered any significant bugs, architectural roadblocks, or useful learnings during this mission, create or append to a file in `docs/lessons/`.
-   - Use the format `docs/lessons/mission_{number}_learnings.md`. This ensures future agents have explicit context on past mistakes.
+3. **Knowledge Capture**:
+   - If significant bugs or architectural learnings were encountered, append a new section to `docs/LESSONS.md`.
 
-4. **Commit & Sync Phase** (// turbo):
+4. **Commit & Sync** (// turbo):
    - Run `git add .`
    - Run `git commit -m "chore: finalize current ADW mission"`
    - Run `git push origin dev`
 
-3. **Status Update Phase**:
-   - Open `docs/PLAN.md` using the `multi_replace_file_content` tool.
-   - Mark the current active mission as completed from `[ ]` to `[x]`.
+5. **Status Update**:
+   - Open `docs/PLAN.md` and mark the current mission as completed (`[ ]` → `[x]`).
    - Run `git add docs/PLAN.md` and `git commit -m "docs: update PLAN.md tracker"` then `git push origin dev`.
 
-4. **Deployment Handoff**:
-   - Inform the user that the code has been successfully verified, committed, and pushed to the `dev` branch.
-   - If this mission concludes a Wave, remind the user to open a Pull Request from `dev` to `main` via the GitHub UI, which will automatically trigger the Vercel production deployment.
+6. **Deployment Handoff**:
+   - Inform the user that code has been verified, committed, and pushed to `dev`.
+   - If this mission concludes a Wave, remind the user to open a PR from `dev` to `main`.

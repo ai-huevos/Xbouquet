@@ -6,24 +6,22 @@ description: Plans a new feature and generates an implementation plan, preparing
 When the USER invokes `/feature [feature_description]`, execute the following protocol strictly:
 
 1. **Context Initialization**:
-   - Briefly read relevant existing documentation (e.g., `docs/PLAN.md`, `docs/ARCHITECTURE.md`, or `docs/DECISIONS.md`) to align the new feature with the current architectural paradigms and project state.
-   - Search the codebase to understand where this feature will live and what existing components/services can be reused.
+   - Read `docs/PLAN.md`, `docs/ARCHITECTURE.md`, and `docs/DECISIONS.md` to align with current project state.
+   - Search the codebase to understand where this feature will live and what can be reused.
 
 2. **Planning Phase**:
    - Call `task_boundary` to enter **PLANNING** mode.
-   - Breakdown the requested feature into specific, actionable steps.
+   - Break down the feature into specific, actionable steps.
    - Draft a comprehensive design covering:
-     - UI/UX components (referencing Stitch MCP patterns if applicable).
-     - Database schema extensions and RLS policies.
+     - UI/UX components needed.
+     - Database schema extensions and RLS policies (if any).
      - Server Actions and backend logic.
-     - Required route changes or new pages in Next.js.
+     - Route changes or new pages.
 
 3. **Artifact Generation**:
-   - Generate the explicit implementation plan and save it directly to the project repository at `docs/missions/mission-[number]-[feature-name-slug]-plan.md`.
-   - Update your internal `task.md` artifact with the new tasks for the feature.
-   - **CRITICAL**: To ensure the handoff to `/adw-start` is smooth, you MUST append the newly planned feature as a numbered mission under the appropriate Wave in `docs/PLAN.md` (e.g., `Mission X: Feature Name`).
+   - Generate the implementation plan as an `implementation_plan.md` in your brain artifacts directory.
+   - **CRITICAL**: Append the feature as a new numbered mission under the appropriate Wave in `docs/PLAN.md`.
 
 4. **Review Phase**:
-   - Pause your work and call `notify_user` to present the `implementation_plan.md` to the user for review.
-   - Ask the user to confirm the plan or provide feedback.
-   - Explicitly inform the user: *"Once you approve this plan, you can run `/adw-start` (or your preferred start command) to begin the implementation phase."*
+   - Call `notify_user` to present the implementation plan for review.
+   - Explicitly inform the user: *"Once you approve this plan, you can run `/adw-start` to begin implementation."*

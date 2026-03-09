@@ -239,7 +239,7 @@ src/components/
 
 ## 11. What Is NOT in MVP
 
-- Drops, tiers, badges, referrals, showcases, trending (see `GROWTH_ARCHITECTURE_V2.md`)
+- Drops, tiers, badges, referrals, showcases, trending (see `GROWTH.md`)
 - Real-time subscriptions
 - Push notifications
 - Email notifications

@@ -120,7 +120,7 @@
 **Context:** Single ARCHITECTURE.md contained both core transactional flow and all 4 growth systems (660 lines). No application code existed yet. Risk of building growth surface area before core loop was validated.
 **Decision:** Split into two documents:
 - `/docs/ARCHITECTURE.md` — Core MVP only (auth, profiles, products, cart, orders). This is the active build target.
-- `/docs/GROWTH_ARCHITECTURE_V2.md` — All growth systems (drops, tiers, badges, referrals, showcases, trending). Frozen until core ships and is validated with real users.
+- `/docs/GROWTH.md` — All growth systems (drops, tiers, badges, referrals, showcases, trending). Frozen until core ships and is validated with real users.
 **Trigger for growth work:** 5 real suppliers, 10 real shops, 20+ real orders completed.
 **First growth feature:** Drops only (directly increases order frequency). Not tiers, not badges, not referrals.
 **Rationale:** Architecture without running code is speculation. The core order loop must prove itself in production before investing in engagement overlays. Cognitive separation prevents scope creep during execution.
