@@ -80,3 +80,8 @@ CSS `height: X%` only works when the parent has an explicit height. In flex layo
 
 **Pattern:** When mixing runtimes (Node.js + Deno) in one repo, always partition via `tsconfig.json` excludes. Consider a separate `deno.json` or `tsconfig.json` in `supabase/functions/` for Deno-specific settings.
 
+## Edge Functions: Import Resolution & Env Var Gotchas
+**What happened:** (1) `deno.land/x` URL imports (`https://deno.land/x/hono@...`) fail with "Module not found" in the Supabase Edge Runtime sandbox. (2) `supabase functions serve --env-file` silently skips any env var starting with `SUPABASE_`. (3) The auto-injected `SUPABASE_URL` points to the local Docker Supabase, not your cloud instance.
+
+**Fix:** (1) Create `supabase/functions/deno.json` with an import map (`"hono": "npm:hono@4.6.20"`) and use bare specifiers in all files. (2) Use `XB_SUPABASE_URL` / `XB_SUPABASE_ANON_KEY` in `.env.local` and fall back in `lib/supabase.ts`: `Deno.env.get('XB_SUPABASE_URL') || Deno.env.get('SUPABASE_URL')`. (3) Link the project with `npx supabase link --project-ref <ref>` before deploying.
+

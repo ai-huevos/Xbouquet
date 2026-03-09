@@ -1,4 +1,4 @@
-import { Hono } from 'https://deno.land/x/hono@v4.6.20/mod.ts'
+import { Hono } from 'hono'
 import { authMiddleware, optionalAuth } from '../middleware/auth.ts'
 
 const products = new Hono()

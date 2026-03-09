@@ -1,4 +1,4 @@
-import { Context, Next } from 'https://deno.land/x/hono@v4.6.20/mod.ts'
+import { Context, Next } from 'hono'
 import { createSupabaseClient } from '../lib/supabase.ts'
 
 /**

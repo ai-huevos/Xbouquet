@@ -28,13 +28,86 @@ Nothing else exists until this works in production with real users.
 | Auth | Supabase Auth (email + password) |
 | Database | Supabase PostgreSQL |
 | Storage | Supabase Storage (product images) |
+| **REST API** | **Supabase Edge Functions (Hono v4 on Deno)** |
 | Payments | Stripe Checkout (session-based) |
 | Security | Row Level Security on every table |
-| Hosting | Vercel |
+| Hosting | Vercel (frontend), Supabase (API) |
 | Styling | Tailwind CSS v4 |
 | Validation | Zod |
 | Data Ingestion | Papaparse (CSV parsing & column mapping) |
 | Testing | Playwright (E2E) |
+
+---
+
+## 2.1 Dual-Layer API Architecture
+
+The app has two data-access paths:
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│  Next.js Frontend (Vercel)                                   │
+│                                                              │
+│  ┌──────────────────┐     ┌────────────────────────────────┐ │
+│  │ Server Components │     │ Client Components              │ │
+│  │ (RSC)             │     │ (Browser JS)                   │ │
+│  └────────┬─────────┘     └──────────┬─────────────────────┘ │
+│           │ Server Actions            │ fetch() + JWT          │
+│           ▼                           ▼                       │
+│  ┌────────────────┐        ┌──────────────────────────────┐  │
+│  │ src/lib/actions │        │ NEXT_PUBLIC_API_URL           │  │
+│  │ (direct DB)     │        │ → Edge Function or localhost  │  │
+│  └────────┬───────┘        └──────────┬───────────────────┘  │
+└───────────┼────────────────────────────┼─────────────────────┘
+            │                            │
+            ▼                            ▼
+  ┌──────────────────┐      ┌───────────────────────────────────┐
+  │ Supabase DB      │      │ Supabase Edge Function (api)      │
+  │ (via server SDK) │      │ Hono v4 + CORS + Auth middleware  │
+  │                  │      │ Routes: /v1/auth, /v1/products,   │
+  │                  │      │ /v1/cart, /v1/orders, /v1/claims, │
+  │                  │      │ /v1/profiles, /v1/dashboard       │
+  │                  │      └──────────────┬────────────────────┘
+  │                  │◄────────────────────┘
+  └──────────────────┘    (via Supabase JS client + RLS)
+```
+
+**Path 1 — Server Actions** (existing): RSC pages call `src/lib/actions/*.ts` directly. Used for SSR pages and form mutations. Zero network hop — runs on the same Vercel serverless function.
+
+**Path 2 — REST API** (new): Client-side code, mobile apps, or third-party integrations call the Edge Function at `NEXT_PUBLIC_API_URL`. Authenticated via Bearer JWT. Runs on Supabase Edge Runtime (Deno).
+
+### Edge Function Files
+
+```
+supabase/functions/
+├── deno.json                       # Import map (hono → npm:hono)
+└── api/
+    ├── index.ts                    # Hono app, route mounting, health check
+    ├── lib/supabase.ts             # Supabase client factory (user-scoped + admin)
+    ├── middleware/
+    │   ├── auth.ts                 # JWT validation + profile attach
+    │   └── cors.ts                 # CORS for frontend origins
+    └── routes/
+        ├── auth.ts                 # /v1/auth — signup, signin, signout, refresh
+        ├── products.ts             # /v1/products — CRUD + bulk + image
+        ├── cart.ts                 # /v1/cart — shop cart operations
+        ├── orders.ts               # /v1/orders — listing, detail, status
+        ├── claims.ts               # /v1/claims — create, resolve
+        ├── profiles.ts             # /v1/profiles — get/update own profile
+        └── dashboard.ts            # /v1/dashboard — supplier KPI stats
+```
+
+### Local Development
+
+```bash
+# Serve Edge Function locally (Docker required)
+npx supabase functions serve api --no-verify-jwt --env-file .env.local
+
+# Test health
+curl http://localhost:54321/functions/v1/api/health
+
+# Deploy to production
+npx supabase functions deploy api --no-verify-jwt
+```
 
 ---
 

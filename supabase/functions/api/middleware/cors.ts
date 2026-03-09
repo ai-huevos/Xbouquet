@@ -1,4 +1,4 @@
-import { Context, Next } from 'https://deno.land/x/hono@v4.6.20/mod.ts'
+import { Context, Next } from 'hono'
 
 const ALLOWED_ORIGINS = [
     'http://localhost:3000',
