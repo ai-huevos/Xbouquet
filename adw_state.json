@@ -20,19 +20,34 @@
             "status": "skipped"
         },
         "build": {
-            "status": "in_progress"
+            "status": "completed"
         },
         "test": {
-            "status": "pending"
+            "status": "completed",
+            "gates_passed": [
+                "tsc",
+                "next_build"
+            ],
+            "gates_skipped": [
+                "browser_visual",
+                "suits"
+            ],
+            "retries": 0
         },
         "review": {
-            "status": "pending"
+            "status": "completed",
+            "walkthrough_artifact": "walkthrough.md",
+            "user_approved": true
         },
         "learn": {
-            "status": "pending"
+            "status": "completed",
+            "lessons_added": 1,
+            "auto_detected": [
+                "file_edited_2x: supabase/functions/api/lib/supabase.ts — already captured"
+            ]
         },
         "ship": {
-            "status": "pending"
+            "status": "in_progress"
         }
     },
     "suit_compliance": {}
