@@ -34,7 +34,12 @@ order: 8
    - `git commit -m "chore: finalize adw_state for {mission_id}"`
    - `git push origin {branch}`
 
-5. **Deployment handoff:**
+5. **Archive state** (for `/adw-metrics`):
+   - `cp adw_state.json .agents/history/adw_state_{mission_id}_{timestamp}.json`
+   - `rm adw_state.json`
+   - `git add .agents/history/ && git commit -m "chore: archive adw_state for {mission_id}" && git push origin {branch}`
+
+6. **Deployment handoff:**
    - Inform the user that code has been verified, committed, and pushed.
    - If this mission concludes a Wave, remind the user to open a PR from `dev` to `main`.
 

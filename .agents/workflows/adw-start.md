@@ -9,6 +9,13 @@ When the USER invokes `/adw-start [mission_description_or_number]`, execute the 
 
 // turbo-all
 
+## Trigger Queue Check
+
+0. If `.agents/trigger-queue` exists and is non-empty:
+   - Read the queued action and use the queued mission as the mission parameter.
+   - Clear the queue file after reading.
+   - This allows `/adw-triggers` (cron, webhook, file watch) to feed missions to the agent.
+
 ## State Initialization
 
 1. Create or resume `adw_state.json` in the project root:

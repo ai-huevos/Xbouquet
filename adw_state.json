@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "mission_id": "M-ADW-V2-FINAL",
+    "mission_title": "Implement /adw-parallel, /adw-metrics, and trigger diversity",
+    "branch": "dev",
+    "type": "feature",
+    "started_at": "2026-03-09T04:49:39Z",
+    "current_phase": "context",
+    "suits_active": [],
+    "phases": {
+        "context": {
+            "status": "in_progress",
+            "started_at": "2026-03-09T04:49:39Z"
+        },
+        "suit": {
+            "status": "pending"
+        },
+        "build": {
+            "status": "pending"
+        },
+        "test": {
+            "status": "pending"
+        },
+        "review": {
+            "status": "pending"
+        },
+        "learn": {
+            "status": "pending"
+        },
+        "ship": {
+            "status": "pending"
+        }
+    },
+    "suit_compliance": {}
+}
