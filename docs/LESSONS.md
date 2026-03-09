@@ -56,3 +56,18 @@ When using `.select('product:flower_products(id, name)')`, Supabase may return t
 
 ## M32: CSS Bar Charts — Percentage Heights
 CSS `height: X%` only works when the parent has an explicit height. In flex layouts, the parent often collapses. Use pixel-based heights computed from a known max height instead: `Math.round((pct / 100) * maxHeightPx)`.
+
+## M-STAGE3: Blueprint First, Model Second
+**What happened:** ADW v2 relied 100% on LLM reading markdown instructions. Research (arXiv 2508.02721, TB-CSPN Architecture) confirmed this is an anti-pattern — "conflating semantic understanding with process orchestration." The LLM occasionally forgot to update `adw_state.json`, skipped phases, or computed confidence scores inconsistently.
+
+**Root cause:** Asking the LLM to be both the kitchen manager AND the chef. Orchestration (state, git, scoring, phase ordering) should be deterministic code, not probabilistic instructions.
+
+**Fix:** Built `.agents/cli/` — a TypeScript CLI that handles orchestration deterministically. The LLM is restricted to "Activities" (code writing, debugging, design decisions). State machine guarantees atomic writes, phase ordering, crash recovery. Confidence scoring is pure math, not mental math.
+
+**Pattern:** Separate deterministic control flow (Temporal-style Workflows) from probabilistic LLM calls (Activities). Code drives the bus, LLM rides in the back writing code.
+
+## M-STAGE3: Safety Overrides Work Correctly
+**What happened:** CLI confidence scorer correctly scored 4/10 and forced human review for a session that modified `.agents/` files (meta-changes).
+
+**Lesson:** The safety override system validates itself. Changes to the workflow system itself should always trigger human review — the meta-change detection is critical for preventing the agent from modifying its own rules autonomously.
+
