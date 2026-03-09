@@ -5,7 +5,8 @@
     "branch": "dev",
     "type": "feature",
     "started_at": "2026-03-09T17:41:31Z",
-    "current_phase": "build",
+    "completed_at": "2026-03-09T21:18:43Z",
+    "current_phase": "ship",
     "suits_active": [],
     "phases": {
         "context": {
@@ -47,7 +48,9 @@
             ]
         },
         "ship": {
-            "status": "in_progress"
+            "status": "completed",
+            "commit_sha": "b10fae8",
+            "pushed_to": "dev"
         }
     },
     "suit_compliance": {}
