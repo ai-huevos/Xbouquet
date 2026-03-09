@@ -1,0 +1,280 @@
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#08f7ab",
+              "background-light": "#f5f8f7",
+              "background-dark": "#0f231c",
+              "emerald-600": "#059669",
+            },
+            fontFamily: {
+              "display": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .floral-blur {
+            position: fixed;
+            top: -10%;
+            right: -5%;
+            width: 40%;
+            height: 50%;
+            background: radial-gradient(circle, rgba(8, 247, 171, 0.15) 0%, rgba(245, 248, 247, 0) 70%);
+            filter: blur(60px);
+            z-index: -1;
+        }
+        .glow-button {
+            box-shadow: 0 0 20px rgba(8, 247, 171, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display min-h-screen">
+<div class="floral-blur"></div>
+<!-- Navigation -->
+<header class="sticky top-0 z-50 glass border-b border-primary/10">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-10">
+<div class="flex items-center gap-3">
+<div class="bg-primary p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-background-dark font-bold">local_florist</span>
+</div>
+<h1 class="text-xl font-extrabold tracking-tight text-slate-900">FLORA<span class="text-emerald-600">B2B</span></h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-colors" href="#">Marketplace</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-colors" href="#">Suppliers</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-colors" href="#">Bulk Orders</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<div class="flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full border border-primary/20 cursor-pointer">
+<span class="material-symbols-outlined text-emerald-600 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm placeholder:text-slate-500 w-48" placeholder="Search cultivars..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-600 hover:bg-white rounded-full transition-all relative">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-1 right-1 bg-emerald-600 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">12</span>
+</button>
+<div class="w-10 h-10 rounded-full border-2 border-primary/30 bg-white overflow-hidden" data-alt="User profile avatar portrait">
+<img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkr_JSPrZ67V7yyZ6tnkLgHsjq2D4Uq3_yTSuP-8i7oPXHsIB-YoBPNqPD6axdqOLwgLesT4_ro8_nNYjY8fhMqqb6PljZij9BSb4ezmZommz103YrpPWjWbmrH2YwwpBVbPCvG4Gytkfr5Q_ZbBqHgIznNIJfmyXGG5QiRGycAWs_l32OV5eF51ssVLjA3P5-iLfFG7vZ79Lv9CPwWiNVSlkLe_3ht0lzXNcf5BY9L0T6dm0JxobLvidT0vKjwS-2zQnhin1poLM"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-12">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-sm text-slate-400 mb-8">
+<a class="hover:text-emerald-600 transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-slate-900 font-medium">Checkout</span>
+</nav>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+<!-- Left Column: Cart Items -->
+<div class="lg:col-span-8 space-y-8">
+<div class="flex items-baseline justify-between">
+<h2 class="text-4xl font-extrabold text-slate-900 tracking-tight">Your Selection</h2>
+<span class="text-slate-500 text-sm font-medium">12 Varieties • 4 Suppliers</span>
+</div>
+<!-- Supplier Group 1 -->
+<section class="glass rounded-3xl p-8 space-y-6">
+<div class="flex items-center gap-3 pb-4 border-b border-slate-100">
+<span class="material-symbols-outlined text-emerald-600">potted_plant</span>
+<h3 class="text-xl font-bold text-slate-800 tracking-tight">Evergreen Farms</h3>
+<span class="ml-auto text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-1 rounded">Preferred Supplier</span>
+</div>
+<div class="space-y-6">
+<!-- Item 1 -->
+<div class="flex items-center gap-6">
+<div class="w-24 h-24 rounded-2xl overflow-hidden glass border border-white" data-alt="Close up of premium red roses with morning dew">
+<img alt="Red Roses" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqNN5TVMxZVOIC8e7WPi7iI11XsXm96xmGfDiOL-C8uRLzGAjPgnsFDiLxRkR44VgoyCszI70Yu2o7XxISaczNRv2EjEy7eFln9s-jG47Z7Vo4Ur_irelka7sygjIuDym17pCHdpplR-v0LLz1BgMx1j8J4kCA92Ka2EvvThEkuvQKXHajRQpqteWOETQfshi2rGYhzCewpaF-vZUTWtd7AmozHyFNKCm_fJNjFD5P3nk5_6bDzzDgcha1NmAVe2FH3lhQ_6Zy7FE"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-lg font-bold text-slate-900">Premium Red Roses</h4>
+<p class="text-sm text-slate-500">Grade A1 • 50cm stem • Ecuador</p>
+</div>
+<p class="text-lg font-bold text-emerald-600">$450.00</p>
+</div>
+<div class="flex items-center justify-between mt-4">
+<div class="flex items-center glass rounded-full px-2 py-1 border border-slate-200">
+<button class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-emerald-600 transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<input class="w-10 bg-transparent border-none text-center text-sm font-bold focus:ring-0" type="number" value="10"/>
+<button class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-emerald-600 transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<button class="text-slate-300 hover:text-rose-400 transition-colors">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center gap-6">
+<div class="w-24 h-24 rounded-2xl overflow-hidden glass border border-white" data-alt="White calla lilies in a bundle">
+<img alt="Calla Lilies" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOiMiEaivAVM-C5Jln3-yidaVJ_4-imFmjAUCsy6eseinVYDyiyH3tjhdcdUXHID4FeP5y2ZkP5260eS8Kx-AktYmZEaSXFp4Dwq_61wqU6jgKjZI3hd_s_5e67dK1c8eVQhuv9uvpAeP_vTG381hWUD_YROITBZW_qG3EGU1GBvpzrlpj6wbmfkGtIbQ3GVtVNR8CEfebGxhNj-t130T3EPPR7HOEUR6cm5i2OlmHS8TfuEwQrR8voaWl8_5PoeCX-wMBDbfGGC8"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-lg font-bold text-slate-900">White Calla Lilies</h4>
+<p class="text-sm text-slate-500">Bulk Pack • 25 stems • Holland</p>
+</div>
+<p class="text-lg font-bold text-emerald-600">$210.00</p>
+</div>
+<div class="flex items-center justify-between mt-4">
+<div class="flex items-center glass rounded-full px-2 py-1 border border-slate-200">
+<button class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-emerald-600 transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<input class="w-10 bg-transparent border-none text-center text-sm font-bold focus:ring-0" type="number" value="5"/>
+<button class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-emerald-600 transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<button class="text-slate-300 hover:text-rose-400 transition-colors">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Supplier Group 2 -->
+<section class="glass rounded-3xl p-8 space-y-6">
+<div class="flex items-center gap-3 pb-4 border-b border-slate-100">
+<span class="material-symbols-outlined text-emerald-600">eco</span>
+<h3 class="text-xl font-bold text-slate-800 tracking-tight">Bloom Haven</h3>
+<span class="ml-auto text-xs font-bold uppercase tracking-wider text-slate-400 bg-slate-100 px-2 py-1 rounded">Eco-Certified</span>
+</div>
+<div class="space-y-6">
+<div class="flex items-center gap-6">
+<div class="w-24 h-24 rounded-2xl overflow-hidden glass border border-white" data-alt="Assorted eucalyptus and greenery for floral arrangements">
+<img alt="Greenery" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_ArkORw-Hvzag16ETcOpIJoHaLDJ332GkqFGT2dOE8No6AsmOUaZDWY1qhB66GmZNguU8bJXxQ5mBLGslI53geV0uesvobXZQ5e0QHTSID_6i8ulzbZD_a2M0spyFj7lwTls5GcQDLzYWtd-nVwi3hpFhAWwARC5z-q-mw2yQbeD5anxE5QU9d9XK69cMlCOULbSj_sp_WQZCnPlya4ry7YZJllDb3U-EwFB_IKqP-JkfxdtHaKx8Uit0L279-zUeu_6xLCWVid0"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-lg font-bold text-slate-900">Silver Dollar Eucalyptus</h4>
+<p class="text-sm text-slate-500">Fresh Bunch • XL Leaves • California</p>
+</div>
+<p class="text-lg font-bold text-emerald-600">$125.50</p>
+</div>
+<div class="flex items-center justify-between mt-4">
+<div class="flex items-center glass rounded-full px-2 py-1 border border-slate-200">
+<button class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-emerald-600 transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<input class="w-10 bg-transparent border-none text-center text-sm font-bold focus:ring-0" type="number" value="15"/>
+<button class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-emerald-600 transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<button class="text-slate-300 hover:text-rose-400 transition-colors">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Order Summary (Sticky) -->
+<div class="lg:col-span-4">
+<div class="glass rounded-3xl p-8 sticky top-28 space-y-8 shadow-2xl shadow-emerald-900/5">
+<h3 class="text-2xl font-extrabold text-slate-900 tracking-tight border-b border-slate-100 pb-4">Order Summary</h3>
+<div class="space-y-4">
+<div class="flex justify-between text-slate-600">
+<span class="font-medium">Subtotal</span>
+<span class="font-bold text-slate-900">$785.50</span>
+</div>
+<div class="flex justify-between text-slate-600">
+<span class="font-medium">Tax (B2B Exemption applied)</span>
+<span class="font-bold text-slate-900">$12.40</span>
+</div>
+<div class="flex justify-between text-slate-600">
+<span class="font-medium">Standard Ground Shipping</span>
+<span class="font-bold text-slate-900">$45.00</span>
+</div>
+<div class="pt-4 border-t border-slate-100 flex justify-between items-baseline">
+<span class="text-xl font-bold text-slate-900">Total Due</span>
+<span class="text-3xl font-extrabold text-emerald-600">$842.90</span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="bg-primary/5 rounded-2xl p-4 border border-primary/10">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-emerald-600 text-sm">local_shipping</span>
+<span class="text-sm font-bold text-slate-800">Estimated Delivery</span>
+</div>
+<p class="text-xs text-slate-500 leading-relaxed">Wednesday, October 25th via Cold-Chain Express. All items are packed in water-reservoir boxes.</p>
+</div>
+<button class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-5 rounded-2xl transition-all glow-button flex items-center justify-center gap-2 group">
+<span>Complete Checkout</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<div class="flex items-center justify-center gap-6 pt-4">
+<div class="flex items-center gap-1.5 grayscale opacity-50">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">SSL Encrypted</span>
+</div>
+<div class="flex items-center gap-1.5 grayscale opacity-50">
+<span class="material-symbols-outlined text-sm">payments</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Credit Terms</span>
+</div>
+</div>
+</div>
+<div class="pt-6">
+<label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 px-1">Discount Code</label>
+<div class="flex gap-2">
+<input class="flex-1 glass border border-slate-200 rounded-xl px-4 py-2 text-sm focus:ring-emerald-600 focus:border-emerald-600 outline-none" placeholder="Enter code" type="text"/>
+<button class="px-4 py-2 text-sm font-bold text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors">Apply</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Decoration -->
+<footer class="mt-20 py-10 glass border-t border-primary/10">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-3">
+<div class="bg-slate-200 p-1 rounded">
+<span class="material-symbols-outlined text-slate-500 text-sm">local_florist</span>
+</div>
+<span class="text-sm font-bold text-slate-400 tracking-tight">© 2023 FLORA B2B MARKETPLACE</span>
+</div>
+<div class="flex gap-8 text-xs font-bold text-slate-400 uppercase tracking-widest">
+<a class="hover:text-emerald-600 transition-colors" href="#">Privacy</a>
+<a class="hover:text-emerald-600 transition-colors" href="#">Terms</a>
+<a class="hover:text-emerald-600 transition-colors" href="#">Contact Support</a>
+</div>
+</div>
+</footer>
+
+```</body></html>

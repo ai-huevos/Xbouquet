@@ -37,6 +37,36 @@ export function SupplierNav() {
                 </svg>
             ),
         },
+        {
+            name: 'Messages',
+            href: '/supplier/messages',
+            exact: false,
+            icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                    <path fillRule="evenodd" d="M2.99 4.316A2.25 2.25 0 015.25 2h9.5A2.25 2.25 0 0117 4.25v9.5A2.25 2.25 0 0114.75 16H6.126l-3.35 2.393A.75.75 0 012 17.78V4.316zM5.25 3.5a.75.75 0 00-.75.75v11.085l2.094-1.496A.75.75 0 017 13.5h7.75a.75.75 0 00.75-.75v-8.5a.75.75 0 00-.75-.75h-9.5z" clipRule="evenodd" />
+                </svg>
+            ),
+        },
+        {
+            name: 'Analytics',
+            href: '/supplier/analytics',
+            exact: false,
+            icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                    <path d="M15.5 2A1.5 1.5 0 0014 3.5v13a1.5 1.5 0 001.5 1.5h1a1.5 1.5 0 001.5-1.5v-13A1.5 1.5 0 0016.5 2h-1zM9.5 6A1.5 1.5 0 008 7.5v9A1.5 1.5 0 009.5 18h1a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0010.5 6h-1zM3.5 10A1.5 1.5 0 002 11.5v5A1.5 1.5 0 003.5 18h1A1.5 1.5 0 006 16.5v-5A1.5 1.5 0 004.5 10h-1z" />
+                </svg>
+            ),
+        },
+        {
+            name: 'Profile',
+            href: '/supplier/profile',
+            exact: true,
+            icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                    <path d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z" />
+                </svg>
+            ),
+        },
     ]
 
     return (
@@ -51,13 +81,13 @@ export function SupplierNav() {
                         key={item.href}
                         href={item.href}
                         className={`flex items-center gap-3 px-4 py-3 rounded-xl font-semibold transition-all group ${isActive
-                                ? 'bg-primary-500/20 text-foreground'
-                                : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800/50'
+                            ? 'bg-primary-500/20 text-foreground'
+                            : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800/50'
                             }`}
                     >
                         <span className={`transition-colors ${isActive
-                                ? 'text-primary-600 dark:text-primary-500 group-hover:scale-110 transition-transform'
-                                : 'text-zinc-400 dark:text-zinc-500 group-hover:text-primary-600 dark:group-hover:text-primary-500'
+                            ? 'text-primary-600 dark:text-primary-500 group-hover:scale-110 transition-transform'
+                            : 'text-zinc-400 dark:text-zinc-500 group-hover:text-primary-600 dark:group-hover:text-primary-500'
                             }`}>
                             {item.icon}
                         </span>

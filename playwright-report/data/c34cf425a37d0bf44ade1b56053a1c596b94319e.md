@@ -1,0 +1,73 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - img [ref=e9]
+        - heading "FloraMarket B2B" [level=1] [ref=e14]
+      - generic [ref=e15]:
+        - heading "Empowering the Global Floral Trade." [level=2] [ref=e16]:
+          - text: Empowering the
+          - text: Global Floral Trade.
+        - paragraph [ref=e17]: Join the most exclusive network of premium flower suppliers and professional buyers worldwide.
+        - generic [ref=e18]:
+          - generic [ref=e19]:
+            - img "Member" [ref=e20]
+            - img "Member" [ref=e21]
+            - img "Member" [ref=e22]
+          - generic [ref=e23]: 5,000+ businesses already joined
+    - generic [ref=e25]:
+      - generic [ref=e26]:
+        - heading "Create Account" [level=3] [ref=e27]
+        - paragraph [ref=e28]: Join the FloraMarket B2B network today.
+      - generic [ref=e29]:
+        - img [ref=e30]
+        - text: fetch failed
+      - generic [ref=e32]:
+        - generic [ref=e33]:
+          - generic [ref=e35] [cursor=pointer]: Buyer (Shop)
+          - generic [ref=e37] [cursor=pointer]: Supplier
+        - generic [ref=e38]:
+          - generic [ref=e39]: Full Name
+          - generic [ref=e40]:
+            - generic:
+              - img
+            - textbox "Full Name" [ref=e41]:
+              - /placeholder: John Doe
+              - text: Test Supplier
+        - generic [ref=e42]:
+          - generic [ref=e43]: Business Email
+          - generic [ref=e44]:
+            - generic:
+              - img
+            - textbox "Business Email" [ref=e45]:
+              - /placeholder: name@company.com
+              - text: supplier1772945417729@test.com
+        - generic [ref=e46]:
+          - generic [ref=e47]: Password
+          - generic [ref=e48]:
+            - generic:
+              - img
+            - textbox "Password" [ref=e49]:
+              - /placeholder: ••••••••
+              - text: password123
+        - button "Create Account" [ref=e51]:
+          - generic [ref=e52]: Create Account
+          - img [ref=e53]
+      - paragraph [ref=e56]:
+        - text: Already have an account?
+        - link "Sign In" [ref=e57] [cursor=pointer]:
+          - /url: /login
+      - generic [ref=e58]:
+        - link "Help Center" [ref=e59] [cursor=pointer]:
+          - /url: "#"
+        - link "Privacy" [ref=e60] [cursor=pointer]:
+          - /url: "#"
+        - link "Terms" [ref=e61] [cursor=pointer]:
+          - /url: "#"
+  - button "Open Next.js Dev Tools" [ref=e67] [cursor=pointer]:
+    - img [ref=e68]
+  - alert [ref=e71]
+```

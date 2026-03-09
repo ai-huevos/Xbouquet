@@ -36,7 +36,7 @@ export default async function SupplierLayout({
                             Logout
                         </button>
                     </form>
-                    <div className="glass border border-zinc-200 dark:border-zinc-800 p-4 rounded-xl flex items-center gap-3 bg-white/50 dark:bg-black/20">
+                    <Link href="/supplier/profile" className="glass border border-zinc-200 dark:border-zinc-800 p-4 rounded-xl flex items-center gap-3 bg-white/50 dark:bg-black/20 hover:border-primary-300 dark:hover:border-primary-700 transition-colors">
                         <div className="w-10 h-10 rounded-full bg-cover bg-primary-100 flex items-center justify-center text-primary-700 font-bold" title={profile?.full_name ?? 'Supplier'}>
                             {profile?.full_name?.charAt(0) ?? 'S'}
                         </div>
@@ -44,7 +44,7 @@ export default async function SupplierLayout({
                             <p className="text-sm font-bold truncate text-foreground">{profile?.full_name ?? 'Supplier'}</p>
                             <p className="text-xs text-zinc-500 truncate">Premium Partner</p>
                         </div>
-                    </div>
+                    </Link>
                 </div>
             </aside>
 

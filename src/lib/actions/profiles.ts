@@ -22,6 +22,49 @@ export async function getProfile() {
     return profile
 }
 
+export async function getFullProfile() {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (!user) return null
+
+    // Get base profile
+    const { data: profile, error: profileError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('user_id', user.id)
+        .single()
+
+    if (profileError || !profile) {
+        console.error('Error fetching profile:', profileError)
+        return null
+    }
+
+    // Get role-specific sub-profile
+    let businessProfile = null
+    if (profile.role === 'shop') {
+        const { data } = await supabase
+            .from('shop_profiles')
+            .select('*')
+            .eq('profile_id', profile.id)
+            .single()
+        businessProfile = data
+    } else if (profile.role === 'supplier') {
+        const { data } = await supabase
+            .from('supplier_profiles')
+            .select('*')
+            .eq('profile_id', profile.id)
+            .single()
+        businessProfile = data
+    }
+
+    return {
+        ...profile,
+        email: user.email,
+        businessProfile,
+    }
+}
+
 export async function updateProfile(formData: FormData) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()

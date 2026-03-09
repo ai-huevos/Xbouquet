@@ -1,11 +1,14 @@
 import Link from 'next/link'
 import { getProfile } from '@/lib/actions/profiles'
+import { getUnreadNotificationCount } from '@/lib/actions/communications'
+import UserMenuDropdown from './UserMenuDropdown'
 
 export default async function ShopHeader() {
     const profile = await getProfile()
+    const { count: unreadCount } = await getUnreadNotificationCount()
 
     return (
-        <header className="sticky top-0 z-50 glass-panel border-b border-slate-200/50 dark:border-slate-800/50 px-6 py-3">
+        <header className="sticky top-0 z-50 bg-zinc-50/80 dark:bg-zinc-900/80 backdrop-blur-lg border-b border-zinc-200/50 dark:border-zinc-800/50 px-6 py-3">
             <div className="max-w-[1440px] mx-auto flex items-center justify-between gap-8">
                 <div className="flex items-center gap-3 shrink-0">
                     <Link href="/shop" className="flex items-center gap-3">
@@ -29,12 +32,22 @@ export default async function ShopHeader() {
                     </form>
                 </div>
 
-                <div className="flex items-center gap-6 shrink-0">
-                    <nav className="hidden lg:flex items-center gap-6 text-sm font-semibold text-zinc-600 dark:text-zinc-300">
-                        <Link className="hover:text-primary-500 transition-colors" href="/shop/browse">Marketplace</Link>
-                        <Link className="hover:text-primary-500 transition-colors" href="/shop/orders">Orders</Link>
+                <div className="flex items-center gap-4 shrink-0 overflow-x-auto no-scrollbar">
+                    <nav className="flex items-center gap-4 text-sm font-semibold text-zinc-600 dark:text-zinc-300">
+                        <Link className="hover:text-primary-500 transition-colors whitespace-nowrap" href="/shop/browse">Marketplace</Link>
+                        <Link className="hover:text-primary-500 transition-colors whitespace-nowrap" href="/shop/orders">Orders</Link>
+                        <Link className="hover:text-primary-500 transition-colors whitespace-nowrap" href="/shop/billing">Billing</Link>
+                        <Link className="hover:text-primary-500 transition-colors whitespace-nowrap flex items-center gap-1" href="/shop/messages">
+                            Messages
+                            {unreadCount > 0 && (
+                                <span className="flex h-2.5 w-2.5 relative">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                                </span>
+                            )}
+                        </Link>
                     </nav>
-                    <div className="h-6 w-px bg-zinc-200 dark:bg-zinc-800 hidden lg:block"></div>
+                    <div className="h-6 w-px bg-zinc-200 dark:bg-zinc-800 hidden sm:block"></div>
 
                     <div className="flex items-center gap-4">
                         <Link href="/shop/cart" className="relative p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors text-zinc-600 dark:text-zinc-300 group">
@@ -43,11 +56,11 @@ export default async function ShopHeader() {
                             </svg>
                         </Link>
 
-                        <div className="flex items-center gap-2 pl-2 border-l border-zinc-200 dark:border-zinc-800">
-                            <div className="w-9 h-9 flex items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 font-bold uppercase overflow-hidden">
-                                {profile?.full_name?.charAt(0) || 'U'}
-                            </div>
-                        </div>
+                        <UserMenuDropdown
+                            initials={profile?.full_name?.charAt(0) || 'U'}
+                            fullName={profile?.full_name || 'User'}
+                            email={profile?.email || ''}
+                        />
                     </div>
                 </div>
             </div>

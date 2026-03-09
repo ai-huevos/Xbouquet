@@ -1,6 +1,6 @@
 # Xpress Buke — Architecture (MVP Core)
 
-> Last updated: 2026-03-02
+> Last updated: 2026-03-07
 > Status: Active — this is the only architecture that matters until core ships
 
 ---
@@ -25,14 +25,16 @@ Nothing else exists until this works in production with real users.
 |-------|------|
 | Framework | Next.js 15 (App Router, RSC, Server Actions) |
 | Language | TypeScript (strict) |
-| Auth | Supabase Auth (email + magic link) |
+| Auth | Supabase Auth (email + password) |
 | Database | Supabase PostgreSQL |
 | Storage | Supabase Storage (product images) |
+| Payments | Stripe Checkout (session-based) |
 | Security | Row Level Security on every table |
 | Hosting | Vercel |
 | Styling | Tailwind CSS v4 |
 | Validation | Zod |
 | Data Ingestion | Papaparse (CSV parsing & column mapping) |
+| Testing | Playwright (E2E) |
 
 ---
 
@@ -52,7 +54,7 @@ Stored in `profiles.role`. No admin role in MVP.
 ```
 profiles (id, user_id, role, full_name, avatar_url, created_at, updated_at)
   ├── supplier_profiles (id, profile_id, business_name, ...)
-  │     └── flower_products (id, supplier_id, name, price_per_unit, stock_qty, ...)
+  │     └── flower_products (id, supplier_id, name, price_per_unit, stock_qty, box_type, ...)
   └── shop_profiles (id, profile_id, business_name, credit_limit, current_balance, payment_terms, ...)
         └── cart_items (id, shop_id, product_id, quantity, ...)
 
@@ -69,7 +71,14 @@ order_groups (id, shop_id, created_at)
 `pending` → `cancelled`
 `confirmed` → `cancelled`
 
-That's it. No other statuses.
+### Order types
+`one_time` | `pre_book` | `standing`
+
+### Box types
+`QB` (Quarter Box) | `HB` (Half Box) | `FB` (Full Box)
+
+### B2B Payment terms
+`cod` (Cash on Delivery) | `net_15` | `net_30` | `put_on_account`
 
 ---
 
@@ -95,7 +104,7 @@ That's it. No other statuses.
 | Action | File | Auth | Description |
 |--------|------|------|-------------|
 | `signUp` | `actions/auth.ts` | Public | Register with role selection |
-| `signIn` | `actions/auth.ts` | Public | Magic link login |
+| `signIn` | `actions/auth.ts` | Public | Email/password login |
 | `getProfile` | `actions/profiles.ts` | Authed | Get own profile |
 | `updateProfile` | `actions/profiles.ts` | Authed | Edit own profile |
 | `createProduct` | `actions/products.ts` | Supplier | Add flower listing |
@@ -122,102 +131,145 @@ That's it. No other statuses.
 
 ```
 app/
+├── page.tsx                          # Landing page (public)
 ├── (auth)/
-│   ├── login/page.tsx
-│   └── signup/page.tsx
+│   ├── layout.tsx                    # Auth layout shell
+│   ├── login/page.tsx                # Email/password login
+│   └── signup/page.tsx               # Signup with role selection
 ├── (dashboard)/
 │   ├── supplier/
+│   │   ├── layout.tsx                # Supplier nav shell (SupplierNav sidebar)
+│   │   ├── page.tsx                  # Supplier dashboard home
 │   │   ├── products/
-│   │   │   ├── page.tsx              # List own products
-│   │   │   ├── new/page.tsx          # Add product
+│   │   │   ├── page.tsx              # List own products (ProductList)
+│   │   │   ├── new/page.tsx          # Add product (ProductForm)
 │   │   │   ├── import/page.tsx       # Bulk CSV upload & mapping
-│   │   │   └── [id]/edit/page.tsx    # Edit product
-│   │   └── orders/
-│   │       ├── page.tsx              # Incoming orders
-│   │       └── [id]/page.tsx         # Order detail + actions
+│   │   │   └── [id]/edit/page.tsx    # Edit product (ProductForm)
+│   │   ├── orders/
+│   │   │   └── page.tsx              # Incoming orders list
+│   │   └── claims/
+│   │       └── page.tsx              # View & resolve quality claims
 │   └── shop/
+│       ├── layout.tsx                # Shop nav shell (ShopHeader + UserMenuDropdown)
+│       ├── page.tsx                  # Shop dashboard home
 │       ├── browse/
-│       │   ├── page.tsx              # Marketplace browse
-│       │   └── [id]/page.tsx         # Product detail
-│       ├── cart/page.tsx             # Shopping cart
-│       └── orders/
-│           ├── page.tsx              # Order history
-│           └── [id]/
-│               ├── page.tsx          # Order detail
-│               └── claim/page.tsx    # Quality claims form
+│       │   ├── page.tsx              # Marketplace product grid
+│       │   └── [id]/page.tsx         # Product detail + AddToCartForm
+│       ├── cart/page.tsx             # Shopping cart (CartItemControls)
+│       ├── orders/
+│       │   └── page.tsx              # Order history
+│       └── claims/
+│           └── new/page.tsx          # Submit quality claim form
+├── checkout/
+│   ├── layout.tsx                    # Checkout layout
+│   ├── gateway/page.tsx              # Auth-aware checkout gateway
+│   ├── payment/page.tsx              # Stripe checkout session
+│   └── success/page.tsx              # Order confirmation
+└── api/
+    └── ...                           # API route (Stripe webhook, etc.)
 ```
 
 ---
 
-## 8. Migration Sequence
+## 8. Component Map
 
 ```
-001_create_profiles.sql
-002_create_supplier_profiles.sql
-003_create_shop_profiles.sql
-004_create_product_categories.sql
-005_create_flower_products.sql
-006_create_cart_items.sql
-007_create_order_groups.sql
-008_create_orders.sql
-009_create_order_items.sql
-010_seed_product_categories.sql
-011_create_rls_core.sql
-012_create_auth_trigger.sql
-013_marketplace_boost_schema.sql
+src/components/
+├── cart/
+│   ├── AddToCartForm.tsx             # Quantity selector + add-to-cart button
+│   └── CartItemControls.tsx          # In-cart quantity update/remove
+├── checkout/
+│   └── CheckoutForm.tsx              # Full checkout form with payment method selection
+├── layout/
+│   ├── ShopHeader.tsx                # Sticky top nav for shop (cart badge, nav links)
+│   └── UserMenuDropdown.tsx          # User avatar dropdown (profile, logout)
+├── products/
+│   ├── MarketplaceProductCard.tsx    # Product card for browse grid
+│   ├── ProductForm.tsx               # Supplier product create/edit form
+│   └── ProductList.tsx               # Supplier product list with actions
+└── supplier/
+    ├── ColumnMapper.tsx              # CSV column mapping UI
+    ├── CsvUploader.tsx               # CSV file upload handler
+    ├── ImportFlow.tsx                # Multi-step import wizard container
+    ├── ImportReview.tsx              # Review & confirm mapped data
+    └── SupplierNav.tsx               # Sidebar navigation for supplier
 ```
-
-13 migrations. That's it.
 
 ---
 
-## 9. File Conventions
+## 9. Migration Sequence
+
+```
+20260303000001_create_profiles.sql
+20260303000002_create_supplier_profiles.sql
+20260303000003_create_shop_profiles.sql
+20260303000012_create_auth_trigger.sql
+20260304000004_create_product_categories.sql
+20260304000005_create_flower_products.sql
+20260304000006_setup_storage.sql
+20260304000007_fix_auth_trigger_supplier.sql
+20260304000008_create_cart_items.sql
+20260304000009_create_orders.sql
+20260304000010_fix_auth_trigger_shop.sql
+20260305000001_rls_enforcement.sql
+20260307000001_marketplace_boost_schema.sql
+```
+
+13 migrations total.
+
+---
+
+## 10. File Conventions
 
 | Type | Path |
 |------|------|
 | Server Actions | `src/lib/actions/{domain}.ts` |
 | Validators | `src/lib/validators/{domain}.ts` |
-| DB client | `src/lib/supabase/server.ts`, `client.ts` |
-| Auth middleware | `src/middleware.ts` |
+| DB client | `src/lib/supabase/server.ts`, `client.ts`, `middleware.ts` |
+| Stripe client | `src/lib/stripe.ts` |
+| Auth middleware | `src/proxy.ts` (Next.js 15.2+ proxy pattern) |
 | Types | `src/types/{domain}.ts` |
 | Pages | `src/app/(dashboard)/{role}/{feature}/page.tsx` |
 | Components | `src/components/{domain}/{ComponentName}.tsx` |
-| Migrations | `supabase/migrations/{NNN}_{description}.sql` |
+| Migrations | `supabase/migrations/{YYYYMMDDNNNNNN}_{description}.sql` |
+| Seed data | `public/seeds/` (local floral photos) |
+| E2E tests | `e2e/` |
 
 ---
 
-## 10. What Is NOT in MVP
+## 11. What Is NOT in MVP
 
-- Drops, tiers, badges, referrals, showcases, trending (see `GROWTH_ARCHITECTURE_V2.md`)
+- Drops, tiers, badges, referrals, showcases, trending (see `GROWTH.md`)
 - Real-time subscriptions
 - Push notifications
 - Email notifications
 - Messaging between users
 - Admin panel
 - Analytics dashboard
-- Payment processing (orders are placed, payment is offline for now)
 - Image optimization pipeline
+- Standing order auto-generation cron
 
 These are all future. None of them block shipping.
 
 ---
 
-## 11. Definition of "Shipped"
+## 12. Definition of "Shipped"
 
 All of the following work in production:
 
-- [ ] Supplier signs up with role = supplier
-- [ ] Supplier completes business profile
-- [ ] Supplier adds flower products (single item and bulk CSV import)
-- [ ] Shop signs up with role = shop
-- [ ] Shop browses marketplace, sees product
-- [ ] Shop adds to cart
-- [ ] Shop checks out (creates order)
-- [ ] Supplier sees incoming order
-- [ ] Supplier confirms order
-- [ ] Supplier marks order delivered
-- [ ] Shop sees order status = delivered
-- [ ] RLS prevents cross-role/cross-user data access
-- [ ] No data leaks between suppliers or between shops
-
-When all boxes are checked: you have shipped.
+- [x] Supplier signs up with role = supplier
+- [x] Supplier completes business profile
+- [x] Supplier adds flower products (single item and bulk CSV import)
+- [x] Shop signs up with role = shop
+- [x] Shop browses marketplace, sees products
+- [x] Shop adds to cart
+- [x] Shop checks out (creates order)
+- [x] Supplier sees incoming order
+- [x] Supplier confirms order
+- [x] Supplier marks order delivered
+- [x] Shop sees order status = delivered
+- [x] RLS prevents cross-role/cross-user data access
+- [x] No data leaks between suppliers or between shops
+- [ ] Deployed to production with real domain
+- [ ] 5 real suppliers onboarded
+- [ ] 10 real shops onboarded

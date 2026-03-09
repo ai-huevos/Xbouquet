@@ -31,6 +31,9 @@ test.describe('Checkout Flow Tests', () => {
         await page.fill('input[name="stock_qty"]', '100');
         // Select first category
         await page.selectOption('select[name="category_id"]', { index: 1 });
+        // Select box type (Required since B2B Box Types)
+        await page.selectOption('select[name="box_type"]', 'QB');
+
         await page.waitForLoadState('networkidle'); // Ensure hydration
         await page.click('button:has-text("Save Product")');
 
@@ -62,12 +65,14 @@ test.describe('Checkout Flow Tests', () => {
         // Click the Add to Cart button on the detail page
         await page.click('button:has-text("Add to Cart")');
 
-        // 4. Shop goes to checkout
-        await page.goto('/shop/cart');
+        // Wait for the server action and the automatic redirect
+        await expect(page).toHaveURL(/\/shop\/cart(\?.*)?$/);
+
+        // 4. Shop is now in checkout cart
         await page.click('text="Proceed to Checkout"');
 
-        // Click continue as guest on gateway
-        await page.click('text="Continue as Guest"');
+        // Verify gateway bypass
+        await expect(page).toHaveURL(/\/checkout\/payment/);
 
         // Click pay securely on payment page
         await page.click('button:has-text("Pay Securely with Card")');
